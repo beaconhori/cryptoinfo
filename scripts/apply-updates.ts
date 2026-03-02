@@ -12,7 +12,7 @@ async function main() {
 
   // 2. 新件をupsert
   const targets = [
-    "kucoin", "crypto-com", "bingx", "phemex",
+    "pionex", "woox", "hashkey-global",
   ];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
