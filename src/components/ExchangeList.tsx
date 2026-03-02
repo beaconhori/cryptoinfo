@@ -155,15 +155,10 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
 
         {/* ===== Left Sidebar ===== */}
         <aside className="w-[200px] flex-shrink-0 flex flex-col py-5 border-r border-gray-100 bg-white rounded-l-[2rem]">
-          {/* ロゴ・サイト名 */}
-          <div className="px-4 mb-6 flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-200 flex-shrink-0">
-              <BarChart3 size={15} className="text-white" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] text-gray-400 leading-none mb-0.5">暗号通貨</p>
-              <p className="text-xs font-bold text-gray-800 leading-tight">取引所ガイド</p>
-            </div>
+          {/* サイト名 */}
+          <div className="px-4 mb-6">
+            <p className="text-[11px] text-gray-400 leading-none mb-1">暗号通貨</p>
+            <p className="text-sm font-bold text-gray-900 leading-tight">取引所ガイド</p>
           </div>
 
           {/* ナビゲーション */}
