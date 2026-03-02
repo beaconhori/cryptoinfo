@@ -176,8 +176,7 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
       style={{ borderBottom: `3px solid ${exchange.logoColor}` }}
     >
       <div
-        className="px-6 py-5 flex items-center justify-between relative"
-        style={{ background: `linear-gradient(145deg, ${exchange.logoColor}12 0%, ${exchange.logoColor}28 100%)` }}
+        className="px-6 py-5 flex items-center justify-between relative bg-white"
       >
         <div className="flex items-center gap-4">
           <div

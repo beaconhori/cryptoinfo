@@ -52,7 +52,7 @@ export const exchanges: Exchange[] = [
     established: 2012,
     url: "https://coincheck.com/ja/",
     domain: "coincheck.com",
-    logoFile: "coincheck.avif",
+    logoFile: "coincheck.png",
     logoColor: "#00B7A4",
     description:
       "国内最多水準の取扱銘柄数を誇る取引所。NFTマーケットプレイスや積立投資など多彩なサービスを提供。マネックスグループ傘下。",
@@ -620,6 +620,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://www.bitget.com/ja",
     domain: "bitget.com",
+    logoFile: "bitget.png",
     logoColor: "#00C096",
     description:
       "コピートレード機能で急成長した取引所。豊富な取引ペアとリーズナブルな手数料が魅力。",

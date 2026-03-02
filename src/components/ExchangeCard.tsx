@@ -29,30 +29,7 @@ function CardBanner({ exchange }: { exchange: Exchange }) {
   };
 
   return (
-    <div
-      className="h-32 w-full relative overflow-hidden flex items-center justify-center"
-      style={{
-        background: `linear-gradient(145deg, ${exchange.logoColor}10 0%, ${exchange.logoColor}28 100%)`,
-      }}
-    >
-      {/* 背景ブロブ */}
-      <div
-        className="absolute rounded-full pointer-events-none"
-        style={{
-          width: 140, height: 140,
-          backgroundColor: exchange.logoColor,
-          opacity: 0.1, top: -40, right: -40,
-        }}
-      />
-      <div
-        className="absolute rounded-full pointer-events-none"
-        style={{
-          width: 80, height: 80,
-          backgroundColor: exchange.logoColor,
-          opacity: 0.08, bottom: -20, left: 20,
-        }}
-      />
-
+    <div className="h-32 w-full relative overflow-hidden flex items-center justify-center bg-white">
       {!fallback && src ? (
         <img
           src={src}
