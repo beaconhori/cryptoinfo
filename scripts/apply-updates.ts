@@ -11,11 +11,7 @@ async function main() {
   console.log("ℹ skipping delete step");
 
   // 2. 新件をupsert
-  const targets = [
-    "uniswap", "dydx", "gmx", "jupiter",
-    // logoFile追加分の更新
-    "kucoin", "crypto-com", "bingx", "phemex", "pionex", "woox", "hashkey-global", "bitrue", "hyperliquid",
-  ];
+  const targets = ["bitstamp"];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
   for (const ex of newExchanges) {
