@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Exchange, Feature } from "@/types/exchange";
 import { FEATURE_LABELS } from "@/data/exchanges";
+import { getSpreadConfig } from "@/lib/spreadUtils";
 import {
   X,
   ExternalLink,
@@ -13,6 +14,8 @@ import {
   CheckCircle,
   XCircle,
   Info,
+  AlertTriangle,
+  ArrowLeftRight,
 } from "lucide-react";
 
 interface ExchangeModalProps {
@@ -319,6 +322,62 @@ export default function ExchangeModal({
               )}
             </div>
           </div>
+
+          {/* 実質コスト・スプレッド評価 */}
+          {(() => {
+            const cfg = getSpreadConfig(exchange.fees.spreadRating);
+            const isAlert = exchange.fees.spreadRating === "wide" || exchange.fees.spreadRating === "very_wide";
+            return (
+              <div
+                className="rounded-xl p-4 border"
+                style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-semibold flex items-center gap-2" style={{ color: cfg.color }}>
+                    <ArrowLeftRight size={16} />
+                    実質コスト（往復）
+                  </h4>
+                  <span
+                    className="text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1"
+                    style={{ backgroundColor: cfg.border, color: cfg.color }}
+                  >
+                    {isAlert && <AlertTriangle size={11} />}
+                    スプレッド: {cfg.label}
+                  </span>
+                </div>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-3xl font-black" style={{ color: cfg.color }}>
+                    ≈ {exchange.fees.roundTripCostPct.toFixed(2)}%
+                  </span>
+                  <span className="text-sm text-gray-500">/ 往復（買って即売る場合）</span>
+                </div>
+                <p className="text-xs" style={{ color: cfg.color + "cc" }}>
+                  {cfg.description}
+                </p>
+                {isAlert && (
+                  <div className="mt-3 p-2.5 bg-white/60 rounded-lg">
+                    <p className="text-xs text-gray-600 leading-relaxed">
+                      💡 <strong>販売所のスプレッドに注意：</strong>
+                      表示される「手数料0円」はあくまで売買手数料の話です。
+                      販売所では買値と売値の差（スプレッド）が実際のコストになります。
+                      取引所機能がある場合はそちらの利用を検討してください。
+                    </p>
+                  </div>
+                )}
+                {/* 金額別往復コスト */}
+                <div className="grid grid-cols-3 gap-2 mt-3">
+                  {[10000, 100000, 1000000].map((amount) => (
+                    <div key={amount} className="bg-white/60 rounded-lg p-2 text-center">
+                      <p className="text-[10px] text-gray-400 mb-0.5">{(amount / 10000).toLocaleString()}万円</p>
+                      <p className="text-sm font-bold" style={{ color: cfg.color }}>
+                        {((amount * exchange.fees.roundTripCostPct) / 100).toLocaleString()}円
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
           {/* コストシミュレーター */}
           <CostSimulator exchange={exchange} />

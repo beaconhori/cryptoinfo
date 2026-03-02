@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, Percent, CheckCircle } from "lucide-react";
+import { MoreHorizontal, Percent, CheckCircle, AlertTriangle } from "lucide-react";
+import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface ExchangeCardProps {
   exchange: Exchange;
@@ -90,9 +91,31 @@ export default function ExchangeCard({
           </button>
         </div>
 
-        <p className="text-xs text-gray-500 line-clamp-2 mb-4 leading-relaxed">
+        <p className="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">
           {exchange.description}
         </p>
+
+        {/* 実質コストバッジ */}
+        {(() => {
+          const cfg = getSpreadConfig(exchange.fees.spreadRating);
+          const isAlert = exchange.fees.spreadRating === "wide" || exchange.fees.spreadRating === "very_wide";
+          return (
+            <div
+              className="flex items-center justify-between rounded-lg px-2.5 py-1.5 mb-3 border"
+              style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
+            >
+              <div className="flex items-center gap-1.5">
+                {isAlert && <AlertTriangle size={11} style={{ color: cfg.color }} />}
+                <span className="text-[10px] font-semibold" style={{ color: cfg.color }}>
+                  実質コスト（往復）
+                </span>
+              </div>
+              <span className="text-xs font-bold" style={{ color: cfg.color }}>
+                ≈ {exchange.fees.roundTripCostPct.toFixed(2)}%
+              </span>
+            </div>
+          );
+        })()}
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1" style={{ color: `${exchange.logoColor}cc` }}>

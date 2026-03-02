@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { TrendingUp, ChevronUp, ChevronDown } from "lucide-react";
+import { TrendingUp, ChevronUp, ChevronDown, AlertTriangle } from "lucide-react";
+import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface CostComparisonTableProps {
   exchanges: Exchange[];
@@ -157,6 +158,12 @@ export default function CostComparisonTable({
                 {selectedAmount.toLocaleString()}円の手数料
               </th>
               <th className="text-center py-3 px-3 font-medium">種別</th>
+              <th className="text-center py-3 px-3 font-medium">
+                <span className="flex items-center justify-center gap-1">
+                  往復コスト目安
+                  <span className="text-gray-300 font-normal">(買→即売)</span>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -239,6 +246,32 @@ export default function CostComparisonTable({
                       {feeType}
                     </span>
                   </td>
+                  {/* 往復コスト */}
+                  <td className="py-3 px-3 text-center">
+                    {(() => {
+                      const { roundTripCostPct, spreadRating } = exchange.fees;
+                      const cfg = getSpreadConfig(spreadRating);
+                      const isAlert = spreadRating === "wide" || spreadRating === "very_wide";
+                      const roundTripAmount = (selectedAmount * roundTripCostPct) / 100;
+                      return (
+                        <div className="flex flex-col items-center gap-0.5">
+                          <span
+                            className="text-xs font-bold"
+                            style={{ color: cfg.color }}
+                          >
+                            {roundTripAmount.toLocaleString()}円
+                          </span>
+                          <span
+                            className="text-[10px] px-1.5 py-0.5 rounded-md font-medium flex items-center gap-0.5"
+                            style={{ backgroundColor: cfg.bg, color: cfg.color }}
+                          >
+                            {isAlert && <AlertTriangle size={9} />}
+                            {cfg.label} ({roundTripCostPct.toFixed(2)}%)
+                          </span>
+                        </div>
+                      );
+                    })()}
+                  </td>
                 </tr>
               );
             })}
@@ -247,7 +280,7 @@ export default function CostComparisonTable({
       </div>
       <div className="px-5 py-3 bg-gray-50/50 border-t border-gray-50">
         <p className="text-xs text-gray-400">
-          ※ 販売所のスプレッドは概算値です。実際は市況により変動します。
+          ※ 往復コスト＝買って即売った場合の損失率（目安）。手数料＋スプレッドを含みます。実際の値は市況により変動します。
         </p>
       </div>
     </div>

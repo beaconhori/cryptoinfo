@@ -47,6 +47,9 @@ export type Feature =
   | "japan_yen_deposit"
   | "credit_card";
 
+/** スプレッドの広さ評価 */
+export type SpreadRating = "tight" | "moderate" | "wide" | "very_wide";
+
 export interface FeeStructure {
   /** 取引所形式: maker手数料(%) */
   exchangeMaker?: number;
@@ -54,6 +57,14 @@ export interface FeeStructure {
   exchangeTaker?: number;
   /** 販売所形式: スプレッド目安(%) */
   dealerSpread?: number;
+  /**
+   * 実質的な往復コスト目安(%) — 買って即売った場合の損失率
+   * 取引所形式: taker×2 + 板スプレッド
+   * 販売所形式: スプレッド そのもの
+   */
+  roundTripCostPct: number;
+  /** スプレッド評価 */
+  spreadRating: SpreadRating;
   /** 入金手数料メモ */
   depositFeeNote?: string;
   /** 出金手数料メモ */
