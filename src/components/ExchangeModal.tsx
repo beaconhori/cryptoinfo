@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Exchange, Feature } from "@/types/exchange";
 import { FEATURE_LABELS } from "@/data/exchanges";
 import { getSpreadConfig } from "@/lib/spreadUtils";
+import { calcTotalScore, calcYearsScore, calcYears } from "@/lib/scoreUtils";
 import {
   X,
   ExternalLink,
@@ -269,16 +270,6 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
             </div>
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <Star size={13} className="text-yellow-500" />
-                <span className="text-xs text-gray-500">セキュリティ評価</span>
-              </div>
-              <span className="text-sm font-semibold text-gray-800">
-                {"★".repeat(exchange.trustScore)}{"☆".repeat(5 - exchange.trustScore)}
-              </span>
-              <p className="text-[10px] text-gray-400 mt-0.5">事故歴ベース</p>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-3 text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
                 <Coins size={13} className="text-blue-500" />
                 <span className="text-xs text-gray-500">取引ペア数</span>
               </div>
@@ -291,7 +282,66 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               </div>
               <span className="text-sm font-semibold text-gray-800">{exchange.maxLeverage ? `${exchange.maxLeverage}倍` : "なし"}</span>
             </div>
+            <div className="bg-gray-50 rounded-xl p-3 text-center">
+              <div className="flex items-center justify-center gap-1 mb-1">
+                <Star size={13} className="text-yellow-500" />
+                <span className="text-xs text-gray-500">設立年</span>
+              </div>
+              <span className="text-sm font-semibold text-gray-800">{exchange.established}年</span>
+              <p className="text-[10px] text-gray-400 mt-0.5">{calcYears(exchange.established)}年運営</p>
+            </div>
           </div>
+
+          {/* 総合スコア */}
+          {(() => {
+            const total = calcTotalScore(exchange);
+            const secScore = exchange.trustScore;
+            const yearsScore = calcYearsScore(exchange.established);
+            const years = calcYears(exchange.established);
+            const totalColor = total >= 8.5 ? "#10B981" : total >= 7.0 ? "#3B82F6" : total >= 5.5 ? "#F59E0B" : "#EF4444";
+            const barWidth = (v: number, max: number) => `${(v / max) * 100}%`;
+            return (
+              <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <Star size={14} className="text-yellow-500" />
+                    <span className="text-sm font-bold text-gray-700">総合信頼スコア</span>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-black" style={{ color: totalColor }}>{total.toFixed(1)}</span>
+                    <span className="text-sm text-gray-400">/ 10</span>
+                  </div>
+                </div>
+                {/* スコアバー */}
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+                  <div className="h-2 rounded-full transition-all" style={{ width: barWidth(total, 10), backgroundColor: totalColor }} />
+                </div>
+                {/* 内訳 */}
+                <div className="space-y-2">
+                  <div>
+                    <div className="flex justify-between text-xs mb-0.5">
+                      <span className="text-gray-500">① セキュリティ事故歴</span>
+                      <span className="font-bold text-gray-700">{secScore.toFixed(1)} / 5</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="h-1.5 rounded-full bg-amber-400" style={{ width: barWidth(secScore, 5) }} />
+                    </div>
+                    <p className="text-[10px] text-gray-400 mt-0.5">{"★".repeat(secScore)}{"☆".repeat(5 - secScore)}　5＝事故なし、1＝重大事故あり</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs mb-0.5">
+                      <span className="text-gray-500">② 継続年数（{years}年 / 最長15年比）</span>
+                      <span className="font-bold text-gray-700">{yearsScore.toFixed(1)} / 5</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="h-1.5 rounded-full bg-blue-400" style={{ width: barWidth(yearsScore, 5) }} />
+                    </div>
+                    <p className="text-[10px] text-gray-400 mt-0.5">{exchange.established}年設立。最長はBitstamp（2011年・15年）= 5.0点</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* 取引コスト：取引所と販売所を分けて表示 */}
           <ExchangeTradingSection exchange={exchange} />

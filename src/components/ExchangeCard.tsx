@@ -4,6 +4,14 @@ import { useState } from "react";
 import { Exchange } from "@/types/exchange";
 import { MoreHorizontal, BookOpen, Store, Zap } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
+import { calcTotalScore } from "@/lib/scoreUtils";
+
+function scoreColor(score: number): string {
+  if (score >= 8.5) return "#10B981"; // emerald
+  if (score >= 7.0) return "#3B82F6"; // blue
+  if (score >= 5.5) return "#F59E0B"; // amber
+  return "#EF4444"; // red
+}
 
 interface ExchangeCardProps {
   exchange: Exchange;
@@ -168,7 +176,16 @@ export default function ExchangeCard({
           })()
         )}
 
-        <div className="text-xs text-gray-400">{exchange.established}年設立</div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-gray-400">{exchange.established}年設立</span>
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-gray-400">総合</span>
+            <span className="text-sm font-black" style={{ color: scoreColor(calcTotalScore(exchange)) }}>
+              {calcTotalScore(exchange).toFixed(1)}
+            </span>
+            <span className="text-[10px] text-gray-400">/ 10</span>
+          </div>
+        </div>
       </div>
     </div>
   );
