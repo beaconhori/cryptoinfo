@@ -38,14 +38,13 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "name", label: "名前順" },
 ];
 
-const COMMON_TOKENS = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "SHIB", "XYM", "MONA"];
+// クイック表示する代表銘柄（日本で人気）
+const COMMON_TOKENS = ["BTC", "ETH", "XRP", "SOL", "DOGE", "SHIB", "XYM"];
 
 const FEATURE_QUICK: Feature[] = [
   "spot",
   "futures",
-  "margin",
   "staking",
-  "copy_trading",
   "japan_yen_deposit",
 ];
 
@@ -76,20 +75,20 @@ export default function CompactFilter({
     update({ features: next });
   };
 
-  const hasFilters =
-    filter.tokens.length > 0 || filter.features.length > 0 || filter.fsaOnly;
+  const hasFilters = filter.tokens.length > 0 || filter.features.length > 0;
 
   return (
-    <div className="bg-white border-b border-gray-100 px-6 py-3 flex items-center gap-3 flex-wrap relative z-20">
-      <SlidersHorizontal size={14} className="text-gray-400 flex-shrink-0" />
+    <div className="bg-white border-b border-gray-100 relative z-20">
+      {/* 上段：銘柄フィルター */}
+      <div className="px-6 pt-2.5 pb-1.5 flex items-center gap-2 flex-wrap">
+        <SlidersHorizontal size={13} className="text-gray-300 flex-shrink-0" />
+        <span className="text-[11px] text-gray-400 font-medium flex-shrink-0">銘柄</span>
 
-      {/* クイックトークン */}
-      <div className="flex items-center gap-1.5 flex-wrap">
         {COMMON_TOKENS.map((token) => (
           <button
             key={token}
             onClick={() => toggleToken(token)}
-            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+            className={`px-2 py-0.5 rounded-lg text-xs font-medium transition-all ${
               filter.tokens.includes(token)
                 ? "bg-amber-400 text-amber-900 shadow-sm"
                 : "bg-gray-100 text-gray-500 hover:bg-gray-200"
@@ -98,17 +97,66 @@ export default function CompactFilter({
             {token}
           </button>
         ))}
+
+        {/* 全銘柄ドロップダウン */}
+        <div className="relative">
+          <button
+            onClick={() => {
+              setShowTokenPanel(!showTokenPanel);
+              setShowFeaturePanel(false);
+            }}
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-lg text-xs font-medium transition-all border ${
+              filter.tokens.length > 0
+                ? "bg-amber-50 text-amber-700 border-amber-200"
+                : "bg-white text-gray-400 border-gray-200 hover:border-gray-300"
+            }`}
+          >
+            すべて
+            {filter.tokens.length > 0 && (
+              <span className="bg-amber-400 text-amber-900 rounded-full px-1.5 text-[10px] font-bold">
+                {filter.tokens.length}
+              </span>
+            )}
+            <ChevronDown size={10} />
+          </button>
+          {showTokenPanel && (
+            <div className="absolute left-0 top-full mt-1 bg-white rounded-xl border border-gray-100 shadow-xl p-3 z-30"
+              style={{ width: "340px" }}>
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-xs text-gray-400">銘柄で絞り込み（AND条件）</p>
+                {filter.tokens.length > 0 && (
+                  <button onClick={() => update({ tokens: [] })} className="text-[10px] text-gray-400 hover:text-red-400">クリア</button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto">
+                {ALL_TOKENS.map((token) => (
+                  <button
+                    key={token}
+                    onClick={() => toggleToken(token)}
+                    className={`px-2 py-0.5 rounded-lg text-xs font-medium transition-colors ${
+                      filter.tokens.includes(token)
+                        ? "bg-amber-400 text-amber-900"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    }`}
+                  >
+                    {token}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="w-px h-4 bg-gray-200 flex-shrink-0" />
+      {/* 下段：機能フィルター + ソート */}
+      <div className="px-6 pb-2.5 flex items-center gap-2 flex-wrap">
+        <span className="text-[11px] text-gray-400 font-medium flex-shrink-0 w-[13px]" />
 
-      {/* 機能クイック選択 */}
-      <div className="flex items-center gap-1.5 flex-wrap">
         {FEATURE_QUICK.map((feature) => (
           <button
             key={feature}
             onClick={() => toggleFeature(feature)}
-            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+            className={`px-2 py-0.5 rounded-lg text-xs font-medium transition-all ${
               filter.features.includes(feature)
                 ? "bg-blue-500 text-white shadow-sm"
                 : "bg-gray-100 text-gray-500 hover:bg-gray-200"
@@ -117,102 +165,34 @@ export default function CompactFilter({
             {FEATURE_LABELS[feature]}
           </button>
         ))}
-      </div>
 
-      <div className="w-px h-4 bg-gray-200 flex-shrink-0" />
-
-      {/* 全銘柄ドロップダウン */}
-      <div className="relative">
-        <button
-          onClick={() => {
-            setShowTokenPanel(!showTokenPanel);
-            setShowFeaturePanel(false);
-          }}
-          className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all border ${
-            filter.tokens.length > 0
-              ? "bg-amber-50 text-amber-700 border-amber-200"
-              : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
-          }`}
-        >
-          全銘柄
-          {filter.tokens.length > 0 && (
-            <span className="bg-amber-400 text-amber-900 rounded-full px-1.5 text-[10px] font-bold">
-              {filter.tokens.length}
-            </span>
-          )}
-          <ChevronDown size={11} />
-        </button>
-        {showTokenPanel && (
-          <div className="absolute left-0 top-full mt-1 bg-white rounded-xl border border-gray-100 shadow-xl p-3 w-72 z-30">
-            <p className="text-xs text-gray-400 mb-2">銘柄で絞り込み（AND条件）</p>
-            <div className="flex flex-wrap gap-1.5">
-              {ALL_TOKENS.map((token) => (
-                <button
-                  key={token}
-                  onClick={() => toggleToken(token)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
-                    filter.tokens.includes(token)
-                      ? "bg-amber-400 text-amber-900"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-                >
-                  {token}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* 金融庁 */}
-      <button
-        onClick={() => update({ fsaOnly: !filter.fsaOnly })}
-        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all border ${
-          filter.fsaOnly
-            ? "bg-green-50 text-green-700 border-green-200"
-            : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
-        }`}
-      >
-        🏛 金融庁登録
-      </button>
-
-      {/* リセット */}
-      {hasFilters && (
-        <button
-          onClick={() =>
-            onFilterChange({
-              ...filter,
-              tokens: [],
-              features: [],
-              fsaOnly: false,
-            })
-          }
-          className="flex items-center gap-1 text-xs text-red-400 hover:text-red-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-red-50"
-        >
-          <X size={11} />
-          クリア
-        </button>
-      )}
-
-      <div className="ml-auto flex items-center gap-3">
-        <span className="text-xs text-gray-400">{resultCount}件</span>
-        {/* ソート */}
-        <div className="relative">
-          <select
-            value={sortKey}
-            onChange={(e) => onSortChange(e.target.value as SortKey)}
-            className="appearance-none pl-2.5 pr-7 py-1.5 bg-gray-100 rounded-lg text-xs text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer"
+        {/* リセット */}
+        {hasFilters && (
+          <button
+            onClick={() => onFilterChange({ ...filter, tokens: [], features: [], fsaOnly: false })}
+            className="flex items-center gap-1 text-xs text-red-400 hover:text-red-600 transition-colors px-1.5 py-0.5 rounded-lg hover:bg-red-50"
           >
-            {SORT_OPTIONS.map((opt) => (
-              <option key={opt.key} value={opt.key}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          <ChevronDown
-            size={11}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-          />
+            <X size={10} />
+            クリア
+          </button>
+        )}
+
+        <div className="ml-auto flex items-center gap-3">
+          <span className="text-xs text-gray-400">{resultCount}件</span>
+          <div className="relative">
+            <select
+              value={sortKey}
+              onChange={(e) => onSortChange(e.target.value as SortKey)}
+              className="appearance-none pl-2.5 pr-7 py-1.5 bg-gray-100 rounded-lg text-xs text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer"
+            >
+              {SORT_OPTIONS.map((opt) => (
+                <option key={opt.key} value={opt.key}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={11} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
         </div>
       </div>
     </div>
