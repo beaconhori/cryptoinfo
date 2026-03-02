@@ -12,7 +12,7 @@ async function main() {
 
   // 2. 新件をupsert
   const targets = [
-    "bitrue",
+    "hyperliquid",
   ];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 

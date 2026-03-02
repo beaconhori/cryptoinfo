@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, BookOpen, Store } from "lucide-react";
+import { MoreHorizontal, BookOpen, Store, Zap } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface ExchangeCardProps {
@@ -55,6 +55,7 @@ export default function ExchangeCard({
   onClick,
   highlightTokens = [],
 }: ExchangeCardProps) {
+  const isDex = exchange.region === "dex";
   const hasExchange = exchange.fees.exchangeMaker !== undefined || exchange.fees.exchangeTaker !== undefined;
   const hasDealer = exchange.fees.dealerSpread !== undefined;
 
@@ -92,54 +93,80 @@ export default function ExchangeCard({
         </p>
 
         {/* 手数料情報 */}
-        {(() => {
-          const cfg = getSpreadConfig(exchange.fees.spreadRating);
-          return (
-            <div className="space-y-1 mb-3">
-              {hasExchange ? (
-                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
-                  <div className="flex items-center gap-1.5">
-                    <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-[10px] font-bold text-gray-600">取引所</span>
-                  </div>
-                  <span className="flex items-center gap-2 text-xs">
-                    {exchange.fees.exchangeMaker !== undefined && (
-                      <span className={exchange.fees.exchangeMaker < 0 ? "text-emerald-600 font-bold" : "text-gray-400"}>
-                        M: {exchange.fees.exchangeMaker.toFixed(2)}%
-                      </span>
-                    )}
-                    {exchange.fees.exchangeTaker !== undefined && (
-                      <span className="text-gray-700 font-semibold">
-                        T: {exchange.fees.exchangeTaker.toFixed(2)}%
-                      </span>
-                    )}
+        {isDex ? (
+          <div className="space-y-1 mb-3">
+            <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
+              <div className="flex items-center gap-1.5">
+                <Zap size={10} className="text-emerald-500 flex-shrink-0" />
+                <span className="text-[10px] font-bold text-gray-600">オンチェーン</span>
+              </div>
+              <span className="flex items-center gap-2 text-xs">
+                {exchange.fees.exchangeMaker !== undefined && (
+                  <span className={exchange.fees.exchangeMaker <= 0 ? "text-emerald-600 font-bold" : "text-gray-400"}>
+                    M: {exchange.fees.exchangeMaker > 0 ? exchange.fees.exchangeMaker.toFixed(3) : exchange.fees.exchangeMaker.toFixed(3)}%
                   </span>
-                </div>
-              ) : (
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
-                  <BookOpen size={10} className="text-gray-300 flex-shrink-0" />
-                  <span className="text-[10px] font-bold text-gray-300">取引所なし</span>
-                </div>
-              )}
-              {hasDealer ? (
-                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
-                  <div className="flex items-center gap-1.5">
-                    <Store size={10} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-[10px] font-bold text-gray-600">販売所</span>
-                  </div>
-                  <span className="text-xs font-semibold" style={{ color: cfg.color }}>
-                    SP ≈{exchange.fees.dealerSpread?.toFixed(1)}%
+                )}
+                {exchange.fees.exchangeTaker !== undefined && (
+                  <span className="text-gray-700 font-semibold">
+                    T: {exchange.fees.exchangeTaker.toFixed(3)}%
                   </span>
-                </div>
-              ) : (
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
-                  <Store size={10} className="text-gray-300 flex-shrink-0" />
-                  <span className="text-[10px] font-bold text-gray-300">販売所なし</span>
-                </div>
-              )}
+                )}
+              </span>
             </div>
-          );
-        })()}
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50">
+              <span className="text-[10px] font-bold text-emerald-600">KYC不要・ノンカストディアル</span>
+            </div>
+          </div>
+        ) : (
+          (() => {
+            const cfg = getSpreadConfig(exchange.fees.spreadRating);
+            return (
+              <div className="space-y-1 mb-3">
+                {hasExchange ? (
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
+                    <div className="flex items-center gap-1.5">
+                      <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
+                      <span className="text-[10px] font-bold text-gray-600">取引所</span>
+                    </div>
+                    <span className="flex items-center gap-2 text-xs">
+                      {exchange.fees.exchangeMaker !== undefined && (
+                        <span className={exchange.fees.exchangeMaker < 0 ? "text-emerald-600 font-bold" : "text-gray-400"}>
+                          M: {exchange.fees.exchangeMaker.toFixed(2)}%
+                        </span>
+                      )}
+                      {exchange.fees.exchangeTaker !== undefined && (
+                        <span className="text-gray-700 font-semibold">
+                          T: {exchange.fees.exchangeTaker.toFixed(2)}%
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
+                    <BookOpen size={10} className="text-gray-300 flex-shrink-0" />
+                    <span className="text-[10px] font-bold text-gray-300">取引所なし</span>
+                  </div>
+                )}
+                {hasDealer ? (
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
+                    <div className="flex items-center gap-1.5">
+                      <Store size={10} className="text-gray-400 flex-shrink-0" />
+                      <span className="text-[10px] font-bold text-gray-600">販売所</span>
+                    </div>
+                    <span className="text-xs font-semibold" style={{ color: cfg.color }}>
+                      SP ≈{exchange.fees.dealerSpread?.toFixed(1)}%
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
+                    <Store size={10} className="text-gray-300 flex-shrink-0" />
+                    <span className="text-[10px] font-bold text-gray-300">販売所なし</span>
+                  </div>
+                )}
+              </div>
+            );
+          })()
+        )}
 
         <div className="text-xs text-gray-400">{exchange.established}年設立</div>
       </div>

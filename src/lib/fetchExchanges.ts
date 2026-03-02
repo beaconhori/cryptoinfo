@@ -25,7 +25,7 @@ function rowToExchange(row: Record<string, unknown>): Exchange {
     id: row.id as string,
     name: row.name as string,
     nameEn: row.name_en as string,
-    region: row.region as "domestic" | "overseas",
+    region: row.region as "domestic" | "overseas" | "dex",
     country: row.country as string,
     established: row.established as number,
     url: row.url as string,

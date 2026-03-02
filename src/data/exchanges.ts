@@ -1249,6 +1249,42 @@ export const exchanges: Exchange[] = [
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://www.binance.com/ja-JP/markets/overview",
   },
+
+  // ========== DEX ==========
+  {
+    id: "hyperliquid",
+    name: "Hyperliquid",
+    nameEn: "Hyperliquid",
+    region: "dex",
+    country: "分散型（Cayman Islands）",
+    established: 2023,
+    url: "https://app.hyperliquid.xyz/",
+    domain: "hyperliquid.xyz",
+    logoColor: "#00D4AA",
+    description:
+      "独自Layer-1上で動作する完全オンチェーンのDEX。DEXパーペチュアル市場シェア70%超を誇り、CEX並みの速度（サブ秒確定）と流動性を実現。KYC不要でウォレット接続のみで取引可能。",
+    tokens: ["BTC", "ETH", "SOL", "DOGE", "AVAX", "LINK", "ATOM", "USDC"],
+    features: ["futures", "spot", "staking", "api"],
+    fees: {
+      exchangeMaker: -0.01,
+      exchangeTaker: 0.035,
+      roundTripCostPct: 0.05,
+      spreadRating: "tight",
+      depositFeeNote: "USDC/USDT等でブリッジ入金。法定通貨入金なし",
+      withdrawalFeeNote: "オンチェーン出金（ガス代のみ）",
+    },
+    tradingPairs: 150,
+    japaneseSupport: false,
+    fsaRegistered: false,
+    trustScore: 4,
+    volumeRank: 5,
+    notes:
+      "DEXパーペチュアル市場シェア70%超。2024年11月のHYPEトークン配布（全流通量の31%をユーザーに無償配布）が話題を呼んだ。日本ユーザーのアクセス制限なし。KYC不要。",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラムで発行可能",
+    tokensUrl: "https://app.hyperliquid.xyz/trade",
+  },
 ];
 
 export const FEATURE_LABELS: Record<string, string> = {

@@ -82,6 +82,7 @@ const REGION_OPTIONS = [
   { value: "all", label: "すべての取引所" },
   { value: "domestic", label: "国内取引所のみ" },
   { value: "overseas", label: "海外取引所のみ" },
+  { value: "dex", label: "DEXのみ" },
 ] as const;
 
 interface ExchangeListProps {
@@ -129,8 +130,10 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
 
   const domesticList = filtered.filter((e) => e.region === "domestic");
   const overseasList = filtered.filter((e) => e.region === "overseas");
-  const showDomestic = filter.region !== "overseas";
-  const showOverseas = filter.region !== "domestic";
+  const dexList = filtered.filter((e) => e.region === "dex");
+  const showDomestic = filter.region === "all" || filter.region === "domestic";
+  const showOverseas = filter.region === "all" || filter.region === "overseas";
+  const showDex = filter.region === "all" || filter.region === "dex";
 
   const handleSelect = useCallback(
     (ex: Exchange) => setSelectedExchange(ex),
@@ -334,6 +337,26 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       />
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {overseasList.map((ex) => (
+                          <ExchangeCard
+                            key={ex.id}
+                            exchange={ex}
+                            onClick={() => handleSelect(ex)}
+                            highlightTokens={filter.tokens}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {showDex && dexList.length > 0 && (
+                    <section>
+                      <SectionHeader
+                        label="分散型取引所 (DEX)"
+                        count={dexList.length}
+                        dotColor="#10B981"
+                      />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {dexList.map((ex) => (
                           <ExchangeCard
                             key={ex.id}
                             exchange={ex}

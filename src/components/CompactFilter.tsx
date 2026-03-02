@@ -6,7 +6,7 @@ import { SlidersHorizontal, ChevronDown, X } from "lucide-react";
 import { useState } from "react";
 
 export interface FilterState {
-  region: "all" | "domestic" | "overseas";
+  region: "all" | "domestic" | "overseas" | "dex";
   tokens: string[];
   features: Feature[];
   fsaOnly: boolean;

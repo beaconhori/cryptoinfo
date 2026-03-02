@@ -1,4 +1,4 @@
-export type Region = "domestic" | "overseas";
+export type Region = "domestic" | "overseas" | "dex";
 
 export type Token =
   | "BTC"
