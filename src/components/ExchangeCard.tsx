@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Exchange } from "@/types/exchange";
 import { MoreHorizontal, Percent, CheckCircle } from "lucide-react";
 
@@ -9,47 +10,57 @@ interface ExchangeCardProps {
   highlightTokens?: string[];
 }
 
-function CardBanner({ color }: { color: string }) {
+function CardBanner({ exchange }: { exchange: Exchange }) {
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <div
-      className="h-32 w-full relative overflow-hidden"
+      className="h-32 w-full relative overflow-hidden flex items-center justify-center"
       style={{
-        background: `linear-gradient(135deg, ${color}12 0%, ${color}35 100%)`,
+        background: `linear-gradient(145deg, ${exchange.logoColor}10 0%, ${exchange.logoColor}28 100%)`,
       }}
     >
+      {/* 背景ブロブ（装飾） */}
       <div
-        className="absolute rounded-full"
+        className="absolute rounded-full pointer-events-none"
         style={{
-          width: 130,
-          height: 130,
-          backgroundColor: color,
-          opacity: 0.18,
-          top: -35,
-          right: -35,
+          width: 140,
+          height: 140,
+          backgroundColor: exchange.logoColor,
+          opacity: 0.1,
+          top: -40,
+          right: -40,
         }}
       />
       <div
-        className="absolute rounded-full"
+        className="absolute rounded-full pointer-events-none"
         style={{
-          width: 90,
-          height: 90,
-          backgroundColor: color,
-          opacity: 0.12,
-          bottom: -25,
-          right: 30,
+          width: 80,
+          height: 80,
+          backgroundColor: exchange.logoColor,
+          opacity: 0.08,
+          bottom: -20,
+          left: 20,
         }}
       />
-      <div
-        className="absolute rounded-full"
-        style={{
-          width: 55,
-          height: 55,
-          backgroundColor: color,
-          opacity: 0.15,
-          top: 18,
-          left: -12,
-        }}
-      />
+
+      {/* ロゴ表示 */}
+      {!logoError ? (
+        <img
+          src={`https://logo.clearbit.com/${exchange.domain}`}
+          alt={`${exchange.name} logo`}
+          onError={() => setLogoError(true)}
+          className="relative z-10 h-12 w-auto max-w-[140px] object-contain drop-shadow-sm"
+        />
+      ) : (
+        /* フォールバック: ブランドカラーのイニシャルブロック */
+        <div
+          className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-lg"
+          style={{ backgroundColor: exchange.logoColor }}
+        >
+          {exchange.name.charAt(0)}
+        </div>
+      )}
     </div>
   );
 }
@@ -74,10 +85,10 @@ export default function ExchangeCard({
     <div
       onClick={onClick}
       className={`bg-white rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all duration-200 group ${
-        hasHighlight ? "ring-2 ring-yellow-300" : ""
+        hasHighlight ? "ring-2 ring-amber-300" : ""
       }`}
     >
-      <CardBanner color={exchange.logoColor} />
+      <CardBanner exchange={exchange} />
 
       <div className="p-4">
         <div className="flex items-start justify-between mb-1.5">
@@ -115,7 +126,7 @@ export default function ExchangeCard({
               {exchange.name.charAt(0)}
             </div>
             {exchange.trustScore >= 5 && (
-              <div className="w-6 h-6 rounded-full bg-yellow-400 border-2 border-white flex items-center justify-center text-white text-[9px] font-bold shadow-sm">
+              <div className="w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-white text-[9px] font-bold shadow-sm">
                 ★
               </div>
             )}

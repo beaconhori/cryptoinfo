@@ -68,6 +68,8 @@ export interface Exchange {
   country: string;
   established: number;
   url: string;
+  /** Clearbit logo API用ドメイン */
+  domain: string;
   logoColor: string;
   description: string;
   tokens: Token[];

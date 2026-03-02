@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Exchange, Feature } from "@/types/exchange";
 import { FEATURE_LABELS } from "@/data/exchanges";
 import {
@@ -155,6 +156,69 @@ function CostSimulator({ exchange }: { exchange: Exchange }) {
   );
 }
 
+function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: () => void }) {
+  const [logoError, setLogoError] = useState(false);
+  return (
+    <div
+      className="sticky top-0 z-10 rounded-t-2xl overflow-hidden"
+      style={{ borderBottom: `3px solid ${exchange.logoColor}` }}
+    >
+      {/* バナー背景 */}
+      <div
+        className="px-6 py-5 flex items-center justify-between relative"
+        style={{ background: `linear-gradient(145deg, ${exchange.logoColor}12 0%, ${exchange.logoColor}28 100%)` }}
+      >
+        <div className="flex items-center gap-4">
+          {/* ロゴ */}
+          <div
+            className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md"
+            style={{ backgroundColor: exchange.logoColor + "20", border: `1.5px solid ${exchange.logoColor}30` }}
+          >
+            {!logoError ? (
+              <img
+                src={`https://logo.clearbit.com/${exchange.domain}`}
+                alt={exchange.name}
+                onError={() => setLogoError(true)}
+                className="w-9 h-9 object-contain"
+              />
+            ) : (
+              <div
+                className="w-full h-full flex items-center justify-center text-white font-bold text-xl"
+                style={{ backgroundColor: exchange.logoColor }}
+              >
+                {exchange.name.charAt(0)}
+              </div>
+            )}
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
+            <div className="flex items-center gap-2 mt-0.5">
+              <span
+                className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                  exchange.region === "domestic"
+                    ? "bg-pink-100 text-pink-700"
+                    : "bg-indigo-100 text-indigo-700"
+                }`}
+              >
+                {exchange.region === "domestic" ? "国内" : "海外"}
+              </span>
+              <span className="text-xs text-gray-500">
+                {exchange.country} · {exchange.established}年設立
+              </span>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={onClose}
+          className="p-2 rounded-xl hover:bg-black/5 transition-colors"
+        >
+          <X size={20} className="text-gray-500" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function ExchangeModal({
   exchange,
   onClose,
@@ -166,43 +230,7 @@ export default function ExchangeModal({
     >
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        {/* ヘッダー */}
-        <div
-          className="sticky top-0 z-10 rounded-t-2xl px-6 py-4 flex items-center justify-between"
-          style={{ backgroundColor: exchange.logoColor + "18", borderBottom: `3px solid ${exchange.logoColor}` }}
-        >
-          <div className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg"
-              style={{ backgroundColor: exchange.logoColor }}
-            >
-              {exchange.name.charAt(0)}
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span
-                  className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    exchange.region === "domestic"
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-purple-100 text-purple-700"
-                  }`}
-                >
-                  {exchange.region === "domestic" ? "国内" : "海外"}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {exchange.country} · {exchange.established}年設立
-                </span>
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            <X size={20} className="text-gray-600" />
-          </button>
-        </div>
+        <ModalLogoHeader exchange={exchange} onClose={onClose} />
 
         <div className="p-6 space-y-6">
           {/* 説明 */}
