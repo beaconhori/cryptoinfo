@@ -752,9 +752,9 @@ export const exchanges: Exchange[] = [
     trustScore: 3,
     volumeRank: 9,
     notes: "重大事故なし。ただし主要国での規制登録なし。現物スポット手数料0%、新規アルトコインの取扱いが早い。",
-    affiliateUrl: "",
+    affiliateUrl: "https://www.mexc.com/ja-JP/acquisition/custom-sign-up?shareCode=mexc-15SZe",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラム: mexc.com/ja-JP/referral で発行",
+    affiliateNote: "紹介リンクから登録で手数料割引特典あり",
     tokensUrl: "https://www.mexc.com/ja-JP/markets",
   },
   {
