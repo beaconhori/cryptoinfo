@@ -2,7 +2,7 @@
 
 import { Feature } from "@/types/exchange";
 import { FEATURE_LABELS, ALL_TOKENS } from "@/data/exchanges";
-import { Search, Filter, X, ChevronDown } from "lucide-react";
+import Fa from "@/components/Fa";
 import { useState } from "react";
 
 export interface FilterState {
@@ -101,10 +101,7 @@ export default function FilterBar({
       {/* 検索 & ソート */}
       <div className="flex gap-2 flex-wrap sm:flex-nowrap">
         <div className="relative flex-1 min-w-0">
-          <Search
-            size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-          />
+          <Fa icon="magnifying-glass" size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             placeholder="取引所名で検索..."
@@ -117,7 +114,7 @@ export default function FilterBar({
               onClick={() => update({ searchText: "" })}
               className="absolute right-3 top-1/2 -translate-y-1/2"
             >
-              <X size={14} className="text-gray-400 hover:text-gray-600" />
+              <Fa icon="xmark" size={13} className="text-gray-400 hover:text-gray-600" />
             </button>
           )}
         </div>
@@ -133,10 +130,7 @@ export default function FilterBar({
               </option>
             ))}
           </select>
-          <ChevronDown
-            size={14}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-          />
+          <Fa icon="chevron-down" size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         </div>
       </div>
 
@@ -194,14 +188,14 @@ export default function FilterBar({
                 : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
             }`}
           >
-            <Filter size={12} />
+            <Fa icon="filter" size={12} />
             銘柄
             {filter.tokens.length > 0 && (
               <span className="bg-white/30 rounded-full px-1.5 text-xs">
                 {filter.tokens.length}
               </span>
             )}
-            <ChevronDown size={12} />
+            <Fa icon="chevron-down" size={11} />
           </button>
           {showTokenFilter && (
             <div className="absolute left-0 top-full mt-1 z-20 bg-white rounded-xl border border-gray-200 shadow-lg p-3 w-72">
@@ -246,14 +240,14 @@ export default function FilterBar({
                 : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
             }`}
           >
-            <Filter size={12} />
+            <Fa icon="filter" size={12} />
             機能
             {filter.features.length > 0 && (
               <span className="bg-white/30 rounded-full px-1.5 text-xs">
                 {filter.features.length}
               </span>
             )}
-            <ChevronDown size={12} />
+            <Fa icon="chevron-down" size={11} />
           </button>
           {showFeatureFilter && (
             <div className="absolute left-0 top-full mt-1 z-20 bg-white rounded-xl border border-gray-200 shadow-lg p-3 w-72">
@@ -290,7 +284,7 @@ export default function FilterBar({
             onClick={clearAll}
             className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs text-red-500 hover:bg-red-50 transition-colors"
           >
-            <X size={12} />
+            <Fa icon="xmark" size={11} />
             リセット
           </button>
         )}

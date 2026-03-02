@@ -6,19 +6,7 @@ import ExchangeCard from "@/components/ExchangeCard";
 import ExchangeModal from "@/components/ExchangeModal";
 import CostComparisonTable from "@/components/CostComparisonTable";
 import CompactFilter, { FilterState, SortKey } from "@/components/CompactFilter";
-import {
-  BarChart3,
-  Grid3X3,
-  TableIcon,
-  Search,
-  X,
-  ChevronRight,
-  Plus,
-  Wallet,
-  Globe2,
-  Zap,
-  Flag,
-} from "lucide-react";
+import Fa from "@/components/Fa";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
 type ActiveSection = "exchanges" | "wallets";
@@ -77,9 +65,9 @@ function SectionHeader({ label, count, icon, color }: SectionHeaderProps) {
 
 const REGION_ICONS = {
   all: null,
-  domestic: <Flag size={13} />,
-  overseas: <Globe2 size={13} />,
-  dex: <Zap size={13} />,
+  domestic: <Fa icon="flag" size={12} />,
+  overseas: <Fa icon="globe" size={12} />,
+  dex: <Fa icon="bolt" size={12} />,
 } as const;
 
 const REGION_OPTIONS = [
@@ -161,7 +149,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
         </div>
         {activeSection === "exchanges" && (
           <div className="relative">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Fa icon="magnifying-glass" size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             <input
               type="text"
               placeholder="検索..."
@@ -171,7 +159,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             />
             {filter.searchText && (
               <button onClick={() => setFilter({ ...filter, searchText: "" })} className="absolute right-2.5 top-1/2 -translate-y-1/2">
-                <X size={12} className="text-blue-300" />
+                <Fa icon="xmark" size={12} className="text-blue-300" />
               </button>
             )}
           </div>
@@ -192,9 +180,9 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                   activeSection === "exchanges" ? "bg-blue-50 text-blue-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                 }`}
               >
-                <BarChart3 size={14} className="flex-shrink-0" />
+                <Fa icon="chart-line" size={13} className="flex-shrink-0" />
                 <span className="text-xs font-semibold">取引所を探す</span>
-                <ChevronRight size={12} className={`ml-auto transition-transform ${activeSection === "exchanges" ? "rotate-90" : ""}`} />
+                <Fa icon="chevron-right" size={11} className={`ml-auto transition-transform ${activeSection === "exchanges" ? "rotate-90" : ""}`} />
               </button>
               {activeSection === "exchanges" && (
                 <div className="mt-1 ml-3 pl-3 border-l-2 border-blue-100 space-y-0.5">
@@ -204,7 +192,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       exchangeTab === "list" ? "bg-blue-500 text-white shadow-sm" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                   >
-                    <Grid3X3 size={12} className="flex-shrink-0" />
+                    <Fa icon="grid-2" size={11} className="flex-shrink-0" />
                     <span className="text-xs font-medium">取引所一覧</span>
                   </button>
                   <button
@@ -213,7 +201,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       exchangeTab === "compare" ? "bg-blue-500 text-white shadow-sm" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                   >
-                    <TableIcon size={12} className="flex-shrink-0" />
+                    <Fa icon="table" size={11} className="flex-shrink-0" />
                     <span className="text-xs font-medium">取引コスト比較</span>
                   </button>
                 </div>
@@ -226,7 +214,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                 activeSection === "wallets" ? "bg-purple-50 text-purple-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
               }`}
             >
-              <Wallet size={14} className="flex-shrink-0" />
+              <Fa icon="wallet" size={13} className="flex-shrink-0" />
               <span className="text-xs font-semibold">ウォレットを探す</span>
             </button>
           </nav>
@@ -264,7 +252,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             </div>
             {activeSection === "exchanges" && (
               <div className="relative w-64">
-                <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Fa icon="magnifying-glass" size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="取引所を検索..."
@@ -274,7 +262,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                 />
                 {filter.searchText && (
                   <button onClick={() => setFilter({ ...filter, searchText: "" })} className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <X size={14} className="text-gray-400 hover:text-gray-600" />
+                    <Fa icon="xmark" size={14} className="text-gray-400 hover:text-gray-600" />
                   </button>
                 )}
               </div>
@@ -322,7 +310,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                   filtered.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-24 text-gray-400">
                       <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
-                        <Search size={24} className="text-gray-300" />
+                        <Fa icon="magnifying-glass" size={24} className="text-gray-300" />
                       </div>
                       <p className="font-medium text-gray-500">条件に一致する取引所が見つかりませんでした</p>
                       <p className="text-sm mt-1">フィルターを変更してみてください</p>
@@ -336,7 +324,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                     <>
                       {showDomestic && domesticList.length > 0 && (
                         <section>
-                          <SectionHeader label="国内取引所" count={domesticList.length} icon={<Flag size={16} />} color="#F43F5E" />
+                          <SectionHeader label="国内取引所" count={domesticList.length} icon={<Fa icon="flag" size={15} />} color="#F43F5E" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {domesticList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -346,7 +334,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showOverseas && overseasList.length > 0 && (
                         <section>
-                          <SectionHeader label="海外取引所" count={overseasList.length} icon={<Globe2 size={16} />} color="#6366F1" />
+                          <SectionHeader label="海外取引所" count={overseasList.length} icon={<Fa icon="globe" size={15} />} color="#6366F1" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {overseasList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -356,7 +344,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showDex && dexList.length > 0 && (
                         <section>
-                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} icon={<Zap size={16} />} color="#10B981" />
+                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} icon={<Fa icon="bolt" size={15} />} color="#10B981" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {dexList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -376,7 +364,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             {activeSection === "wallets" && (
               <div className="flex flex-col items-center justify-center py-24 text-gray-400">
                 <div className="w-20 h-20 rounded-2xl bg-purple-50 flex items-center justify-center mb-5">
-                  <Wallet size={32} className="text-purple-300" />
+                  <Fa icon="wallet" size={32} className="text-purple-300" />
                 </div>
                 <p className="font-bold text-gray-600 text-lg mb-2">ウォレットガイド</p>
                 <p className="text-sm text-gray-400 mb-1">ハードウェア・ソフトウェア・ブラウザ拡張など</p>
@@ -401,7 +389,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             activeSection === "exchanges" && exchangeTab === "list" ? "text-blue-600" : "text-gray-400"
           }`}
         >
-          <Grid3X3 size={20} />
+          <Fa icon="grid-2" size={20} />
           <span className="text-[10px] font-medium">取引所一覧</span>
         </button>
         <button
@@ -410,7 +398,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             activeSection === "exchanges" && exchangeTab === "compare" ? "text-blue-600" : "text-gray-400"
           }`}
         >
-          <TableIcon size={20} />
+          <Fa icon="table" size={20} />
           <span className="text-[10px] font-medium">コスト比較</span>
         </button>
         <button
@@ -419,7 +407,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             activeSection === "wallets" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <Wallet size={20} />
+          <Fa icon="wallet" size={20} />
           <span className="text-[10px] font-medium">ウォレット</span>
         </button>
       </nav>

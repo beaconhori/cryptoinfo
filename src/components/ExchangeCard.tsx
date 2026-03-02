@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, BookOpen, Store, Zap } from "lucide-react";
+import Fa from "@/components/Fa";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
@@ -92,7 +92,7 @@ export default function ExchangeCard({
             onClick={(e) => e.stopPropagation()}
             className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0 -mr-0.5 -mt-0.5"
           >
-            <MoreHorizontal size={16} />
+            <Fa icon="ellipsis" size={15} />
           </button>
         </div>
 
@@ -105,7 +105,7 @@ export default function ExchangeCard({
           <div className="space-y-1 mb-3">
             <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
               <div className="flex items-center gap-1.5">
-                <Zap size={10} className="text-emerald-500 flex-shrink-0" />
+                <Fa icon="bolt" size={10} className="text-emerald-500 flex-shrink-0" />
                 <span className="text-[10px] font-bold text-gray-600">オンチェーン</span>
               </div>
               <span className="flex items-center gap-2 text-xs">
@@ -133,7 +133,7 @@ export default function ExchangeCard({
                 {hasExchange ? (
                   <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
                     <div className="flex items-center gap-1.5">
-                      <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
+                      <Fa icon="book-open" size={10} className="text-gray-400 flex-shrink-0" />
                       <span className="text-[10px] font-bold text-gray-600">取引所</span>
                     </div>
                     <span className="flex items-center gap-2 text-xs">
@@ -151,14 +151,14 @@ export default function ExchangeCard({
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
-                    <BookOpen size={10} className="text-gray-300 flex-shrink-0" />
+                    <Fa icon="book-open" size={10} className="text-gray-300 flex-shrink-0" />
                     <span className="text-[10px] font-bold text-gray-300">取引所なし</span>
                   </div>
                 )}
                 {hasDealer ? (
                   <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
                     <div className="flex items-center gap-1.5">
-                      <Store size={10} className="text-gray-400 flex-shrink-0" />
+                      <Fa icon="store" size={10} className="text-gray-400 flex-shrink-0" />
                       <span className="text-[10px] font-bold text-gray-600">販売所</span>
                     </div>
                     <span className="text-xs font-semibold" style={{ color: cfg.color }}>
@@ -167,7 +167,7 @@ export default function ExchangeCard({
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
-                    <Store size={10} className="text-gray-300 flex-shrink-0" />
+                    <Fa icon="store" size={10} className="text-gray-300 flex-shrink-0" />
                     <span className="text-[10px] font-bold text-gray-300">販売所なし</span>
                   </div>
                 )}

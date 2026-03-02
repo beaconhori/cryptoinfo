@@ -5,22 +5,7 @@ import { Exchange, Feature } from "@/types/exchange";
 import { FEATURE_LABELS } from "@/data/exchanges";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 import { calcTotalScore, calcYearsScore, calcYears } from "@/lib/scoreUtils";
-import {
-  X,
-  ExternalLink,
-  Coins,
-  Star,
-  CheckCircle,
-  XCircle,
-  Info,
-  AlertTriangle,
-  TrendingUp,
-  BookOpen,
-  Store,
-  Flag,
-  Globe2,
-  Zap,
-} from "lucide-react";
+import Fa from "@/components/Fa";
 
 interface ExchangeModalProps {
   exchange: Exchange;
@@ -28,19 +13,19 @@ interface ExchangeModalProps {
 }
 
 const FEATURE_ICONS: Partial<Record<Feature, string>> = {
-  spot: "💹",
-  futures: "📈",
-  margin: "⚡",
-  staking: "🏦",
-  lending: "💰",
-  nft: "🖼️",
-  copy_trading: "📋",
-  options: "🎯",
-  demo: "🧪",
-  api: "🔌",
-  mobile_app: "📱",
-  japan_yen_deposit: "¥",
-  credit_card: "💳",
+  spot: "chart-candlestick",
+  futures: "chart-line",
+  margin: "arrow-trend-up",
+  staking: "coins",
+  lending: "hand-holding-dollar",
+  nft: "image",
+  copy_trading: "copy",
+  options: "sliders",
+  demo: "flask",
+  api: "code",
+  mobile_app: "mobile-screen",
+  japan_yen_deposit: "yen-sign",
+  credit_card: "credit-card",
 };
 
 const AMOUNTS = [10000, 100000, 1000000];
@@ -56,7 +41,7 @@ function ExchangeTradingSection({ exchange }: { exchange: Exchange }) {
     <div className="rounded-2xl border border-gray-200 overflow-hidden">
       {/* ヘッダー */}
       <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
-        <BookOpen size={14} className="text-gray-500" />
+        <Fa icon="book-open" size={13} className="text-gray-500" />
         <h4 className="font-semibold text-gray-800 text-sm">取引所（板取引）</h4>
         <span className="text-xs text-gray-400 ml-auto">Order Book</span>
       </div>
@@ -126,7 +111,7 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
     <div className="rounded-2xl border border-gray-200 overflow-hidden">
       {/* ヘッダー */}
       <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
-        <Store size={14} className="text-gray-500" />
+        <Fa icon="store" size={13} className="text-gray-500" />
         <h4 className="font-semibold text-gray-800 text-sm">販売所（相対取引）</h4>
         <span className="text-xs font-medium ml-auto" style={{ color: cfg.color }}>
           スプレッド {cfg.label}
@@ -153,7 +138,7 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
         {/* 警告メッセージ */}
         {isAlert && (
           <div className="flex items-start gap-2.5 rounded-xl p-3 bg-gray-50 border border-gray-200">
-            <AlertTriangle size={14} className="flex-shrink-0 mt-0.5" style={{ color: cfg.color }} />
+            <Fa icon="triangle-exclamation" size={13} className="flex-shrink-0 mt-0.5" style={{ color: cfg.color }} />
             <p className="text-xs text-gray-600 leading-relaxed">
               {fees.spreadRating === "very_wide"
                 ? "このスプレッドは非常に広く、頻繁な売買には不向きです。少額の積立などの用途に限定するか、取引所機能（板取引）の利用を強く推奨します。"
@@ -216,16 +201,16 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
           <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
           <div className="flex items-center gap-2 mt-1 flex-wrap">
             <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600">
-              {exchange.region === "domestic" ? <><Flag size={10} />国内</> : exchange.region === "dex" ? <><Zap size={10} />DEX</> : <><Globe2 size={10} />海外</>}
+              {exchange.region === "domestic" ? <><Fa icon="flag" size={10} />国内</> : exchange.region === "dex" ? <><Fa icon="bolt" size={10} />DEX</> : <><Fa icon="globe" size={10} />海外</>}
             </span>
             {hasExchange && (
               <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
-                <BookOpen size={10} /> 取引所
+                <Fa icon="book-open" size={10} /> 取引所
               </span>
             )}
             {hasDealer && (
               <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
-                <Store size={10} /> 販売所
+                <Fa icon="store" size={10} /> 販売所
               </span>
             )}
             <span className="text-xs text-gray-500">{exchange.country} · {exchange.established}年</span>
@@ -233,7 +218,7 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
         </div>
       </div>
       <button onClick={onClose} className="p-2 rounded-xl hover:bg-black/10 transition-colors flex-shrink-0">
-        <X size={20} className="text-gray-600" />
+        <Fa icon="xmark" size={18} className="text-gray-600" />
       </button>
     </div>
   );
@@ -255,7 +240,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                {exchange.fsaRegistered ? <CheckCircle size={13} className="text-green-500" /> : <XCircle size={13} className="text-gray-400" />}
+                {exchange.fsaRegistered ? <Fa icon="circle-check" size={13} className="text-green-500" /> : <Fa icon="circle-xmark" size={13} className="text-gray-400" />}
                 <span className="text-xs text-gray-500">金融庁登録</span>
               </div>
               <span className={`text-sm font-semibold ${exchange.fsaRegistered ? "text-green-600" : "text-gray-400"}`}>
@@ -264,21 +249,21 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
             </div>
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <Coins size={13} className="text-blue-500" />
+                <Fa icon="coins" size={13} className="text-blue-500" />
                 <span className="text-xs text-gray-500">取引ペア数</span>
               </div>
               <span className="text-sm font-semibold text-gray-800">{exchange.tradingPairs?.toLocaleString() ?? "—"}</span>
             </div>
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <TrendingUp size={13} className="text-purple-500" />
+                <Fa icon="arrow-trend-up" size={13} className="text-purple-500" />
                 <span className="text-xs text-gray-500">最大レバレッジ</span>
               </div>
               <span className="text-sm font-semibold text-gray-800">{exchange.maxLeverage ? `${exchange.maxLeverage}倍` : "なし"}</span>
             </div>
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <Star size={13} className="text-yellow-500" />
+                <Fa icon="calendar" size={13} className="text-yellow-500" />
                 <span className="text-xs text-gray-500">設立年</span>
               </div>
               <span className="text-sm font-semibold text-gray-800">{exchange.established}年</span>
@@ -298,7 +283,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-1.5">
-                    <Star size={14} className="text-yellow-500" />
+                    <Fa icon="shield-check" size={14} className="text-yellow-500" />
                     <span className="text-sm font-bold text-gray-700">総合信頼スコア</span>
                   </div>
                   <div className="flex items-baseline gap-1">
@@ -362,7 +347,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
           {/* 対応トークン */}
           <div>
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              <Coins size={16} className="text-gray-600" />
+              <Fa icon="coins" size={15} className="text-gray-600" />
               対応トークン
               {exchange.region === "domestic" && (
                 <span className="text-gray-400 font-normal text-sm">({exchange.tokens.length}銘柄)</span>
@@ -378,7 +363,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               </div>
             ) : (
               <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-3 border border-gray-100">
-                <Coins size={14} className="text-gray-400 flex-shrink-0" />
+                <Fa icon="coins" size={13} className="text-gray-400 flex-shrink-0" />
                 <span className="text-sm text-gray-500">
                   {exchange.tradingPairs?.toLocaleString() ?? "多数"}銘柄以上に対応（日々変動）
                 </span>
@@ -394,7 +379,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {exchange.features.map((feature) => (
                 <div key={feature} className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
-                  <span>{FEATURE_ICONS[feature] ?? "✓"}</span>
+                  <Fa icon={FEATURE_ICONS[feature] ?? "check"} size={13} className="text-blue-400 flex-shrink-0" />
                   <span className="text-sm text-gray-700">{FEATURE_LABELS[feature] ?? feature}</span>
                 </div>
               ))}
@@ -411,7 +396,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               }}
             >
               <div className="flex items-center gap-2">
-                <Info size={13} className="text-gray-400" />
+                <Fa icon="circle-info" size={13} className="text-gray-400" />
                 <span className="text-xs font-medium text-gray-500">セキュリティ評価スコアの基準</span>
               </div>
               <span className="text-xs text-gray-400">タップで展開</span>
@@ -439,7 +424,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
           {/* 特記事項 */}
           {exchange.notes && (
             <div className="flex items-start gap-2 bg-gray-50 border border-gray-200 rounded-xl p-4">
-              <Info size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
+              <Fa icon="circle-info" size={15} className="text-gray-400 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-gray-600">{exchange.notes}</p>
             </div>
           )}
@@ -453,7 +438,7 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
               style={{ backgroundColor: exchange.logoColor }}
             >
-              <ExternalLink size={16} />
+              <Fa icon="arrow-up-right-from-square" size={15} />
               公式サイトを見る
             </a>
             {exchange.affiliateNote && (

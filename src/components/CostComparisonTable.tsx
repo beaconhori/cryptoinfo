@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { TrendingUp, ChevronUp, ChevronDown, AlertTriangle, BookOpen, Store, Zap, Flag, Globe2 } from "lucide-react";
+import Fa from "@/components/Fa";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface CostComparisonTableProps {
@@ -16,10 +16,10 @@ type TabMode = "exchange" | "dealer" | "dex";
 
 function RegionBadge({ region }: { region: string }) {
   if (region === "domestic")
-    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600"><Flag size={11} />国内</span>;
+    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600"><Fa icon="flag" size={11} />国内</span>;
   if (region === "dex")
-    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600"><Zap size={11} />DEX</span>;
-  return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600"><Globe2 size={11} />海外</span>;
+    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600"><Fa icon="bolt" size={11} />DEX</span>;
+  return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600"><Fa icon="globe" size={11} />海外</span>;
 }
 
 function RankBadge({ rank, cost }: { rank: number; cost: number | null }) {
@@ -89,9 +89,9 @@ export default function CostComparisonTable({
   const dealerMax = Math.max(...dealerValidCosts);
 
   const tabConfig = {
-    exchange: { label: "取引所", icon: <BookOpen size={13} />, count: exchangeList.length, color: "emerald" },
-    dealer: { label: "販売所", icon: <Store size={13} />, count: dealerList.length, color: "amber" },
-    dex: { label: "DEX（オンチェーン）", icon: <Zap size={13} />, count: dexList.length, color: "teal" },
+    exchange: { label: "取引所", icon: <Fa icon="book-open" size={13} />, count: exchangeList.length, color: "emerald" },
+    dealer: { label: "販売所", icon: <Fa icon="store" size={13} />, count: dealerList.length, color: "amber" },
+    dex: { label: "DEX（オンチェーン）", icon: <Fa icon="bolt" size={13} />, count: dexList.length, color: "teal" },
   } as const;
 
   return (
@@ -100,7 +100,7 @@ export default function CostComparisonTable({
       <div className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
-            <TrendingUp size={16} className="text-blue-500" />
+            <Fa icon="chart-line" size={15} className="text-blue-500" />
           </div>
           <div>
             <h2 className="font-bold text-gray-900 text-sm">取引コスト比較</h2>
@@ -217,8 +217,8 @@ export default function CostComparisonTable({
                           <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-lg text-sm font-medium ${
                             isRebate ? "text-emerald-600" : isLowest ? "text-blue-700 bg-blue-50" : isHighest ? "text-rose-500 bg-rose-50" : "text-gray-600"
                           }`}>
-                            {isLowest && !isRebate && <ChevronDown size={12} className="text-blue-400" />}
-                            {isHighest && <ChevronUp size={12} className="text-rose-400" />}
+                            {isLowest && !isRebate && <Fa icon="chevron-down" size={11} className="text-blue-400" />}
+                            {isHighest && <Fa icon="chevron-up" size={11} className="text-rose-400" />}
                             {isRebate ? "-" : ""}{Math.abs(cost).toLocaleString()}円
                           </span>
                         ) : <span className="text-gray-300 text-sm">—</span>}
@@ -249,7 +249,7 @@ export default function CostComparisonTable({
       {tab === "dealer" && (
         <>
           <div className="px-5 py-2.5 bg-amber-50 border-b border-amber-100 flex items-start gap-2">
-            <AlertTriangle size={13} className="text-amber-500 flex-shrink-0 mt-0.5" />
+            <Fa icon="triangle-exclamation" size={12} className="text-amber-500 flex-shrink-0 mt-0.5" />
             <p className="text-xs text-amber-700">
               販売所はスプレッド（売値と買値の差）がコストです。手数料0円でもスプレッドが広いと実質コストは高くなります。<strong>往復コスト（買って即売った場合の損失）</strong>で比較してください。
             </p>
@@ -292,9 +292,9 @@ export default function CostComparisonTable({
                         <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-lg text-sm font-bold ${
                           isLowest ? "text-blue-700 bg-blue-50" : isHighest ? "text-rose-600 bg-rose-50" : ""
                         }`} style={!isLowest && !isHighest ? { color: cfg.color } : {}}>
-                          {isLowest && <ChevronDown size={12} className="text-blue-400" />}
-                          {isHighest && <ChevronUp size={12} className="text-rose-400" />}
-                          {isAlert && !isHighest && <AlertTriangle size={11} />}
+                          {isLowest && <Fa icon="chevron-down" size={11} className="text-blue-400" />}
+                          {isHighest && <Fa icon="chevron-up" size={11} className="text-rose-400" />}
+                          {isAlert && !isHighest && <Fa icon="triangle-exclamation" size={11} />}
                           {lossCost.toLocaleString()}円
                         </span>
                       </td>
@@ -319,7 +319,7 @@ export default function CostComparisonTable({
       {tab === "dex" && (
         <>
           <div className="px-5 py-2.5 bg-emerald-50 border-b border-emerald-100 flex items-start gap-2">
-            <Zap size={13} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+            <Fa icon="bolt" size={13} className="text-emerald-500 flex-shrink-0 mt-0.5" />
             <p className="text-xs text-emerald-700">
               DEXはノンカストディアル（自己管理）でKYC不要。手数料に加えてガス代・ブリッジコストが発生します。法定通貨（円）での直接入出金はできません。
             </p>
@@ -366,7 +366,7 @@ export default function CostComparisonTable({
                           <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-lg text-sm font-medium ${
                             isRebate ? "text-emerald-600" : isLowest ? "text-blue-700 bg-blue-50" : "text-gray-600"
                           }`}>
-                            {isLowest && !isRebate && <ChevronDown size={12} className="text-blue-400" />}
+                            {isLowest && !isRebate && <Fa icon="chevron-down" size={11} className="text-blue-400" />}
                             {isRebate ? "-" : ""}{Math.abs(cost).toLocaleString()}円
                           </span>
                         ) : <span className="text-gray-300 text-sm">—</span>}

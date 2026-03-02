@@ -2,7 +2,7 @@
 
 import { Feature } from "@/types/exchange";
 import { FEATURE_LABELS } from "@/data/exchanges";
-import { SlidersHorizontal, ChevronDown, X } from "lucide-react";
+import Fa from "@/components/Fa";
 
 export interface FilterState {
   region: "all" | "domestic" | "overseas" | "dex";
@@ -69,7 +69,7 @@ export default function CompactFilter({
     <div className="bg-white border-b border-gray-100 relative z-20">
       {/* フィルターボタン（横スクロール） */}
       <div className="flex items-center gap-2 overflow-x-auto px-3 md:px-6 py-2 scrollbar-hide">
-        <SlidersHorizontal size={13} className="text-gray-300 flex-shrink-0" />
+        <Fa icon="sliders" size={13} className="text-gray-300 flex-shrink-0" />
         {FEATURE_QUICK.map((feature) => (
           <button
             key={feature}
@@ -88,7 +88,7 @@ export default function CompactFilter({
             onClick={() => onFilterChange({ ...filter, features: [], fsaOnly: false })}
             className="flex-shrink-0 flex items-center gap-1 text-xs text-red-400 hover:text-red-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-red-50"
           >
-            <X size={10} />
+            <Fa icon="xmark" size={10} />
             クリア
           </button>
         )}
@@ -108,7 +108,7 @@ export default function CompactFilter({
               </option>
             ))}
           </select>
-          <ChevronDown size={11} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          <Fa icon="chevron-down" size={10} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         </div>
       </div>
     </div>
