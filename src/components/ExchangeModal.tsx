@@ -207,15 +207,12 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
       style={{ borderBottom: `3px solid ${exchange.logoColor}` }}
     >
       <div className="px-6 py-5 flex items-center justify-between bg-white">
-        <div className="flex items-center gap-4">
-          <div
-            className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md"
-            style={{ backgroundColor: exchange.logoColor + "20", border: `1.5px solid ${exchange.logoColor}30` }}
-          >
+          <div className="flex items-center gap-4">
+          <div className="h-10 flex items-center justify-center flex-shrink-0">
             {!fallback && src ? (
-              <img src={src} alt={exchange.name} onError={handleError} className="w-9 h-9 object-contain" />
+              <img src={src} alt={exchange.name} onError={handleError} className="h-10 w-auto max-w-[120px] object-contain" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white font-bold text-xl" style={{ backgroundColor: exchange.logoColor }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: exchange.logoColor }}>
                 {exchange.name.charAt(0)}
               </div>
             )}
@@ -322,15 +319,37 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
           <div>
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
               <Coins size={16} className="text-gray-600" />
-              対応トークン <span className="text-gray-400 font-normal text-sm">({exchange.tokens.length}銘柄)</span>
+              対応トークン
+              {exchange.region === "domestic" && (
+                <span className="text-gray-400 font-normal text-sm">({exchange.tokens.length}銘柄)</span>
+              )}
             </h3>
-            <div className="flex flex-wrap gap-1.5">
-              {exchange.tokens.map((token) => (
-                <span key={token} className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
-                  {token}
+            {exchange.region === "domestic" ? (
+              <div className="flex flex-wrap gap-1.5">
+                {exchange.tokens.map((token) => (
+                  <span key={token} className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
+                    {token}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-3 border border-gray-100">
+                <Coins size={14} className="text-gray-400 flex-shrink-0" />
+                <span className="text-sm text-gray-500">
+                  {exchange.tradingPairs?.toLocaleString() ?? "多数"}銘柄以上に対応（日々変動）
                 </span>
-              ))}
-            </div>
+                {exchange.tokensUrl && (
+                  <a
+                    href={exchange.tokensUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto flex items-center gap-1 text-xs font-medium text-blue-500 hover:text-blue-700 transition-colors flex-shrink-0"
+                  >
+                    銘柄一覧を見る <ExternalLink size={11} />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* 機能一覧 */}
@@ -358,44 +377,14 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
 
           {/* ボタン */}
           <div className="space-y-2.5">
-            {exchange.affiliateType !== "none" && (
-              exchange.affiliateUrl ? (
-                <a
-                  href={exchange.affiliateUrl}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: exchange.logoColor }}
-                >
-                  <ExternalLink size={16} />
-                  {exchange.name} で口座開設する
-                  {exchange.affiliateType === "referral" && (
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">紹介リンク</span>
-                  )}
-                </a>
-              ) : (
-                <div
-                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white/70 cursor-not-allowed"
-                  style={{ backgroundColor: exchange.logoColor + "99" }}
-                >
-                  <ExternalLink size={16} />
-                  {exchange.name} で口座開設する
-                  <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">リンク未設定</span>
-                </div>
-              )
-            )}
             <a
-              href={exchange.url}
+              href={exchange.affiliateUrl || exchange.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl font-medium transition-colors border ${
-                exchange.affiliateType !== "none"
-                  ? "text-gray-600 border-gray-200 hover:bg-gray-50 bg-white text-sm"
-                  : "text-white font-semibold hover:opacity-90"
-              }`}
-              style={exchange.affiliateType === "none" ? { backgroundColor: exchange.logoColor } : undefined}
+              className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: exchange.logoColor }}
             >
-              <ExternalLink size={14} />
+              <ExternalLink size={16} />
               公式サイトを見る
             </a>
             {exchange.affiliateNote && (

@@ -110,4 +110,6 @@ export interface Exchange {
   affiliateType?: "asp" | "referral" | "none";
   /** アフィリエイト登録先メモ */
   affiliateNote?: string;
+  /** 対応トークン一覧ページURL（主に海外取引所向け） */
+  tokensUrl?: string;
 }

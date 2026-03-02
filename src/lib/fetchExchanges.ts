@@ -47,6 +47,7 @@ function rowToExchange(row: Record<string, unknown>): Exchange {
     ...(row.affiliate_url !== null ? { affiliateUrl: row.affiliate_url as string } : {}),
     ...(row.affiliate_type ? { affiliateType: row.affiliate_type as "asp" | "referral" | "none" } : {}),
     ...(row.affiliate_note ? { affiliateNote: row.affiliate_note as string } : {}),
+    ...(row.tokens_url ? { tokensUrl: row.tokens_url as string } : {}),
   };
 }
 

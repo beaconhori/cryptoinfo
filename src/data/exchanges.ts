@@ -443,6 +443,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: 紹介した相手の手数料の20〜40%がバック。dashboard.binance.com で発行",
+    tokensUrl: "https://www.binance.com/ja/markets/overview",
   },
   {
     id: "bybit",
@@ -508,6 +509,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: bybit.com/ja-JP/vip/affiliate で発行",
+    tokensUrl: "https://www.bybit.com/ja-JP/markets/spot",
   },
   {
     id: "okx",
@@ -573,6 +575,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: okx.com/ja/affiliate で発行",
+    tokensUrl: "https://www.okx.com/ja/spot-trading",
   },
   {
     id: "kraken",
@@ -632,6 +635,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: undefined,
     affiliateType: "none",
     affiliateNote: "公式アフィリエイトプログラムは現在提供なし",
+    tokensUrl: "https://www.kraken.com/ja-jp/spot-trading",
   },
   {
     id: "bitget",
@@ -693,6 +697,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式アフィリエイトプログラム: bitget.com/ja/affiliate で発行",
+    tokensUrl: "https://www.bitget.com/ja/spot",
   },
   {
     id: "mexc",
@@ -753,6 +758,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: mexc.com/ja-JP/referral で発行",
+    tokensUrl: "https://www.mexc.com/ja-JP/markets",
   },
   {
     id: "gate-io",
@@ -816,6 +822,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: gate.io/ja/referral で発行",
+    tokensUrl: "https://www.gate.io/ja/market",
   },
 ];
 
