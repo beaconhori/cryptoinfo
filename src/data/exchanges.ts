@@ -806,7 +806,6 @@ export const exchanges: Exchange[] = [
     tokensUrl: "https://www.mexc.com/ja-JP/markets",
   },
   {
-  {
     id: "kucoin",
     name: "KuCoin",
     nameEn: "KuCoin",
