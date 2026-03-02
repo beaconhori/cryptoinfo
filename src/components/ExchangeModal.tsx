@@ -271,11 +271,12 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
                 <Star size={13} className="text-yellow-500" />
-                <span className="text-xs text-gray-500">信頼スコア</span>
+                <span className="text-xs text-gray-500">セキュリティ評価</span>
               </div>
               <span className="text-sm font-semibold text-gray-800">
                 {"★".repeat(exchange.trustScore)}{"☆".repeat(5 - exchange.trustScore)}
               </span>
+              <p className="text-[10px] text-gray-400 mt-0.5">事故歴ベース</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-3 text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
@@ -364,6 +365,41 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
                   <span className="text-sm text-gray-700">{FEATURE_LABELS[feature] ?? feature}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* セキュリティ評価基準 */}
+          <div className="rounded-xl border border-gray-200 overflow-hidden">
+            <button
+              className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 text-left"
+              onClick={(e) => {
+                const el = e.currentTarget.nextElementSibling as HTMLElement;
+                el.style.display = el.style.display === "none" ? "block" : "none";
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <Info size={13} className="text-gray-400" />
+                <span className="text-xs font-medium text-gray-500">セキュリティ評価スコアの基準</span>
+              </div>
+              <span className="text-xs text-gray-400">タップで展開</span>
+            </button>
+            <div style={{ display: "none" }} className="px-4 py-3 bg-white">
+              <table className="w-full text-xs text-gray-600 border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left py-1.5 pr-3 font-semibold text-gray-700 w-12">スコア</th>
+                    <th className="text-left py-1.5 font-semibold text-gray-700">基準</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr><td className="py-1.5 pr-3 font-bold">★★★★★</td><td className="py-1.5">重大事故なし・長期運営（5年以上）・金融庁登録または主要国の規制あり</td></tr>
+                  <tr><td className="py-1.5 pr-3 font-bold">★★★★☆</td><td className="py-1.5">重大事故なし・運営5年未満、または主要規制登録なし</td></tr>
+                  <tr><td className="py-1.5 pr-3 font-bold">★★★☆☆</td><td className="py-1.5">軽微なインシデントあり、または親会社・グループに事故歴あり</td></tr>
+                  <tr><td className="py-1.5 pr-3 font-bold">★★☆☆☆</td><td className="py-1.5">重大なセキュリティ事故あり（補償済み・運営継続中）</td></tr>
+                  <tr><td className="py-1.5 pr-3 font-bold">★☆☆☆☆</td><td className="py-1.5">重大なセキュリティ事故あり（未補償・サービス終了）</td></tr>
+                </tbody>
+              </table>
+              <p className="text-[10px] text-gray-400 mt-2">※当サイト独自の評価です。投資判断の参考としてのみご利用ください。</p>
             </div>
           </div>
 
