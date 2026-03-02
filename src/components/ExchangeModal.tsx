@@ -138,22 +138,13 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
           「手数料無料」と表示されていても、このスプレッドは別途発生します。
         </p>
 
-        {/* スプレッド率 + 往復コスト */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
-            <p className="text-xs text-gray-400 mb-1">スプレッド目安</p>
-            <p className="text-2xl font-black" style={{ color: cfg.color }}>
-              ≈{fees.dealerSpread.toFixed(1)}%
-            </p>
-            <p className="text-[10px] text-gray-400 mt-0.5">買値と売値の差</p>
-          </div>
-          <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
-            <p className="text-xs text-gray-400 mb-1">往復コスト目安</p>
-            <p className="text-2xl font-black" style={{ color: cfg.color }}>
-              ≈{fees.roundTripCostPct.toFixed(2)}%
-            </p>
-            <p className="text-[10px] text-gray-400 mt-0.5">買→即売の損失率</p>
-          </div>
+        {/* スプレッド率（＝往復コスト率） */}
+        <div className="rounded-xl p-4 text-center bg-gray-50 border border-gray-100">
+          <p className="text-xs text-gray-400 mb-1">スプレッド目安（＝往復コスト率）</p>
+          <p className="text-3xl font-black" style={{ color: cfg.color }}>
+            ≈{fees.dealerSpread.toFixed(1)}%
+          </p>
+          <p className="text-[10px] text-gray-400 mt-0.5">買値と売値の差。これがそのまま「買って即売った時の損失率」になります。</p>
         </div>
 
         {/* 警告メッセージ */}
@@ -168,15 +159,15 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
           </div>
         )}
 
-        {/* 金額別コスト */}
+        {/* 金額別損失額 */}
         <div>
-          <p className="text-xs text-gray-400 mb-2">往復コスト（金額別）</p>
+          <p className="text-xs text-gray-400 mb-2">損失額目安（金額別・買→即売）</p>
           <div className="grid grid-cols-3 gap-2">
             {AMOUNTS.map((amount) => (
               <div key={amount} className="rounded-lg p-2 text-center bg-gray-50 border border-gray-100">
                 <p className="text-[10px] text-gray-400">{(amount / 10000).toLocaleString()}万円</p>
                 <p className="text-sm font-bold" style={{ color: cfg.color }}>
-                  {((amount * fees.roundTripCostPct) / 100).toLocaleString()}円
+                  {((amount * fees.dealerSpread) / 100).toLocaleString()}円
                 </p>
               </div>
             ))}

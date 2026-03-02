@@ -56,14 +56,14 @@ export default function CostComparisonTable({
       return a.cost - b.cost;
     });
 
-  // 販売所タブ用コスト計算
+  // 販売所タブ用コスト計算（スプレッド = 往復コスト）
   const dealerSorted = [...dealerList]
     .map((ex) => {
       const spread = ex.fees.dealerSpread!;
-      const roundTrip = ex.fees.roundTripCostPct;
-      return { ex, spread, roundTripCost: (selectedAmount * roundTrip) / 100 };
+      const lossCost = (selectedAmount * spread) / 100;
+      return { ex, spread, lossCost };
     })
-    .sort((a, b) => a.roundTripCost - b.roundTripCost);
+    .sort((a, b) => a.lossCost - b.lossCost);
 
   // DEXタブ用コスト計算
   const dexSorted = [...dexList]
@@ -80,7 +80,7 @@ export default function CostComparisonTable({
 
   const exchangeValidCosts = exchangeSorted.map((r) => r.cost).filter((c): c is number => c !== null && c >= 0);
   const dexValidCosts = dexSorted.map((r) => r.cost).filter((c): c is number => c !== null && c >= 0);
-  const dealerValidCosts = dealerSorted.map((r) => r.roundTripCost);
+  const dealerValidCosts = dealerSorted.map((r) => r.lossCost);
 
   const exMin = Math.min(...exchangeValidCosts);
   const exMax = Math.max(...exchangeValidCosts);
@@ -260,17 +260,16 @@ export default function CostComparisonTable({
                 <tr className="bg-gray-50/70 text-xs text-gray-400 border-b border-gray-100">
                   <th className="text-left py-3 px-5 font-medium">取引所名</th>
                   <th className="text-center py-3 px-3 font-medium">地域</th>
-                  <th className="text-center py-3 px-3 font-medium">スプレッド目安</th>
-                  <th className="text-center py-3 px-3 font-medium">往復コスト<span className="text-gray-300 ml-1 font-normal">(買→即売)</span></th>
-                  <th className="text-center py-3 px-3 font-medium">{selectedAmount.toLocaleString()}円の往復損失額</th>
+                  <th className="text-center py-3 px-3 font-medium">スプレッド目安<span className="text-gray-300 ml-1 font-normal">＝往復コスト率</span></th>
+                  <th className="text-center py-3 px-3 font-medium">{selectedAmount.toLocaleString()}円の損失額目安<span className="text-gray-300 ml-1 font-normal">(買→即売)</span></th>
                   <th className="text-center py-3 px-3 font-medium">評価</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {dealerSorted.map(({ ex, spread, roundTripCost }, i) => {
+                {dealerSorted.map(({ ex, spread, lossCost }, i) => {
                   const cfg = getSpreadConfig(ex.fees.spreadRating);
-                  const isLowest = roundTripCost === dealerMin;
-                  const isHighest = roundTripCost === dealerMax && dealerMax > dealerMin;
+                  const isLowest = lossCost === dealerMin;
+                  const isHighest = lossCost === dealerMax && dealerMax > dealerMin;
                   const isAlert = ex.fees.spreadRating === "wide" || ex.fees.spreadRating === "very_wide";
                   const positiveIdx = dealerSorted.findIndex(r => r.ex.id === ex.id);
 
@@ -278,7 +277,7 @@ export default function CostComparisonTable({
                     <tr key={ex.id} onClick={() => onSelectExchange(ex)} className="cursor-pointer hover:bg-amber-50/40 transition-colors">
                       <td className="py-3 px-5">
                         <div className="flex items-center gap-2">
-                          <RankBadge rank={positiveIdx} cost={roundTripCost} />
+                          <RankBadge rank={positiveIdx} cost={lossCost} />
                           <div className="w-7 h-7 rounded-xl flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-sm" style={{ backgroundColor: ex.logoColor }}>
                             {ex.name.charAt(0)}
                           </div>
@@ -290,18 +289,13 @@ export default function CostComparisonTable({
                         <span className="text-sm font-bold" style={{ color: cfg.color }}>≈ {spread.toFixed(1)}%</span>
                       </td>
                       <td className="py-3 px-3 text-center">
-                        <span className="text-sm font-bold" style={{ color: cfg.color }}>
-                          {ex.fees.roundTripCostPct.toFixed(1)}%
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 text-center">
                         <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-lg text-sm font-bold ${
                           isLowest ? "text-blue-700 bg-blue-50" : isHighest ? "text-rose-600 bg-rose-50" : ""
                         }`} style={!isLowest && !isHighest ? { color: cfg.color } : {}}>
                           {isLowest && <ChevronDown size={12} className="text-blue-400" />}
                           {isHighest && <ChevronUp size={12} className="text-rose-400" />}
                           {isAlert && !isHighest && <AlertTriangle size={11} />}
-                          {roundTripCost.toLocaleString()}円
+                          {lossCost.toLocaleString()}円
                         </span>
                       </td>
                       <td className="py-3 px-3 text-center">
