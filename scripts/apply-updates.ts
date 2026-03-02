@@ -13,7 +13,7 @@ async function main() {
   console.log("ℹ skipping delete step");
 
   // 2. 新件をupsert
-  const targets = ["jupiter"];
+  const targets = ["zoomex"];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
   for (const ex of newExchanges) {
