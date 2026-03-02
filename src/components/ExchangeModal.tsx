@@ -157,28 +157,38 @@ function CostSimulator({ exchange }: { exchange: Exchange }) {
 }
 
 function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: () => void }) {
-  const [logoError, setLogoError] = useState(false);
+  const localSrc = exchange.logoFile ? `/logos/${exchange.logoFile}` : null;
+  const clearbitSrc = `https://logo.clearbit.com/${exchange.domain}`;
+  const [src, setSrc] = useState<string | null>(localSrc ?? clearbitSrc);
+  const [fallback, setFallback] = useState(false);
+
+  const handleError = () => {
+    if (src === localSrc) {
+      setSrc(clearbitSrc);
+    } else {
+      setFallback(true);
+    }
+  };
+
   return (
     <div
       className="sticky top-0 z-10 rounded-t-2xl overflow-hidden"
       style={{ borderBottom: `3px solid ${exchange.logoColor}` }}
     >
-      {/* バナー背景 */}
       <div
         className="px-6 py-5 flex items-center justify-between relative"
         style={{ background: `linear-gradient(145deg, ${exchange.logoColor}12 0%, ${exchange.logoColor}28 100%)` }}
       >
         <div className="flex items-center gap-4">
-          {/* ロゴ */}
           <div
             className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0 shadow-md"
             style={{ backgroundColor: exchange.logoColor + "20", border: `1.5px solid ${exchange.logoColor}30` }}
           >
-            {!logoError ? (
+            {!fallback && src ? (
               <img
-                src={`https://logo.clearbit.com/${exchange.domain}`}
+                src={src}
                 alt={exchange.name}
-                onError={() => setLogoError(true)}
+                onError={handleError}
                 className="w-9 h-9 object-contain"
               />
             ) : (

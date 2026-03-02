@@ -11,6 +11,7 @@ export const exchanges: Exchange[] = [
     established: 2014,
     url: "https://bitflyer.com/ja-jp/",
     domain: "bitflyer.com",
+    logoFile: "bitflyer.webp",
     logoColor: "#1652F0",
     description:
       "国内最大級のビットコイン取引量を誇る老舗取引所。金融庁登録済みで高い信頼性を持つ。Lightning FXなどのデリバティブ取引も可能。",
@@ -51,6 +52,7 @@ export const exchanges: Exchange[] = [
     established: 2012,
     url: "https://coincheck.com/ja/",
     domain: "coincheck.com",
+    logoFile: "coincheck.avif",
     logoColor: "#00B7A4",
     description:
       "国内最多水準の取扱銘柄数を誇る取引所。NFTマーケットプレイスや積立投資など多彩なサービスを提供。マネックスグループ傘下。",
@@ -111,6 +113,7 @@ export const exchanges: Exchange[] = [
     established: 2016,
     url: "https://coin.z.com/jp/",
     domain: "coin.z.com",
+    logoFile: "gmocoin.png",
     logoColor: "#009BDE",
     description:
       "GMOインターネットグループ傘下の取引所。業界最安水準の手数料と豊富な取引機能が特徴。取引所での売買手数料がマイナス(リベート)になることも。",
@@ -166,6 +169,7 @@ export const exchanges: Exchange[] = [
     established: 2014,
     url: "https://bitbank.cc/",
     domain: "bitbank.cc",
+    logoFile: "bitbank.png",
     logoColor: "#2B5FEC",
     description:
       "国内でも有数の取引量を誇るプロ向け取引所。チャートや板が充実しており本格的なトレードが可能。",
@@ -211,6 +215,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://www.sbivc.co.jp/",
     domain: "sbivc.co.jp",
+    logoFile: "sbivctrade.png",
     logoColor: "#E4001B",
     description:
       "SBIホールディングス傘下の取引所。高い信頼性と充実したサービスが特徴。SBIグループとの連携が強み。",
@@ -264,6 +269,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://bitcoin.dmm.com/",
     domain: "bitcoin.dmm.com",
+    logoFile: "dmmbitcoin.png",
     logoColor: "#FF0033",
     description:
       "DMMグループが運営する取引所。レバレッジ取引に強みを持ち、多数の通貨ペアに対応。カスタマーサポートが充実。",
@@ -314,6 +320,7 @@ export const exchanges: Exchange[] = [
     established: 2024,
     url: "https://www.bybit.com/ja-JP/",
     domain: "bybit.com",
+    logoFile: "Bybit.png",
     logoColor: "#F7A600",
     description:
       "海外大手Bybitの日本法人。金融庁登録を取得し国内サービスを提供。豊富な銘柄と低い手数料が魅力。",
@@ -366,6 +373,7 @@ export const exchanges: Exchange[] = [
     established: 2017,
     url: "https://www.binance.com/ja",
     domain: "binance.com",
+    logoFile: "binance.png",
     logoColor: "#F0B90B",
     description:
       "世界最大の取引量を誇る取引所。1,000以上の通貨ペアを取扱い、現物・先物・オプション・NFTなど多様なサービスを提供。日本居住者は利用制限あり。",
@@ -429,6 +437,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://www.bybit.com/",
     domain: "bybit.com",
+    logoFile: "Bybit.png",
     logoColor: "#F7A600",
     description:
       "デリバティブ取引に強みを持つ世界第2位の取引所。コピートレード機能が充実しており初心者にも人気。",
@@ -491,6 +500,7 @@ export const exchanges: Exchange[] = [
     established: 2017,
     url: "https://www.okx.com/ja",
     domain: "okx.com",
+    logoFile: "OKX.png",
     logoColor: "#121212",
     description:
       "世界トップクラスの取引所。Web3ウォレット機能や幅広いDeFiサービスへのアクセスが特徴。機関投資家にも人気。",
@@ -553,6 +563,7 @@ export const exchanges: Exchange[] = [
     established: 2011,
     url: "https://www.kraken.com/ja-jp",
     domain: "kraken.com",
+    logoFile: "kraken.png",
     logoColor: "#5741D9",
     description:
       "セキュリティと信頼性で定評のある老舗取引所。機関投資家向けサービスも充実しており、フィアット出入金が豊富。",
@@ -667,6 +678,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://www.mexc.com/ja-JP",
     domain: "mexc.com",
+    logoFile: "mexc.webp",
     logoColor: "#1B49E8",
     description:
       "新興アルトコインの上場が早い取引所。現物取引のmaker手数料が0%で非常にコストが低い。",
@@ -724,6 +736,7 @@ export const exchanges: Exchange[] = [
     established: 2013,
     url: "https://www.gate.io/ja",
     domain: "gate.io",
+    logoFile: "gateio.png",
     logoColor: "#E44D26",
     description:
       "1,700以上の銘柄を取扱う取引所。マイナーなアルトコインの取扱いも多く、幅広い投資選択肢を提供。",

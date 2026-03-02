@@ -70,6 +70,8 @@ export interface Exchange {
   url: string;
   /** Clearbit logo API用ドメイン */
   domain: string;
+  /** public/logos/ 配下のローカルロゴファイル名（未設定の場合はClearbit APIを使用） */
+  logoFile?: string;
   logoColor: string;
   description: string;
   tokens: Token[];

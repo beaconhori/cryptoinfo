@@ -11,7 +11,22 @@ interface ExchangeCardProps {
 }
 
 function CardBanner({ exchange }: { exchange: Exchange }) {
-  const [logoError, setLogoError] = useState(false);
+  // ローカルロゴ → Clearbit → イニシャルの順でフォールバック
+  const localSrc = exchange.logoFile ? `/logos/${exchange.logoFile}` : null;
+  const clearbitSrc = `https://logo.clearbit.com/${exchange.domain}`;
+
+  const [src, setSrc] = useState<string | null>(localSrc ?? clearbitSrc);
+  const [fallback, setFallback] = useState(false);
+
+  const handleError = () => {
+    if (src === localSrc) {
+      // ローカル失敗 → Clearbitを試す
+      setSrc(clearbitSrc);
+    } else {
+      // Clearbitも失敗 → イニシャル表示
+      setFallback(true);
+    }
+  };
 
   return (
     <div
@@ -20,40 +35,32 @@ function CardBanner({ exchange }: { exchange: Exchange }) {
         background: `linear-gradient(145deg, ${exchange.logoColor}10 0%, ${exchange.logoColor}28 100%)`,
       }}
     >
-      {/* 背景ブロブ（装飾） */}
+      {/* 背景ブロブ */}
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
-          width: 140,
-          height: 140,
+          width: 140, height: 140,
           backgroundColor: exchange.logoColor,
-          opacity: 0.1,
-          top: -40,
-          right: -40,
+          opacity: 0.1, top: -40, right: -40,
         }}
       />
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
-          width: 80,
-          height: 80,
+          width: 80, height: 80,
           backgroundColor: exchange.logoColor,
-          opacity: 0.08,
-          bottom: -20,
-          left: 20,
+          opacity: 0.08, bottom: -20, left: 20,
         }}
       />
 
-      {/* ロゴ表示 */}
-      {!logoError ? (
+      {!fallback && src ? (
         <img
-          src={`https://logo.clearbit.com/${exchange.domain}`}
+          src={src}
           alt={`${exchange.name} logo`}
-          onError={() => setLogoError(true)}
-          className="relative z-10 h-12 w-auto max-w-[140px] object-contain drop-shadow-sm"
+          onError={handleError}
+          className="relative z-10 h-12 w-auto max-w-[150px] object-contain drop-shadow-sm"
         />
       ) : (
-        /* フォールバック: ブランドカラーのイニシャルブロック */
         <div
           className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-lg"
           style={{ backgroundColor: exchange.logoColor }}
