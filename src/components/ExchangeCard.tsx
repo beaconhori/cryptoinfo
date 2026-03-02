@@ -97,10 +97,10 @@ export default function ExchangeCard({
           return (
             <div className="space-y-1 mb-3">
               {hasExchange ? (
-                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
                   <div className="flex items-center gap-1.5">
                     <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-[10px] text-gray-500">取引所</span>
+                    <span className="text-[10px] font-bold text-gray-600">取引所</span>
                   </div>
                   <span className="flex items-center gap-2 text-xs">
                     {exchange.fees.exchangeMaker !== undefined && (
@@ -116,25 +116,25 @@ export default function ExchangeCard({
                   </span>
                 </div>
               ) : (
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50">
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
                   <BookOpen size={10} className="text-gray-300 flex-shrink-0" />
-                  <span className="text-[10px] text-gray-300">取引所なし</span>
+                  <span className="text-[10px] font-bold text-gray-300">取引所なし</span>
                 </div>
               )}
               {hasDealer ? (
-                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
                   <div className="flex items-center gap-1.5">
                     <Store size={10} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-[10px] text-gray-500">販売所</span>
+                    <span className="text-[10px] font-bold text-gray-600">販売所</span>
                   </div>
                   <span className="text-xs font-semibold" style={{ color: cfg.color }}>
                     SP ≈{exchange.fees.dealerSpread?.toFixed(1)}%
                   </span>
                 </div>
               ) : (
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50">
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
                   <Store size={10} className="text-gray-300 flex-shrink-0" />
-                  <span className="text-[10px] text-gray-300">販売所なし</span>
+                  <span className="text-[10px] font-bold text-gray-300">販売所なし</span>
                 </div>
               )}
             </div>
