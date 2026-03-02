@@ -1176,9 +1176,9 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     notes:
       "2023年日本市場参入。金融庁登録済みで国内規制に準拠。親会社はグローバルNo.1取引所のBinance。",
-    affiliateUrl: "",
+    affiliateUrl: "https://s.binance.com/i5hlAdtO?ref=GRO_40299_LLEQA",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラムで発行可能",
+    affiliateNote: "紹介リンクから登録で手数料割引特典あり",
     tokensUrl: "https://www.binance.com/ja-JP/markets/overview",
   },
 
