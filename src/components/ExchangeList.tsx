@@ -150,16 +150,17 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
       : "取引コスト比較";
 
   return (
-    <div className="min-h-screen bg-[#D9E8F4] flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen bg-[#D9E8F4] flex flex-col items-center justify-center p-4 md:p-8 gap-4">
+      {/* ===== ページタイトル（枠外） ===== */}
+      <div className="w-full max-w-[1440px] px-2">
+        <p className="text-xs font-semibold text-[#1E3A8A] tracking-widest uppercase opacity-70">暗号通貨</p>
+        <h1 className="text-2xl font-extrabold text-[#1E3A8A] leading-tight">取引所ガイド</h1>
+      </div>
+
       <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-[1440px] flex overflow-hidden min-h-[92vh]">
 
         {/* ===== Left Sidebar ===== */}
         <aside className="w-[200px] flex-shrink-0 flex flex-col py-5 border-r border-gray-100 bg-white rounded-l-[2rem]">
-          {/* サイト名 */}
-          <div className="px-4 mb-6">
-            <p className="text-[11px] text-gray-400 leading-none mb-1">暗号通貨</p>
-            <p className="text-sm font-bold text-gray-900 leading-tight">取引所ガイド</p>
-          </div>
 
           {/* ナビゲーション */}
           <nav className="flex-1 px-2 space-y-1">
