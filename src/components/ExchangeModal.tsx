@@ -142,8 +142,8 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
         <div className="rounded-xl p-4 text-center bg-gray-50 border border-gray-100">
           <p className="text-xs text-gray-400 mb-1">スプレッド目安（＝往復コスト率）</p>
           <p className="text-3xl font-black" style={{ color: cfg.color }}>
-            ≈{fees.dealerSpread.toFixed(1)}%
-          </p>
+              ≈{fees.dealerSpread!.toFixed(1)}%
+            </p>
           <p className="text-[10px] text-gray-400 mt-0.5">買値と売値の差。これがそのまま「買って即売った時の損失率」になります。</p>
         </div>
 
@@ -167,7 +167,7 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
               <div key={amount} className="rounded-lg p-2 text-center bg-gray-50 border border-gray-100">
                 <p className="text-[10px] text-gray-400">{(amount / 10000).toLocaleString()}万円</p>
                 <p className="text-sm font-bold" style={{ color: cfg.color }}>
-                  {((amount * fees.dealerSpread) / 100).toLocaleString()}円
+                  {((amount * fees.dealerSpread!) / 100).toLocaleString()}円
                 </p>
               </div>
             ))}
