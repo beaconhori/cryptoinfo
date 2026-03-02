@@ -268,24 +268,6 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
               )}
             </div>
 
-            {/* Avatar stack */}
-            <div className="flex items-center -space-x-2 flex-shrink-0">
-              {[
-                { bg: "from-blue-400 to-blue-600", label: "B" },
-                { bg: "from-purple-400 to-purple-600", label: "P" },
-                { bg: "from-green-400 to-emerald-600", label: "G" },
-              ].map((av, i) => (
-                <div
-                  key={i}
-                  className={`w-8 h-8 rounded-full bg-gradient-to-br ${av.bg} flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-sm`}
-                >
-                  {av.label}
-                </div>
-              ))}
-              <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 text-xs font-bold border-2 border-white shadow-sm">
-                +{initialExchanges.length - 3}
-              </div>
-            </div>
           </div>
 
           {/* Filter row */}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, CheckCircle, BookOpen, Store } from "lucide-react";
+import { MoreHorizontal, BookOpen, Store } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface ExchangeCardProps {
@@ -141,34 +141,7 @@ export default function ExchangeCard({
           );
         })()}
 
-        <div className="flex items-center justify-between">
-          <div className="text-xs text-gray-400">{exchange.established}年設立</div>
-
-          <div className="flex items-center -space-x-1.5">
-            {exchange.fsaRegistered && (
-              <div
-                className="w-6 h-6 rounded-full flex items-center justify-center z-10 shadow-sm border-2"
-                style={{
-                  backgroundColor: `${exchange.logoColor}18`,
-                  borderColor: "white",
-                }}
-              >
-                <CheckCircle size={12} className="text-green-500" />
-              </div>
-            )}
-            <div
-              className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-white shadow-sm"
-              style={{ backgroundColor: exchange.logoColor }}
-            >
-              {exchange.name.charAt(0)}
-            </div>
-            {exchange.trustScore >= 5 && (
-              <div className="w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-white text-[9px] font-bold shadow-sm">
-                ★
-              </div>
-            )}
-          </div>
-        </div>
+        <div className="text-xs text-gray-400">{exchange.established}年設立</div>
       </div>
     </div>
   );
