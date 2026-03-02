@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "国内・海外の仮想通貨取引所を手数料・対応銘柄・機能で比較・検索できるサービスです。取引コストシミュレーターで実際のコストを試算できます。",
   keywords: ["仮想通貨", "取引所", "比較", "手数料", "ビットコイン", "暗号資産", "DEX", "海外取引所"],
   metadataBase: new URL("https://cryptoinfo.jp"),
+  other: {
+    "impact-site-verification": "e2f19bad-6a82-47a0-b8b6-fa4c1d280944",
+  },
   openGraph: {
     title: "暗号通貨取引所ガイド | 国内・海外取引所を比較",
     description: "国内・海外の仮想通貨取引所を手数料・対応銘柄・機能で比較・検索できるサービスです。",
