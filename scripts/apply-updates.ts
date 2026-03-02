@@ -12,8 +12,7 @@ async function main() {
 
   // 2. 新件をupsert
   const targets = [
-    "okx-japan", "binance-japan", "coinbase-japan",
-    "rakuten-wallet", "sblox", "bittrade", "mercoin", "line-bitmax", "bitpoint",
+    "kucoin", "crypto-com", "bingx", "phemex",
   ];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
