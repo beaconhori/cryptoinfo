@@ -1,0 +1,17 @@
+-- =====================================================
+-- Supabase 更新SQL（Supabase SQL Editor で実行してください）
+-- 1. グローバルOKX削除
+-- 2. OKX Japan / Binance Japan / Coinbase Japan を追加
+-- =====================================================
+
+-- 1. グローバルOKX を削除
+DELETE FROM exchanges WHERE id = 'okx';
+
+-- 2. OKX Japan を追加
+INSERT INTO exchanges (id,name,name_en,region,country,established,url,domain,logo_file,logo_color,description,tokens,features,fees,min_trade_amount_jpy,max_leverage,trading_pairs,japanese_support,fsa_registered,trust_score,volume_rank,notes,affiliate_url,affiliate_type,affiliate_note,tokens_url) VALUES ('okx-japan','OKX Japan','OKX Japan','domestic','日本',2017,'https://www.okx.com/ja','okx.com','OKX.png','#121212','世界大手OKXの日本法人。2017年にOKCoin Japanとして設立後、OKX Japanとしてサービスを提供。金融庁登録済みで安心して利用可能。',ARRAY['BTC','ETH','XRP','SOL','ADA','DOT','MATIC','DOGE','LTC','AVAX','LINK','UNI','ATOM','USDT','USDC'],ARRAY['spot','staking','api','mobile_app','japan_yen_deposit'],'{"exchangeMaker":0.08,"exchangeTaker":0.1,"roundTripCostPct":0.19,"spreadRating":"tight","depositFeeNote":"銀行振込対応","withdrawalFeeNote":"銘柄により異なる"}'::jsonb,500,NULL,30,true,true,4,NULL,'重大なセキュリティ事故なし。2017年設立の老舗日本法人。金融庁登録済み。','','referral','公式リファラルプログラム: okx.com/ja/affiliate で発行','https://www.okx.com/ja/markets/prices') ON CONFLICT (id) DO NOTHING;
+
+-- 3. Binance Japan を追加
+INSERT INTO exchanges (id,name,name_en,region,country,established,url,domain,logo_file,logo_color,description,tokens,features,fees,min_trade_amount_jpy,max_leverage,trading_pairs,japanese_support,fsa_registered,trust_score,volume_rank,notes,affiliate_url,affiliate_type,affiliate_note,tokens_url) VALUES ('binance-japan','Binance Japan','Binance Japan','domestic','日本',2023,'https://www.binance.com/ja-JP','binance.com','binance.png','#F0B90B','世界最大手バイナンスの日本法人。バイナンスジャパン株式会社として金融庁登録済み。豊富な銘柄数と高い流動性が特徴。',ARRAY['BTC','ETH','XRP','SOL','ADA','DOT','MATIC','DOGE','LTC','BNB','AVAX','LINK','UNI','ATOM','USDT','USDC'],ARRAY['spot','staking','api','mobile_app','japan_yen_deposit','credit_card'],'{"exchangeMaker":0.1,"exchangeTaker":0.1,"roundTripCostPct":0.21,"spreadRating":"tight","depositFeeNote":"銀行振込・コンビニ入金対応","withdrawalFeeNote":"銘柄により異なる"}'::jsonb,500,NULL,50,true,true,4,NULL,'2023年日本市場参入。金融庁登録済みで国内規制に準拠。親会社はグローバルNo.1取引所のBinance。','','referral','公式リファラルプログラムで発行可能','https://www.binance.com/ja-JP/markets/overview') ON CONFLICT (id) DO NOTHING;
+
+-- 4. Coinbase Japan を追加
+INSERT INTO exchanges (id,name,name_en,region,country,established,url,domain,logo_file,logo_color,description,tokens,features,fees,min_trade_amount_jpy,max_leverage,trading_pairs,japanese_support,fsa_registered,trust_score,volume_rank,notes,affiliate_url,affiliate_type,affiliate_note,tokens_url) VALUES ('coinbase-japan','Coinbase Japan','Coinbase Japan','domestic','日本',2023,'https://www.coinbase.com/ja/','coinbase.com',NULL,'#0052FF','米国ナスダック上場・世界有数のコインベースの日本法人。金融庁登録済みで透明性が高く、セキュリティ実績も優秀。シンプルなUIで初心者にも使いやすい。',ARRAY['BTC','ETH','XRP','SOL','ADA','DOT','MATIC','DOGE','AVAX','LINK','UNI','ATOM','USDT','USDC'],ARRAY['spot','staking','api','mobile_app','japan_yen_deposit','credit_card'],'{"exchangeMaker":0.5,"exchangeTaker":0.5,"roundTripCostPct":1.01,"spreadRating":"moderate","depositFeeNote":"銀行振込対応","withdrawalFeeNote":"無料"}'::jsonb,500,NULL,50,true,true,5,NULL,'重大なセキュリティ事故なし。米ナスダック上場企業の日本法人で透明性・信頼性がトップクラス。','','referral','公式リファラルプログラムで発行可能','https://www.coinbase.com/ja/markets') ON CONFLICT (id) DO NOTHING;

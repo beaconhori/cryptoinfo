@@ -32,7 +32,7 @@ for (const ex of exchanges) {
     "tokens","features","fees",
     "min_trade_amount_jpy","max_leverage","trading_pairs",
     "japanese_support","fsa_registered","trust_score","volume_rank",
-    "notes","affiliate_url","affiliate_type","affiliate_note",
+    "notes","affiliate_url","affiliate_type","affiliate_note","tokens_url",
   ].join(",");
 
   const vals = [
@@ -61,6 +61,7 @@ for (const ex of exchanges) {
     esc(ex.affiliateUrl),
     esc(ex.affiliateType),
     esc(ex.affiliateNote),
+    ex.tokensUrl ? esc(ex.tokensUrl) : "NULL",
   ].join(",");
 
   console.log(`INSERT INTO exchanges (${cols}) VALUES (${vals}) ON CONFLICT (id) DO NOTHING;`);
