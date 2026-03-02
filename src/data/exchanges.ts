@@ -679,7 +679,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://www.mexc.com/ja-JP",
     domain: "mexc.com",
-    logoFile: "mexc.webp",
+    logoFile: "mexc.svg",
     logoColor: "#1B49E8",
     description:
       "新興アルトコインの上場が早い取引所。現物取引のmaker手数料が0%で非常にコストが低い。",
