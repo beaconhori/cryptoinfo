@@ -203,44 +203,43 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
 
   return (
     <div
-      className="sticky top-0 z-10 rounded-t-2xl overflow-hidden"
-      style={{ borderBottom: `3px solid ${exchange.logoColor}` }}
+      className="rounded-t-2xl px-6 py-5 flex items-center justify-between flex-shrink-0"
+      style={{ backgroundColor: `${exchange.logoColor}18` }}
     >
-      <div className="px-6 py-5 flex items-center justify-between bg-white">
-          <div className="flex items-center gap-4">
-          <div className="h-10 flex items-center justify-center flex-shrink-0">
-            {!fallback && src ? (
-              <img src={src} alt={exchange.name} onError={handleError} className="h-10 w-auto max-w-[120px] object-contain" />
-            ) : (
-              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: exchange.logoColor }}>
-                {exchange.name.charAt(0)}
-              </div>
-            )}
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
-            <div className="flex items-center gap-2 mt-1 flex-wrap">
-              <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600">
-                {exchange.region === "domestic" ? "国内" : "海外"}
-              </span>
-              {hasExchange && (
-                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600 flex items-center gap-1">
-                  <BookOpen size={10} /> 取引所
-                </span>
-              )}
-              {hasDealer && (
-                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600 flex items-center gap-1">
-                  <Store size={10} /> 販売所
-                </span>
-              )}
-              <span className="text-xs text-gray-400">{exchange.country} · {exchange.established}年</span>
+      <div className="flex items-center gap-4">
+        {/* 白座布団ロゴ */}
+        <div className="bg-white rounded-xl p-2 flex items-center justify-center flex-shrink-0">
+          {!fallback && src ? (
+            <img src={src} alt={exchange.name} onError={handleError} className="h-10 w-auto max-w-[110px] object-contain" />
+          ) : (
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: exchange.logoColor }}>
+              {exchange.name.charAt(0)}
             </div>
+          )}
+        </div>
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600">
+              {exchange.region === "domestic" ? "国内" : "海外"}
+            </span>
+            {hasExchange && (
+              <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
+                <BookOpen size={10} /> 取引所
+              </span>
+            )}
+            {hasDealer && (
+              <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
+                <Store size={10} /> 販売所
+              </span>
+            )}
+            <span className="text-xs text-gray-500">{exchange.country} · {exchange.established}年</span>
           </div>
         </div>
-        <button onClick={onClose} className="p-2 rounded-xl hover:bg-black/5 transition-colors">
-          <X size={20} className="text-gray-500" />
-        </button>
       </div>
+      <button onClick={onClose} className="p-2 rounded-xl hover:bg-black/10 transition-colors flex-shrink-0">
+        <X size={20} className="text-gray-600" />
+      </button>
     </div>
   );
 }
@@ -250,10 +249,10 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
         <ModalLogoHeader exchange={exchange} onClose={onClose} />
 
-        <div className="p-6 space-y-5">
+        <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {/* 説明 */}
           <p className="text-gray-600 leading-relaxed">{exchange.description}</p>
 
