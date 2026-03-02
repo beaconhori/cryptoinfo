@@ -38,7 +38,7 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "name", label: "名前順" },
 ];
 
-const COMMON_TOKENS = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "USDT"];
+const COMMON_TOKENS = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "SHIB", "XYM", "MONA"];
 
 const FEATURE_QUICK: Feature[] = [
   "spot",
