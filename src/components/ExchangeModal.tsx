@@ -338,16 +338,6 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
                 <span className="text-sm text-gray-500">
                   {exchange.tradingPairs?.toLocaleString() ?? "多数"}銘柄以上に対応（日々変動）
                 </span>
-                {exchange.tokensUrl && (
-                  <a
-                    href={exchange.tokensUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-auto flex items-center gap-1 text-xs font-medium text-blue-500 hover:text-blue-700 transition-colors flex-shrink-0"
-                  >
-                    銘柄一覧を見る <ExternalLink size={11} />
-                  </a>
-                )}
               </div>
             )}
           </div>
