@@ -19,6 +19,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* スクロールバー非表示ユーティリティ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* iOS safe area */
+.pt-safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
 /* スクロールバー */
 ::-webkit-scrollbar {
   width: 5px;

@@ -22,6 +22,14 @@ export const metadata: Metadata = {
   other: {
     "impact-site-verification": "e2f19bad-6a82-47a0-b8b6-fa4c1d280944",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "取引所ガイド",
+  },
+  icons: {
+    apple: "/icon-192.png",
+  },
   openGraph: {
     title: "暗号通貨取引所ガイド | 国内・海外取引所を比較",
     description: "国内・海外の仮想通貨取引所を手数料・対応銘柄・機能で比較・検索できるサービスです。",

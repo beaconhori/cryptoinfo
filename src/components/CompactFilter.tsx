@@ -66,34 +66,35 @@ export default function CompactFilter({
   const hasFilters = filter.features.length > 0;
 
   return (
-    <div className="bg-white border-b border-gray-100 px-6 py-2.5 flex items-center gap-2 flex-wrap relative z-20">
-      <SlidersHorizontal size={13} className="text-gray-300 flex-shrink-0" />
-
-      {FEATURE_QUICK.map((feature) => (
-        <button
-          key={feature}
-          onClick={() => toggleFeature(feature)}
-          className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
-            filter.features.includes(feature)
-              ? "bg-blue-500 text-white shadow-sm"
-              : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-          }`}
-        >
-          {FEATURE_LABELS[feature]}
-        </button>
-      ))}
-
-      {hasFilters && (
-        <button
-          onClick={() => onFilterChange({ ...filter, features: [], fsaOnly: false })}
-          className="flex items-center gap-1 text-xs text-red-400 hover:text-red-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-red-50"
-        >
-          <X size={10} />
-          クリア
-        </button>
-      )}
-
-      <div className="ml-auto flex items-center gap-3">
+    <div className="bg-white border-b border-gray-100 relative z-20">
+      {/* フィルターボタン（横スクロール） */}
+      <div className="flex items-center gap-2 overflow-x-auto px-3 md:px-6 py-2 scrollbar-hide">
+        <SlidersHorizontal size={13} className="text-gray-300 flex-shrink-0" />
+        {FEATURE_QUICK.map((feature) => (
+          <button
+            key={feature}
+            onClick={() => toggleFeature(feature)}
+            className={`flex-shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+              filter.features.includes(feature)
+                ? "bg-blue-500 text-white shadow-sm"
+                : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+            }`}
+          >
+            {FEATURE_LABELS[feature]}
+          </button>
+        ))}
+        {hasFilters && (
+          <button
+            onClick={() => onFilterChange({ ...filter, features: [], fsaOnly: false })}
+            className="flex-shrink-0 flex items-center gap-1 text-xs text-red-400 hover:text-red-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-red-50"
+          >
+            <X size={10} />
+            クリア
+          </button>
+        )}
+      </div>
+      {/* 件数＋ソート */}
+      <div className="flex items-center justify-end gap-3 px-3 md:px-6 pb-2">
         <span className="text-xs text-gray-400">{resultCount}件</span>
         <div className="relative">
           <select
