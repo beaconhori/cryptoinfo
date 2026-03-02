@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Plus,
 } from "lucide-react";
+import { calcTotalScore } from "@/lib/scoreUtils";
 
 type ActiveTab = "list" | "compare";
 
@@ -34,7 +35,7 @@ function sortExchanges(list: Exchange[], key: SortKey): Exchange[] {
       case "name":
         return a.name.localeCompare(b.name, "ja");
       case "trustScore":
-        return b.trustScore - a.trustScore;
+        return calcTotalScore(b) - calcTotalScore(a);
       case "takerFee": {
         const fa = a.fees.exchangeTaker ?? a.fees.dealerSpread ?? Infinity;
         const fb = b.fees.exchangeTaker ?? b.fees.dealerSpread ?? Infinity;
