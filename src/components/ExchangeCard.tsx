@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, CheckCircle, AlertTriangle, BookOpen, Store } from "lucide-react";
+import { MoreHorizontal, CheckCircle, BookOpen, Store } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface ExchangeCardProps {
@@ -91,45 +91,41 @@ export default function ExchangeCard({
           {exchange.description}
         </p>
 
-        {/* 取引形態 + 実質コスト */}
+        {/* 手数料情報 */}
         {(() => {
           const cfg = getSpreadConfig(exchange.fees.spreadRating);
-          const isAlert = exchange.fees.spreadRating === "wide" || exchange.fees.spreadRating === "very_wide";
           return (
             <div className="space-y-1.5 mb-3">
-              {/* 取引形態バッジ */}
-              <div className="flex gap-1.5">
-                {hasExchange && (
-                  <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">
-                    <BookOpen size={9} /> 取引所
+              {hasExchange && (
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-50 border border-blue-100">
+                  <BookOpen size={10} className="text-blue-500 flex-shrink-0" />
+                  <span className="text-[10px] font-semibold text-blue-600">取引所</span>
+                  <span className="ml-auto flex items-center gap-2 text-xs">
+                    {exchange.fees.exchangeMaker !== undefined && (
+                      <span className={exchange.fees.exchangeMaker < 0 ? "text-emerald-600 font-bold" : "text-gray-500"}>
+                        M: {exchange.fees.exchangeMaker.toFixed(2)}%
+                      </span>
+                    )}
                     {exchange.fees.exchangeTaker !== undefined && (
-                      <span className="opacity-70">Taker {exchange.fees.exchangeTaker.toFixed(2)}%</span>
+                      <span className="text-gray-600 font-medium">
+                        T: {exchange.fees.exchangeTaker.toFixed(2)}%
+                      </span>
                     )}
                   </span>
-                )}
-                {hasDealer && (
-                  <span
-                    className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-md"
-                    style={{ backgroundColor: cfg.bg, color: cfg.color }}
-                  >
-                    <Store size={9} /> 販売所
-                    <span className="opacity-70">SP≈{exchange.fees.dealerSpread?.toFixed(1)}%</span>
-                  </span>
-                )}
-              </div>
-              {/* 往復コスト */}
-              <div
-                className="flex items-center justify-between rounded-lg px-2.5 py-1.5 border"
-                style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
-              >
-                <div className="flex items-center gap-1">
-                  {isAlert && <AlertTriangle size={10} style={{ color: cfg.color }} />}
-                  <span className="text-[10px] font-medium" style={{ color: cfg.color }}>往復コスト目安</span>
                 </div>
-                <span className="text-xs font-bold" style={{ color: cfg.color }}>
-                  ≈{exchange.fees.roundTripCostPct.toFixed(2)}%
-                </span>
-              </div>
+              )}
+              {hasDealer && (
+                <div
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border"
+                  style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
+                >
+                  <Store size={10} style={{ color: cfg.color }} className="flex-shrink-0" />
+                  <span className="text-[10px] font-semibold" style={{ color: cfg.color }}>販売所</span>
+                  <span className="ml-auto text-xs font-medium" style={{ color: cfg.color }}>
+                    スプレッド ≈{exchange.fees.dealerSpread?.toFixed(1)}%
+                  </span>
+                </div>
+              )}
             </div>
           );
         })()}
