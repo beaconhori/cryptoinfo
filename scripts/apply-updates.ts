@@ -12,7 +12,9 @@ async function main() {
 
   // 2. 新件をupsert
   const targets = [
-    "hyperliquid",
+    "uniswap", "dydx", "gmx", "jupiter",
+    // logoFile追加分の更新
+    "kucoin", "crypto-com", "bingx", "phemex", "pionex", "woox", "hashkey-global", "bitrue", "hyperliquid",
   ];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
