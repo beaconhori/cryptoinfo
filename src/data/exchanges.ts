@@ -1399,9 +1399,9 @@ export const exchanges: Exchange[] = [
     volumeRank: 3,
     notes:
       "Solana上のスワップ取引の過半数を処理。複数DEXを束ねたルーティングで最良レートを自動実現。パーペチュアル取引ではJLP流動性プールへのステーキングで収益を獲得可能。",
-    affiliateUrl: "",
+    affiliateUrl: "https://jup.ag/?ref=en3l92v6ozb7",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラムあり",
+    affiliateNote: "紹介リンクから利用で手数料の一部が還元",
     tokensUrl: "https://jup.ag/tokens",
   },
   {
