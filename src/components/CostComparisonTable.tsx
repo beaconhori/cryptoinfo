@@ -16,10 +16,10 @@ type TabMode = "exchange" | "dealer" | "dex";
 
 function RegionBadge({ region }: { region: string }) {
   if (region === "domestic")
-    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600">国内</span>;
+    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600 flex items-center gap-1 w-fit">🇯🇵 国内</span>;
   if (region === "dex")
-    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600">DEX</span>;
-  return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600">海外</span>;
+    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600">⚡ DEX</span>;
+  return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600">🌐 海外</span>;
 }
 
 function RankBadge({ rank, cost }: { rank: number; cost: number | null }) {

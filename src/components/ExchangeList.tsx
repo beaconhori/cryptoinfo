@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Exchange } from "@/types/exchange";
 import ExchangeCard from "@/components/ExchangeCard";
 import ExchangeModal from "@/components/ExchangeModal";
@@ -15,6 +15,8 @@ import {
   ChevronRight,
   Plus,
   Wallet,
+  Globe2,
+  Zap,
 } from "lucide-react";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
@@ -59,26 +61,23 @@ function sortExchanges(list: Exchange[], key: SortKey): Exchange[] {
 interface SectionHeaderProps {
   label: string;
   count: number;
-  dotColor: string;
+  icon: React.ReactNode;
 }
-function SectionHeader({ label, count, dotColor }: SectionHeaderProps) {
+function SectionHeader({ label, count, icon }: SectionHeaderProps) {
   return (
     <div className="flex items-center gap-2.5 mb-4">
-      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: dotColor }} />
+      <span className="text-lg leading-none flex-shrink-0">{icon}</span>
       <span className="text-sm font-semibold text-gray-700">{label}</span>
       <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full font-medium">{count}</span>
-      <button className="w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors">
-        <Plus size={11} />
-      </button>
     </div>
   );
 }
 
 const REGION_OPTIONS = [
-  { value: "all", label: "すべて" },
-  { value: "domestic", label: "国内" },
-  { value: "overseas", label: "海外" },
-  { value: "dex", label: "DEX" },
+  { value: "all", label: "すべて", icon: null },
+  { value: "domestic", label: "国内", icon: "🇯🇵" },
+  { value: "overseas", label: "海外", icon: "🌐" },
+  { value: "dex", label: "DEX", icon: "⚡" },
 ] as const;
 
 interface ExchangeListProps {
@@ -243,10 +242,11 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                     <button
                       key={opt.value}
                       onClick={() => setFilter({ ...filter, region: opt.value })}
-                      className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                      className={`flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all ${
                         filter.region === opt.value ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
+                      {opt.icon && <span className="text-sm leading-none">{opt.icon}</span>}
                       {opt.label}
                     </button>
                   ))}
@@ -280,10 +280,11 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                   <button
                     key={opt.value}
                     onClick={() => setFilter({ ...filter, region: opt.value })}
-                    className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-0.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       filter.region === opt.value ? "bg-white text-gray-900 shadow-sm" : "text-gray-500"
                     }`}
                   >
+                    {opt.icon && <span className="text-xs leading-none">{opt.icon}</span>}
                     {opt.label}
                   </button>
                 ))}
@@ -326,7 +327,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                     <>
                       {showDomestic && domesticList.length > 0 && (
                         <section>
-                          <SectionHeader label="国内取引所" count={domesticList.length} dotColor="#FF6B8A" />
+                          <SectionHeader label="国内取引所" count={domesticList.length} icon="🇯🇵" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {domesticList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -336,7 +337,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showOverseas && overseasList.length > 0 && (
                         <section>
-                          <SectionHeader label="海外取引所" count={overseasList.length} dotColor="#6366F1" />
+                          <SectionHeader label="海外取引所" count={overseasList.length} icon={<Globe2 size={18} className="text-indigo-400" />} />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {overseasList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -346,7 +347,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showDex && dexList.length > 0 && (
                         <section>
-                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} dotColor="#10B981" />
+                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} icon={<Zap size={18} className="text-emerald-500" />} />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {dexList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
