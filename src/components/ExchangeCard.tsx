@@ -96,7 +96,7 @@ export default function ExchangeCard({
           const cfg = getSpreadConfig(exchange.fees.spreadRating);
           return (
             <div className="space-y-1 mb-3">
-              {hasExchange && (
+              {hasExchange ? (
                 <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
                   <div className="flex items-center gap-1.5">
                     <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
@@ -115,8 +115,13 @@ export default function ExchangeCard({
                     )}
                   </span>
                 </div>
+              ) : (
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50">
+                  <BookOpen size={10} className="text-gray-300 flex-shrink-0" />
+                  <span className="text-[10px] text-gray-300">取引所なし</span>
+                </div>
               )}
-              {hasDealer && (
+              {hasDealer ? (
                 <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
                   <div className="flex items-center gap-1.5">
                     <Store size={10} className="text-gray-400 flex-shrink-0" />
@@ -125,6 +130,11 @@ export default function ExchangeCard({
                   <span className="text-xs font-semibold" style={{ color: cfg.color }}>
                     SP ≈{exchange.fees.dealerSpread?.toFixed(1)}%
                   </span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50">
+                  <Store size={10} className="text-gray-300 flex-shrink-0" />
+                  <span className="text-[10px] text-gray-300">販売所なし</span>
                 </div>
               )}
             </div>
