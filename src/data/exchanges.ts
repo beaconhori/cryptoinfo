@@ -1206,6 +1206,7 @@ export const exchanges: Exchange[] = [
     established: 2011,
     url: "https://www.bitstamp.net/",
     domain: "bitstamp.net",
+    logoFile: "bitstamp.svg",
     logoColor: "#00CF6B",
     description:
       "2011年設立・世界最古の暗号資産取引所。2025年6月にRobinhoodが買収し、EU・FCA・FinCENなど世界最高水準の複数ライセンスを保持。機関投資家やコンプライアンス重視のユーザーに支持される老舗プラットフォーム。",
@@ -1303,6 +1304,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://app.uniswap.org/",
     domain: "uniswap.org",
+    logoFile: "uniswap.png",
     logoColor: "#FF007A",
     description:
       "Ethereum・L2最大のスポットDEX。AMM（自動マーケットメーカー）モデルの元祖。V4では「フック」機能でDEX初のカスタム流動性ロジックを実現。300万以上のトークンペアを取扱う。",
@@ -1336,6 +1338,7 @@ export const exchanges: Exchange[] = [
     established: 2017,
     url: "https://dydx.exchange/",
     domain: "dydx.exchange",
+    logoFile: "dydx.png",
     logoColor: "#6966FF",
     description:
       "独自Cosmosアプリチェーン上で動作するパーペチュアル特化DEX。180以上の取引ペアを提供。BTCなど主要ペアはMaker・Taker手数料ともにゼロ。取引リワードでDYDXトークンを獲得できる。",
@@ -1370,6 +1373,7 @@ export const exchanges: Exchange[] = [
     established: 2021,
     url: "https://app.gmx.io/",
     domain: "gmx.io",
+    logoFile: "gmx.png",
     logoColor: "#2D42FC",
     description:
       "Arbitrum・Avalanche上のパーペチュアル特化DEX。GLP流動性プールモデルにより最大100倍レバレッジを実現。Chainlinkオラクルで板操作による強制清算を防止。GMX/GLPのステーキングで手数料収益（年利15-20%）を受け取れる。",
@@ -1405,6 +1409,7 @@ export const exchanges: Exchange[] = [
     established: 2021,
     url: "https://jup.ag/",
     domain: "jup.ag",
+    logoFile: "jupiter.svg",
     logoColor: "#C7B53E",
     description:
       "Solana最大のDEXアグリゲーター。複数のDEXを横断して最安値ルートを自動探索。リミット注文・DCA（積立）・パーペチュアル取引も対応。JUPトークン保有者によるDAO統治。",
