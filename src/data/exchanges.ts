@@ -324,9 +324,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 3,
     notes: "国内法人は別法人だが、親会社Bybitが2025年2月に約2,200億円相当のハッキング被害を受けた。",
-    affiliateUrl: "",
+    affiliateUrl: "https://partner.bybit.com/b/118679",
     affiliateType: "referral",
-    affiliateNote: "Bybit公式の紹介プログラム（手数料の一部がバック）",
+    affiliateNote: "紹介リンクから登録で手数料割引特典あり",
   },
   {
     id: "rakuten-wallet",
