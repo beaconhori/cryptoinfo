@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { MoreHorizontal, Percent, CheckCircle, AlertTriangle } from "lucide-react";
+import { MoreHorizontal, CheckCircle, AlertTriangle, BookOpen, Store } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface ExchangeCardProps {
@@ -55,12 +55,8 @@ export default function ExchangeCard({
   onClick,
   highlightTokens = [],
 }: ExchangeCardProps) {
-  const feeDisplay =
-    exchange.fees.exchangeTaker !== undefined
-      ? `Taker ${exchange.fees.exchangeTaker.toFixed(2)}%`
-      : exchange.fees.dealerSpread !== undefined
-      ? `SP ≈${exchange.fees.dealerSpread.toFixed(1)}%`
-      : "—";
+  const hasExchange = exchange.fees.exchangeMaker !== undefined || exchange.fees.exchangeTaker !== undefined;
+  const hasDealer = exchange.fees.dealerSpread !== undefined;
 
   const hasHighlight = highlightTokens.some((t) =>
     exchange.tokens.includes(t as never)
@@ -95,33 +91,51 @@ export default function ExchangeCard({
           {exchange.description}
         </p>
 
-        {/* 実質コストバッジ */}
+        {/* 取引形態 + 実質コスト */}
         {(() => {
           const cfg = getSpreadConfig(exchange.fees.spreadRating);
           const isAlert = exchange.fees.spreadRating === "wide" || exchange.fees.spreadRating === "very_wide";
           return (
-            <div
-              className="flex items-center justify-between rounded-lg px-2.5 py-1.5 mb-3 border"
-              style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
-            >
-              <div className="flex items-center gap-1.5">
-                {isAlert && <AlertTriangle size={11} style={{ color: cfg.color }} />}
-                <span className="text-[10px] font-semibold" style={{ color: cfg.color }}>
-                  実質コスト（往復）
+            <div className="space-y-1.5 mb-3">
+              {/* 取引形態バッジ */}
+              <div className="flex gap-1.5">
+                {hasExchange && (
+                  <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">
+                    <BookOpen size={9} /> 取引所
+                    {exchange.fees.exchangeTaker !== undefined && (
+                      <span className="opacity-70">Taker {exchange.fees.exchangeTaker.toFixed(2)}%</span>
+                    )}
+                  </span>
+                )}
+                {hasDealer && (
+                  <span
+                    className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-md"
+                    style={{ backgroundColor: cfg.bg, color: cfg.color }}
+                  >
+                    <Store size={9} /> 販売所
+                    <span className="opacity-70">SP≈{exchange.fees.dealerSpread?.toFixed(1)}%</span>
+                  </span>
+                )}
+              </div>
+              {/* 往復コスト */}
+              <div
+                className="flex items-center justify-between rounded-lg px-2.5 py-1.5 border"
+                style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
+              >
+                <div className="flex items-center gap-1">
+                  {isAlert && <AlertTriangle size={10} style={{ color: cfg.color }} />}
+                  <span className="text-[10px] font-medium" style={{ color: cfg.color }}>往復コスト目安</span>
+                </div>
+                <span className="text-xs font-bold" style={{ color: cfg.color }}>
+                  ≈{exchange.fees.roundTripCostPct.toFixed(2)}%
                 </span>
               </div>
-              <span className="text-xs font-bold" style={{ color: cfg.color }}>
-                ≈ {exchange.fees.roundTripCostPct.toFixed(2)}%
-              </span>
             </div>
           );
         })()}
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1" style={{ color: `${exchange.logoColor}cc` }}>
-            <Percent size={11} />
-            <span className="text-xs font-medium">{feeDisplay}</span>
-          </div>
+          <div className="text-xs text-gray-400">{exchange.established}年設立</div>
 
           <div className="flex items-center -space-x-1.5">
             {exchange.fsaRegistered && (
