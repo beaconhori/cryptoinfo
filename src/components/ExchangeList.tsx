@@ -81,10 +81,10 @@ function SectionHeader({ label, count, dotColor }: SectionHeaderProps) {
 }
 
 const REGION_OPTIONS = [
-  { value: "all", label: "すべての取引所" },
-  { value: "domestic", label: "国内取引所のみ" },
-  { value: "overseas", label: "海外取引所のみ" },
-  { value: "dex", label: "DEXのみ" },
+  { value: "all", label: "すべて" },
+  { value: "domestic", label: "国内" },
+  { value: "overseas", label: "海外" },
+  { value: "dex", label: "DEX" },
 ] as const;
 
 interface ExchangeListProps {
@@ -97,7 +97,6 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
   const [selectedExchange, setSelectedExchange] = useState<Exchange | null>(null);
   const [activeSection, setActiveSection] = useState<ActiveSection>("exchanges");
   const [exchangeTab, setExchangeTab] = useState<ExchangeTab>("list");
-  const [showRegionDropdown, setShowRegionDropdown] = useState(false);
 
   const filtered = useMemo(() => {
     let list = initialExchanges;
@@ -138,10 +137,6 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
     []
   );
   const handleClose = useCallback(() => setSelectedExchange(null), []);
-
-  const currentRegionLabel =
-    REGION_OPTIONS.find((o) => o.value === filter.region)?.label ??
-    "すべての取引所";
 
   const hasFilters =
     filter.features.length > 0 ||
@@ -245,37 +240,23 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
 
           {/* Header */}
           <div className="bg-white px-6 py-4 flex items-center gap-4 border-b border-gray-50">
-            <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-gray-900 leading-tight">{headerTitle}</h1>
+            <div className="flex-1 min-w-0 flex items-center gap-4">
+              <h1 className="text-2xl font-bold text-gray-900 leading-tight flex-shrink-0">{headerTitle}</h1>
               {activeSection === "exchanges" && exchangeTab === "list" && (
-                <div className="relative mt-1 inline-block">
-                  <button
-                    onClick={() => setShowRegionDropdown(!showRegionDropdown)}
-                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors bg-gray-50 hover:bg-gray-100 rounded-lg px-3 py-1"
-                  >
-                    <span>{currentRegionLabel}</span>
-                    <ChevronDown size={13} />
-                  </button>
-                  {showRegionDropdown && (
-                    <div className="absolute left-0 top-full mt-1 z-30 bg-white rounded-xl border border-gray-100 shadow-lg py-1 min-w-[160px]">
-                      {REGION_OPTIONS.map((opt) => (
-                        <button
-                          key={opt.value}
-                          onClick={() => {
-                            setFilter({ ...filter, region: opt.value });
-                            setShowRegionDropdown(false);
-                          }}
-                          className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                            filter.region === opt.value
-                              ? "text-blue-600 bg-blue-50 font-medium"
-                              : "text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
+                  {REGION_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setFilter({ ...filter, region: opt.value })}
+                      className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                        filter.region === opt.value
+                          ? "bg-white text-gray-900 shadow-sm"
+                          : "text-gray-500 hover:text-gray-700"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -314,7 +295,6 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
           {/* ===== コンテンツ ===== */}
           <div
             className="flex-1 overflow-auto p-6 space-y-8"
-            onClick={() => showRegionDropdown && setShowRegionDropdown(false)}
           >
 
             {/* 取引所セクション */}
