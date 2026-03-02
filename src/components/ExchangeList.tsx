@@ -17,6 +17,7 @@ import {
   Wallet,
   Globe2,
   Zap,
+  Flag,
 } from "lucide-react";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
@@ -62,22 +63,30 @@ interface SectionHeaderProps {
   label: string;
   count: number;
   icon: React.ReactNode;
+  color: string;
 }
-function SectionHeader({ label, count, icon }: SectionHeaderProps) {
+function SectionHeader({ label, count, icon, color }: SectionHeaderProps) {
   return (
     <div className="flex items-center gap-2.5 mb-4">
-      <span className="text-lg leading-none flex-shrink-0">{icon}</span>
+      <span className="flex-shrink-0" style={{ color }}>{icon}</span>
       <span className="text-sm font-semibold text-gray-700">{label}</span>
       <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full font-medium">{count}</span>
     </div>
   );
 }
 
+const REGION_ICONS = {
+  all: null,
+  domestic: <Flag size={13} />,
+  overseas: <Globe2 size={13} />,
+  dex: <Zap size={13} />,
+} as const;
+
 const REGION_OPTIONS = [
-  { value: "all", label: "すべて", icon: null },
-  { value: "domestic", label: "国内", icon: "🇯🇵" },
-  { value: "overseas", label: "海外", icon: "🌐" },
-  { value: "dex", label: "DEX", icon: "⚡" },
+  { value: "all", label: "すべて" },
+  { value: "domestic", label: "国内" },
+  { value: "overseas", label: "海外" },
+  { value: "dex", label: "DEX" },
 ] as const;
 
 interface ExchangeListProps {
@@ -246,7 +255,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                         filter.region === opt.value ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
-                      {opt.icon && <span className="text-sm leading-none">{opt.icon}</span>}
+                      {REGION_ICONS[opt.value]}
                       {opt.label}
                     </button>
                   ))}
@@ -280,11 +289,11 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                   <button
                     key={opt.value}
                     onClick={() => setFilter({ ...filter, region: opt.value })}
-                    className={`flex-1 flex items-center justify-center gap-0.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       filter.region === opt.value ? "bg-white text-gray-900 shadow-sm" : "text-gray-500"
                     }`}
                   >
-                    {opt.icon && <span className="text-xs leading-none">{opt.icon}</span>}
+                    {REGION_ICONS[opt.value]}
                     {opt.label}
                   </button>
                 ))}
@@ -327,7 +336,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                     <>
                       {showDomestic && domesticList.length > 0 && (
                         <section>
-                          <SectionHeader label="国内取引所" count={domesticList.length} icon="🇯🇵" />
+                          <SectionHeader label="国内取引所" count={domesticList.length} icon={<Flag size={16} />} color="#F43F5E" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {domesticList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -337,7 +346,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showOverseas && overseasList.length > 0 && (
                         <section>
-                          <SectionHeader label="海外取引所" count={overseasList.length} icon={<Globe2 size={18} className="text-indigo-400" />} />
+                          <SectionHeader label="海外取引所" count={overseasList.length} icon={<Globe2 size={16} />} color="#6366F1" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {overseasList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -347,7 +356,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       )}
                       {showDex && dexList.length > 0 && (
                         <section>
-                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} icon={<Zap size={18} className="text-emerald-500" />} />
+                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} icon={<Zap size={16} />} color="#10B981" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {dexList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />

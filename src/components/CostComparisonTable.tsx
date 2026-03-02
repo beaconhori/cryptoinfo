@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Exchange } from "@/types/exchange";
-import { TrendingUp, ChevronUp, ChevronDown, AlertTriangle, BookOpen, Store, Zap } from "lucide-react";
+import { TrendingUp, ChevronUp, ChevronDown, AlertTriangle, BookOpen, Store, Zap, Flag, Globe2 } from "lucide-react";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 
 interface CostComparisonTableProps {
@@ -16,10 +16,10 @@ type TabMode = "exchange" | "dealer" | "dex";
 
 function RegionBadge({ region }: { region: string }) {
   if (region === "domestic")
-    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600 flex items-center gap-1 w-fit">🇯🇵 国内</span>;
+    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-pink-50 text-pink-600"><Flag size={11} />国内</span>;
   if (region === "dex")
-    return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600">⚡ DEX</span>;
-  return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600">🌐 海外</span>;
+    return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-600"><Zap size={11} />DEX</span>;
+  return <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-600"><Globe2 size={11} />海外</span>;
 }
 
 function RankBadge({ rank, cost }: { rank: number; cost: number | null }) {

@@ -17,6 +17,9 @@ import {
   TrendingUp,
   BookOpen,
   Store,
+  Flag,
+  Globe2,
+  Zap,
 } from "lucide-react";
 
 interface ExchangeModalProps {
@@ -212,8 +215,8 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
         <div>
           <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
           <div className="flex items-center gap-2 mt-1 flex-wrap">
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600">
-              {exchange.region === "domestic" ? "国内" : "海外"}
+            <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600">
+              {exchange.region === "domestic" ? <><Flag size={10} />国内</> : exchange.region === "dex" ? <><Zap size={10} />DEX</> : <><Globe2 size={10} />海外</>}
             </span>
             {hasExchange && (
               <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
