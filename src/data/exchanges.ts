@@ -828,7 +828,7 @@ export const exchanges: Exchange[] = [
       withdrawalFeeNote: "銘柄により異なる",
     },
     minTradeAmountJPY: 1000,
-    maxLeverage: 3.3,
+    maxLeverage: 3,
     tradingPairs: 130,
     japaneseSupport: false,
     fsaRegistered: false,
