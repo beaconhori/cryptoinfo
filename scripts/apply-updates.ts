@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { exchanges } from "../src/data/exchanges";
+import { config } from "dotenv";
+config({ path: ".env.local" });
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -11,7 +13,7 @@ async function main() {
   console.log("ℹ skipping delete step");
 
   // 2. 新件をupsert
-  const targets = ["bitstamp", "uniswap", "dydx", "gmx", "jupiter"];
+  const targets = ["dydx"];
   const newExchanges = exchanges.filter((e) => targets.includes(e.id));
 
   for (const ex of newExchanges) {

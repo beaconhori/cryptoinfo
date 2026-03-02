@@ -1247,9 +1247,9 @@ export const exchanges: Exchange[] = [
     volumeRank: 10,
     notes:
       "米国・カナダからのアクセスは不可。日本を含む多くの国は利用可能。BTC・SOLパーペチュアルは現在手数料ゼロ。取引量に応じてDYDXリワードあり。",
-    affiliateUrl: "",
+    affiliateUrl: "https://dydx.trade?ref=WideReefU7A",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラムあり",
+    affiliateNote: "紹介リンクから登録で特典あり",
     tokensUrl: "https://dydx.exchange/trade/BTC-USD",
   },
   {
