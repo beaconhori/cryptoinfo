@@ -10,16 +10,17 @@ import {
   BarChart3,
   Grid3X3,
   TableIcon,
-  Settings,
-  TrendingUp,
   Search,
   X,
   ChevronDown,
   Plus,
+  Wallet,
+  ChevronRight,
 } from "lucide-react";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
-type ActiveTab = "list" | "compare";
+type ActiveSection = "exchanges" | "wallets";
+type ExchangeTab = "list" | "compare";
 
 const defaultFilter: FilterState = {
   region: "all",
@@ -94,7 +95,8 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
   const [filter, setFilter] = useState<FilterState>(defaultFilter);
   const [sortKey, setSortKey] = useState<SortKey>("trustScore");
   const [selectedExchange, setSelectedExchange] = useState<Exchange | null>(null);
-  const [activeTab, setActiveTab] = useState<ActiveTab>("list");
+  const [activeSection, setActiveSection] = useState<ActiveSection>("exchanges");
+  const [exchangeTab, setExchangeTab] = useState<ExchangeTab>("list");
   const [showRegionDropdown, setShowRegionDropdown] = useState(false);
 
   const filtered = useMemo(() => {
@@ -152,58 +154,96 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
     filter.fsaOnly ||
     filter.searchText !== "";
 
+  const headerTitle =
+    activeSection === "wallets"
+      ? "ウォレットを探す"
+      : exchangeTab === "list"
+      ? "取引所一覧"
+      : "取引コスト比較";
+
   return (
     <div className="min-h-screen bg-[#D9E8F4] flex items-center justify-center p-4 md:p-8">
       <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-[1440px] flex overflow-hidden min-h-[92vh]">
 
         {/* ===== Left Sidebar ===== */}
-        <aside className="w-[72px] flex-shrink-0 flex flex-col items-center py-6 gap-2.5 border-r border-gray-100 bg-white rounded-l-[2rem]">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-3 shadow-md shadow-blue-200">
-            <BarChart3 size={18} className="text-white" />
+        <aside className="w-[200px] flex-shrink-0 flex flex-col py-5 border-r border-gray-100 bg-white rounded-l-[2rem]">
+          {/* ロゴ・サイト名 */}
+          <div className="px-4 mb-6 flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-200 flex-shrink-0">
+              <BarChart3 size={15} className="text-white" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] text-gray-400 leading-none mb-0.5">暗号通貨</p>
+              <p className="text-xs font-bold text-gray-800 leading-tight">取引所ガイド</p>
+            </div>
           </div>
 
-          <button
-            onClick={() => setActiveTab("list")}
-            title="取引所一覧"
-            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-              activeTab === "list"
-                ? "bg-blue-500 text-white shadow-md shadow-blue-200"
-                : "text-gray-400 hover:bg-gray-100"
-            }`}
-          >
-            <Grid3X3 size={18} />
-          </button>
+          {/* ナビゲーション */}
+          <nav className="flex-1 px-2 space-y-1">
 
-          <button
-            onClick={() => setActiveTab("compare")}
-            title="コスト比較"
-            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-              activeTab === "compare"
-                ? "bg-blue-500 text-white shadow-md shadow-blue-200"
-                : "text-gray-400 hover:bg-gray-100"
-            }`}
-          >
-            <TableIcon size={18} />
-          </button>
+            {/* 取引所を探す */}
+            <div>
+              <button
+                onClick={() => setActiveSection("exchanges")}
+                className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-all ${
+                  activeSection === "exchanges"
+                    ? "bg-blue-50 text-blue-700"
+                    : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                }`}
+              >
+                <BarChart3 size={14} className="flex-shrink-0" />
+                <span className="text-xs font-semibold">取引所を探す</span>
+                <ChevronRight size={12} className={`ml-auto transition-transform ${activeSection === "exchanges" ? "rotate-90" : ""}`} />
+              </button>
 
-          <button
-            title="手数料グラフ"
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
-          >
-            <TrendingUp size={18} />
-          </button>
+              {/* サブメニュー */}
+              {activeSection === "exchanges" && (
+                <div className="mt-1 ml-3 pl-3 border-l-2 border-blue-100 space-y-0.5">
+                  <button
+                    onClick={() => setExchangeTab("list")}
+                    className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-left transition-all ${
+                      exchangeTab === "list"
+                        ? "bg-blue-500 text-white shadow-sm"
+                        : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                    }`}
+                  >
+                    <Grid3X3 size={12} className="flex-shrink-0" />
+                    <span className="text-xs font-medium">取引所一覧</span>
+                  </button>
+                  <button
+                    onClick={() => setExchangeTab("compare")}
+                    className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-left transition-all ${
+                      exchangeTab === "compare"
+                        ? "bg-blue-500 text-white shadow-sm"
+                        : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                    }`}
+                  >
+                    <TableIcon size={12} className="flex-shrink-0" />
+                    <span className="text-xs font-medium">取引コスト比較</span>
+                  </button>
+                </div>
+              )}
+            </div>
 
-          <button
-            title="設定"
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
-          >
-            <Settings size={18} />
-          </button>
+            {/* ウォレットを探す */}
+            <button
+              onClick={() => setActiveSection("wallets")}
+              className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-all ${
+                activeSection === "wallets"
+                  ? "bg-purple-50 text-purple-700"
+                  : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+              }`}
+            >
+              <Wallet size={14} className="flex-shrink-0" />
+              <span className="text-xs font-semibold">ウォレットを探す</span>
+            </button>
 
-          <div className="flex-1" />
+          </nav>
 
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-xs font-bold shadow-sm cursor-pointer hover:scale-105 transition-transform">
-            U
+          <div className="px-4 pt-4 border-t border-gray-100">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-xs font-bold shadow-sm cursor-pointer hover:scale-105 transition-transform">
+              U
+            </div>
           </div>
         </aside>
 
@@ -213,175 +253,150 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
           {/* Header */}
           <div className="bg-white px-6 py-4 flex items-center gap-4 border-b border-gray-50">
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-gray-900 leading-tight">
-                {activeTab === "list" ? "取引所を探す" : "コスト比較"}
-              </h1>
-              <div className="relative mt-1 inline-block">
-                <button
-                  onClick={() => setShowRegionDropdown(!showRegionDropdown)}
-                  className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors bg-gray-50 hover:bg-gray-100 rounded-lg px-3 py-1"
-                >
-                  <span>{currentRegionLabel}</span>
-                  <ChevronDown size={13} />
-                </button>
-                {showRegionDropdown && (
-                  <div className="absolute left-0 top-full mt-1 z-30 bg-white rounded-xl border border-gray-100 shadow-lg py-1 min-w-[160px]">
-                    {REGION_OPTIONS.map((opt) => (
-                      <button
-                        key={opt.value}
-                        onClick={() => {
-                          setFilter({ ...filter, region: opt.value });
-                          setShowRegionDropdown(false);
-                        }}
-                        className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                          filter.region === opt.value
-                            ? "text-blue-600 bg-blue-50 font-medium"
-                            : "text-gray-700 hover:bg-gray-50"
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Search */}
-            <div className="relative w-64">
-              <Search
-                size={15}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
-              />
-              <input
-                type="text"
-                placeholder="取引所を検索..."
-                value={filter.searchText}
-                onChange={(e) =>
-                  setFilter({ ...filter, searchText: e.target.value })
-                }
-                className="w-full pl-9 pr-9 py-2.5 bg-gray-100 rounded-full text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all placeholder-gray-400"
-              />
-              {filter.searchText && (
-                <button
-                  onClick={() => setFilter({ ...filter, searchText: "" })}
-                  className="absolute right-3 top-1/2 -translate-y-1/2"
-                >
-                  <X size={14} className="text-gray-400 hover:text-gray-600" />
-                </button>
+              <h1 className="text-2xl font-bold text-gray-900 leading-tight">{headerTitle}</h1>
+              {activeSection === "exchanges" && exchangeTab === "list" && (
+                <div className="relative mt-1 inline-block">
+                  <button
+                    onClick={() => setShowRegionDropdown(!showRegionDropdown)}
+                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors bg-gray-50 hover:bg-gray-100 rounded-lg px-3 py-1"
+                  >
+                    <span>{currentRegionLabel}</span>
+                    <ChevronDown size={13} />
+                  </button>
+                  {showRegionDropdown && (
+                    <div className="absolute left-0 top-full mt-1 z-30 bg-white rounded-xl border border-gray-100 shadow-lg py-1 min-w-[160px]">
+                      {REGION_OPTIONS.map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => {
+                            setFilter({ ...filter, region: opt.value });
+                            setShowRegionDropdown(false);
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                            filter.region === opt.value
+                              ? "text-blue-600 bg-blue-50 font-medium"
+                              : "text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
+            {/* Search（取引所セクションのみ表示） */}
+            {activeSection === "exchanges" && (
+              <div className="relative w-64">
+                <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="取引所を検索..."
+                  value={filter.searchText}
+                  onChange={(e) => setFilter({ ...filter, searchText: e.target.value })}
+                  className="w-full pl-9 pr-9 py-2.5 bg-gray-100 rounded-full text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all placeholder-gray-400"
+                />
+                {filter.searchText && (
+                  <button onClick={() => setFilter({ ...filter, searchText: "" })} className="absolute right-3 top-1/2 -translate-y-1/2">
+                    <X size={14} className="text-gray-400 hover:text-gray-600" />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Filter row */}
-          <CompactFilter
-            filter={filter}
-            sortKey={sortKey}
-            onFilterChange={setFilter}
-            onSortChange={setSortKey}
-            resultCount={filtered.length}
-          />
+          {/* Filter row（取引所一覧のみ） */}
+          {activeSection === "exchanges" && exchangeTab === "list" && (
+            <CompactFilter
+              filter={filter}
+              sortKey={sortKey}
+              onFilterChange={setFilter}
+              onSortChange={setSortKey}
+              resultCount={filtered.length}
+            />
+          )}
 
-          {/* Scrollable content */}
+          {/* ===== コンテンツ ===== */}
           <div
             className="flex-1 overflow-auto p-6 space-y-8"
             onClick={() => showRegionDropdown && setShowRegionDropdown(false)}
           >
-            {activeTab === "list" ? (
-              filtered.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-24 text-gray-400">
-                  <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
-                    <Search size={24} className="text-gray-300" />
-                  </div>
-                  <p className="font-medium text-gray-500">
-                    条件に一致する取引所が見つかりませんでした
-                  </p>
-                  <p className="text-sm mt-1">フィルターを変更してみてください</p>
-                  {hasFilters && (
-                    <button
-                      onClick={() => setFilter(defaultFilter)}
-                      className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm rounded-xl hover:bg-blue-600 transition-colors"
-                    >
-                      フィルターをリセット
-                    </button>
-                  )}
+
+            {/* 取引所セクション */}
+            {activeSection === "exchanges" && (
+              <>
+                {exchangeTab === "list" ? (
+                  filtered.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-24 text-gray-400">
+                      <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
+                        <Search size={24} className="text-gray-300" />
+                      </div>
+                      <p className="font-medium text-gray-500">条件に一致する取引所が見つかりませんでした</p>
+                      <p className="text-sm mt-1">フィルターを変更してみてください</p>
+                      {hasFilters && (
+                        <button onClick={() => setFilter(defaultFilter)} className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm rounded-xl hover:bg-blue-600 transition-colors">
+                          フィルターをリセット
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      {showDomestic && domesticList.length > 0 && (
+                        <section>
+                          <SectionHeader label="国内取引所" count={domesticList.length} dotColor="#FF6B8A" />
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {domesticList.map((ex) => (
+                              <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
+                            ))}
+                          </div>
+                        </section>
+                      )}
+                      {showOverseas && overseasList.length > 0 && (
+                        <section>
+                          <SectionHeader label="海外取引所" count={overseasList.length} dotColor="#6366F1" />
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {overseasList.map((ex) => (
+                              <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
+                            ))}
+                          </div>
+                        </section>
+                      )}
+                      {showDex && dexList.length > 0 && (
+                        <section>
+                          <SectionHeader label="分散型取引所 (DEX)" count={dexList.length} dotColor="#10B981" />
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {dexList.map((ex) => (
+                              <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
+                            ))}
+                          </div>
+                        </section>
+                      )}
+                    </>
+                  )
+                ) : (
+                  <CostComparisonTable exchanges={filtered} onSelectExchange={handleSelect} />
+                )}
+              </>
+            )}
+
+            {/* ウォレットセクション（準備中） */}
+            {activeSection === "wallets" && (
+              <div className="flex flex-col items-center justify-center py-24 text-gray-400">
+                <div className="w-20 h-20 rounded-2xl bg-purple-50 flex items-center justify-center mb-5">
+                  <Wallet size={32} className="text-purple-300" />
                 </div>
-              ) : (
-                <>
-                  {showDomestic && domesticList.length > 0 && (
-                    <section>
-                      <SectionHeader
-                        label="国内取引所"
-                        count={domesticList.length}
-                        dotColor="#FF6B8A"
-                      />
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {domesticList.map((ex) => (
-                          <ExchangeCard
-                            key={ex.id}
-                            exchange={ex}
-                            onClick={() => handleSelect(ex)}
-                            highlightTokens={filter.tokens}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-
-                  {showOverseas && overseasList.length > 0 && (
-                    <section>
-                      <SectionHeader
-                        label="海外取引所"
-                        count={overseasList.length}
-                        dotColor="#6366F1"
-                      />
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {overseasList.map((ex) => (
-                          <ExchangeCard
-                            key={ex.id}
-                            exchange={ex}
-                            onClick={() => handleSelect(ex)}
-                            highlightTokens={filter.tokens}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-
-                  {showDex && dexList.length > 0 && (
-                    <section>
-                      <SectionHeader
-                        label="分散型取引所 (DEX)"
-                        count={dexList.length}
-                        dotColor="#10B981"
-                      />
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {dexList.map((ex) => (
-                          <ExchangeCard
-                            key={ex.id}
-                            exchange={ex}
-                            onClick={() => handleSelect(ex)}
-                            highlightTokens={filter.tokens}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-                </>
-              )
-            ) : (
-              <CostComparisonTable
-                exchanges={filtered}
-                onSelectExchange={handleSelect}
-              />
+                <p className="font-bold text-gray-600 text-lg mb-2">ウォレットガイド</p>
+                <p className="text-sm text-gray-400 mb-1">ハードウェア・ソフトウェア・ブラウザ拡張など</p>
+                <p className="text-sm text-gray-400">各種ウォレットの比較・解説ページを準備中です。</p>
+                <span className="mt-5 px-4 py-1.5 bg-purple-100 text-purple-600 text-xs font-semibold rounded-full">Coming Soon</span>
+              </div>
             )}
 
             <footer className="text-center py-4 text-xs text-gray-400 space-y-1">
-              <p>
-                ※ 掲載情報は参考目的です。最新情報は各取引所の公式サイトでご確認ください。
-              </p>
-              <p>© 2025 CryptoExchange Finder</p>
+              <p>※ 掲載情報は参考目的です。最新情報は各取引所の公式サイトでご確認ください。</p>
+              <p>© 2025 暗号通貨取引所ガイド</p>
             </footer>
           </div>
         </div>
