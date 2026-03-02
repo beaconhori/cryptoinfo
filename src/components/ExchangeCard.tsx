@@ -74,32 +74,41 @@ export default function ExchangeCard({
     >
       <CardBanner exchange={exchange} />
 
-      <div className="p-4">
+      <div
+        className="p-4"
+        style={{ backgroundColor: `${exchange.logoColor}12` }}
+      >
         <div className="flex items-start justify-between mb-1.5">
           <h3 className="font-bold text-gray-900 text-sm leading-snug pr-1.5 flex-1">
             {exchange.name}
           </h3>
           <button
             onClick={(e) => e.stopPropagation()}
-            className="text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0 -mr-0.5 -mt-0.5"
+            className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0 -mr-0.5 -mt-0.5"
           >
             <MoreHorizontal size={16} />
           </button>
         </div>
 
-        <p className="text-xs text-gray-400 line-clamp-2 mb-4 leading-relaxed">
+        <p className="text-xs text-gray-500 line-clamp-2 mb-4 leading-relaxed">
           {exchange.description}
         </p>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 text-gray-400">
+          <div className="flex items-center gap-1" style={{ color: `${exchange.logoColor}cc` }}>
             <Percent size={11} />
-            <span className="text-xs">{feeDisplay}</span>
+            <span className="text-xs font-medium">{feeDisplay}</span>
           </div>
 
           <div className="flex items-center -space-x-1.5">
             {exchange.fsaRegistered && (
-              <div className="w-6 h-6 rounded-full bg-green-50 border-2 border-white flex items-center justify-center z-10 shadow-sm">
+              <div
+                className="w-6 h-6 rounded-full flex items-center justify-center z-10 shadow-sm border-2"
+                style={{
+                  backgroundColor: `${exchange.logoColor}18`,
+                  borderColor: "white",
+                }}
+              >
                 <CheckCircle size={12} className="text-green-500" />
               </div>
             )}
