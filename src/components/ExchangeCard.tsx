@@ -95,19 +95,21 @@ export default function ExchangeCard({
         {(() => {
           const cfg = getSpreadConfig(exchange.fees.spreadRating);
           return (
-            <div className="space-y-1.5 mb-3">
+            <div className="space-y-1 mb-3">
               {hasExchange && (
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-50 border border-blue-100">
-                  <BookOpen size={10} className="text-blue-500 flex-shrink-0" />
-                  <span className="text-[10px] font-semibold text-blue-600">取引所</span>
-                  <span className="ml-auto flex items-center gap-2 text-xs">
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
+                  <div className="flex items-center gap-1.5">
+                    <BookOpen size={10} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-[10px] text-gray-500">取引所</span>
+                  </div>
+                  <span className="flex items-center gap-2 text-xs">
                     {exchange.fees.exchangeMaker !== undefined && (
-                      <span className={exchange.fees.exchangeMaker < 0 ? "text-emerald-600 font-bold" : "text-gray-500"}>
+                      <span className={exchange.fees.exchangeMaker < 0 ? "text-emerald-600 font-bold" : "text-gray-400"}>
                         M: {exchange.fees.exchangeMaker.toFixed(2)}%
                       </span>
                     )}
                     {exchange.fees.exchangeTaker !== undefined && (
-                      <span className="text-gray-600 font-medium">
+                      <span className="text-gray-700 font-semibold">
                         T: {exchange.fees.exchangeTaker.toFixed(2)}%
                       </span>
                     )}
@@ -115,14 +117,13 @@ export default function ExchangeCard({
                 </div>
               )}
               {hasDealer && (
-                <div
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border"
-                  style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}
-                >
-                  <Store size={10} style={{ color: cfg.color }} className="flex-shrink-0" />
-                  <span className="text-[10px] font-semibold" style={{ color: cfg.color }}>販売所</span>
-                  <span className="ml-auto text-xs font-medium" style={{ color: cfg.color }}>
-                    スプレッド ≈{exchange.fees.dealerSpread?.toFixed(1)}%
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-gray-50">
+                  <div className="flex items-center gap-1.5">
+                    <Store size={10} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-[10px] text-gray-500">販売所</span>
+                  </div>
+                  <span className="text-xs font-semibold" style={{ color: cfg.color }}>
+                    SP ≈{exchange.fees.dealerSpread?.toFixed(1)}%
                   </span>
                 </div>
               )}

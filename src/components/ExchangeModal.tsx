@@ -47,30 +47,19 @@ function ExchangeTradingSection({ exchange }: { exchange: Exchange }) {
   if (fees.exchangeMaker === undefined && fees.exchangeTaker === undefined) return null;
 
   const makerIsRebate = (fees.exchangeMaker ?? 0) < 0;
-  const makerIsZero = fees.exchangeMaker === 0;
-  const takerIsZero = fees.exchangeTaker === 0;
 
   return (
-    <div className="rounded-2xl border border-blue-100 overflow-hidden">
+    <div className="rounded-2xl border border-gray-200 overflow-hidden">
       {/* ヘッダー */}
-      <div className="bg-blue-50 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center">
-            <BookOpen size={14} className="text-white" />
-          </div>
-          <div>
-            <h4 className="font-bold text-blue-900 text-sm">取引所（板取引）</h4>
-            <p className="text-xs text-blue-600">Order Book Trading</p>
-          </div>
-        </div>
-        <span className="text-xs bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-medium">
-          ユーザー間取引
-        </span>
+      <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+        <BookOpen size={14} className="text-gray-500" />
+        <h4 className="font-semibold text-gray-800 text-sm">取引所（板取引）</h4>
+        <span className="text-xs text-gray-400 ml-auto">Order Book</span>
       </div>
 
       <div className="p-4 bg-white space-y-4">
         {/* 説明 */}
-        <p className="text-xs text-gray-500 leading-relaxed border-l-2 border-blue-200 pl-3">
+        <p className="text-xs text-gray-500 leading-relaxed border-l-2 border-gray-200 pl-3">
           ユーザー同士が売買注文を出し合う市場です。
           指値注文で流動性を提供する側（<strong className="text-gray-700">Maker</strong>）と、
           成行注文で即時約定させる側（<strong className="text-gray-700">Taker</strong>）で手数料が異なります。
@@ -80,26 +69,22 @@ function ExchangeTradingSection({ exchange }: { exchange: Exchange }) {
         {/* Maker / Taker 料率 */}
         <div className="grid grid-cols-2 gap-3">
           {fees.exchangeMaker !== undefined && (
-            <div className={`rounded-xl p-3 text-center ${makerIsRebate ? "bg-emerald-50 border border-emerald-100" : makerIsZero ? "bg-blue-50 border border-blue-100" : "bg-gray-50 border border-gray-100"}`}>
-              <p className="text-xs text-gray-500 mb-1">Maker（指値）</p>
-              <p className={`text-2xl font-black ${makerIsRebate ? "text-emerald-600" : makerIsZero ? "text-blue-600" : "text-gray-800"}`}>
+            <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
+              <p className="text-xs text-gray-400 mb-1">Maker（指値）</p>
+              <p className={`text-2xl font-black ${makerIsRebate ? "text-emerald-600" : "text-gray-800"}`}>
                 {fees.exchangeMaker.toFixed(2)}%
               </p>
               {makerIsRebate && (
-                <p className="text-xs font-bold text-emerald-600 mt-0.5">
-                  ← リベート（受け取り）
-                </p>
+                <p className="text-xs font-medium text-emerald-600 mt-0.5">リベート（受け取り）</p>
               )}
-              {makerIsZero && <p className="text-xs text-blue-600 mt-0.5 font-medium">無料</p>}
             </div>
           )}
           {fees.exchangeTaker !== undefined && (
-            <div className={`rounded-xl p-3 text-center ${takerIsZero ? "bg-blue-50 border border-blue-100" : "bg-gray-50 border border-gray-100"}`}>
-              <p className="text-xs text-gray-500 mb-1">Taker（成行）</p>
-              <p className={`text-2xl font-black ${takerIsZero ? "text-blue-600" : "text-gray-800"}`}>
+            <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
+              <p className="text-xs text-gray-400 mb-1">Taker（成行）</p>
+              <p className="text-2xl font-black text-gray-800">
                 {fees.exchangeTaker.toFixed(2)}%
               </p>
-              {takerIsZero && <p className="text-xs text-blue-600 mt-0.5 font-medium">無料</p>}
             </div>
           )}
         </div>
@@ -110,9 +95,9 @@ function ExchangeTradingSection({ exchange }: { exchange: Exchange }) {
             <p className="text-xs text-gray-400 mb-2">Taker手数料（金額別）</p>
             <div className="grid grid-cols-3 gap-2">
               {AMOUNTS.map((amount) => (
-                <div key={amount} className="bg-gray-50 rounded-lg p-2 text-center">
+                <div key={amount} className="bg-gray-50 rounded-lg p-2 text-center border border-gray-100">
                   <p className="text-[10px] text-gray-400">{(amount / 10000).toLocaleString()}万円</p>
-                  <p className={`text-sm font-bold ${takerIsZero ? "text-blue-600" : "text-gray-700"}`}>
+                  <p className="text-sm font-bold text-gray-700">
                     {((amount * (fees.exchangeTaker ?? 0)) / 100).toLocaleString()}円
                   </p>
                 </div>
@@ -134,30 +119,19 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
   const isAlert = fees.spreadRating === "wide" || fees.spreadRating === "very_wide";
 
   return (
-    <div className="rounded-2xl border overflow-hidden" style={{ borderColor: cfg.border }}>
+    <div className="rounded-2xl border border-gray-200 overflow-hidden">
       {/* ヘッダー */}
-      <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: cfg.bg }}>
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: cfg.color }}>
-            <Store size={14} className="text-white" />
-          </div>
-          <div>
-            <h4 className="font-bold text-sm" style={{ color: cfg.color }}>販売所（相対取引）</h4>
-            <p className="text-xs" style={{ color: cfg.color + "99" }}>Dealer / OTC</p>
-          </div>
-        </div>
-        <span
-          className="text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1"
-          style={{ backgroundColor: cfg.border, color: cfg.color }}
-        >
-          {isAlert && <AlertTriangle size={11} />}
+      <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+        <Store size={14} className="text-gray-500" />
+        <h4 className="font-semibold text-gray-800 text-sm">販売所（相対取引）</h4>
+        <span className="text-xs font-medium ml-auto" style={{ color: cfg.color }}>
           スプレッド {cfg.label}
         </span>
       </div>
 
       <div className="p-4 bg-white space-y-4">
         {/* 説明 */}
-        <p className="text-xs text-gray-500 leading-relaxed border-l-2 pl-3" style={{ borderColor: cfg.border }}>
+        <p className="text-xs text-gray-500 leading-relaxed border-l-2 border-gray-200 pl-3">
           取引所が売買価格を提示し、ユーザーはその価格で売買します。
           注文は即時成立しますが、<strong className="text-gray-700">売値と買値の差（スプレッド）が実質的なコスト</strong>になります。
           「手数料無料」と表示されていても、このスプレッドは別途発生します。
@@ -165,15 +139,15 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
 
         {/* スプレッド率 + 往復コスト */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-xl p-3 text-center border" style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}>
-            <p className="text-xs text-gray-500 mb-1">スプレッド目安</p>
+          <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
+            <p className="text-xs text-gray-400 mb-1">スプレッド目安</p>
             <p className="text-2xl font-black" style={{ color: cfg.color }}>
               ≈{fees.dealerSpread.toFixed(1)}%
             </p>
             <p className="text-[10px] text-gray-400 mt-0.5">買値と売値の差</p>
           </div>
-          <div className="rounded-xl p-3 text-center border" style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}>
-            <p className="text-xs text-gray-500 mb-1">往復コスト目安</p>
+          <div className="rounded-xl p-3 text-center bg-gray-50 border border-gray-100">
+            <p className="text-xs text-gray-400 mb-1">往復コスト目安</p>
             <p className="text-2xl font-black" style={{ color: cfg.color }}>
               ≈{fees.roundTripCostPct.toFixed(2)}%
             </p>
@@ -183,9 +157,9 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
 
         {/* 警告メッセージ */}
         {isAlert && (
-          <div className="flex items-start gap-2.5 rounded-xl p-3 border" style={{ backgroundColor: cfg.bg + "80", borderColor: cfg.border }}>
+          <div className="flex items-start gap-2.5 rounded-xl p-3 bg-gray-50 border border-gray-200">
             <AlertTriangle size={14} className="flex-shrink-0 mt-0.5" style={{ color: cfg.color }} />
-            <p className="text-xs leading-relaxed" style={{ color: cfg.color }}>
+            <p className="text-xs text-gray-600 leading-relaxed">
               {fees.spreadRating === "very_wide"
                 ? "このスプレッドは非常に広く、頻繁な売買には不向きです。少額の積立などの用途に限定するか、取引所機能（板取引）の利用を強く推奨します。"
                 : "スプレッドが広めです。まとまった金額を取引する場合は事前に実際の価格差を確認することをお勧めします。"}
@@ -198,7 +172,7 @@ function DealerTradingSection({ exchange }: { exchange: Exchange }) {
           <p className="text-xs text-gray-400 mb-2">往復コスト（金額別）</p>
           <div className="grid grid-cols-3 gap-2">
             {AMOUNTS.map((amount) => (
-              <div key={amount} className="rounded-lg p-2 text-center border" style={{ backgroundColor: cfg.bg, borderColor: cfg.border }}>
+              <div key={amount} className="rounded-lg p-2 text-center bg-gray-50 border border-gray-100">
                 <p className="text-[10px] text-gray-400">{(amount / 10000).toLocaleString()}万円</p>
                 <p className="text-sm font-bold" style={{ color: cfg.color }}>
                   {((amount * fees.roundTripCostPct) / 100).toLocaleString()}円
@@ -249,16 +223,16 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
           <div>
             <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
             <div className="flex items-center gap-2 mt-1 flex-wrap">
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${exchange.region === "domestic" ? "bg-pink-100 text-pink-700" : "bg-indigo-100 text-indigo-700"}`}>
+              <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600">
                 {exchange.region === "domestic" ? "国内" : "海外"}
               </span>
               {hasExchange && (
-                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-blue-100 text-blue-700 flex items-center gap-1">
+                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600 flex items-center gap-1">
                   <BookOpen size={10} /> 取引所
                 </span>
               )}
               {hasDealer && (
-                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-amber-100 text-amber-700 flex items-center gap-1">
+                <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-600 flex items-center gap-1">
                   <Store size={10} /> 販売所
                 </span>
               )}
@@ -330,14 +304,14 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
           {(exchange.fees.depositFeeNote || exchange.fees.withdrawalFeeNote) && (
             <div className="grid grid-cols-2 gap-3">
               {exchange.fees.depositFeeNote && (
-                <div className="bg-blue-50 rounded-xl p-3">
-                  <p className="text-xs text-blue-600 font-medium mb-1">入金手数料</p>
+                <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                  <p className="text-xs text-gray-500 font-medium mb-1">入金手数料</p>
                   <p className="text-sm text-gray-700">{exchange.fees.depositFeeNote}</p>
                 </div>
               )}
               {exchange.fees.withdrawalFeeNote && (
-                <div className="bg-orange-50 rounded-xl p-3">
-                  <p className="text-xs text-orange-600 font-medium mb-1">出金手数料</p>
+                <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                  <p className="text-xs text-gray-500 font-medium mb-1">出金手数料</p>
                   <p className="text-sm text-gray-700">{exchange.fees.withdrawalFeeNote}</p>
                 </div>
               )}
@@ -376,9 +350,9 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
 
           {/* 特記事項 */}
           {exchange.notes && (
-            <div className="flex items-start gap-2 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-              <Info size={16} className="text-yellow-600 mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-yellow-800">{exchange.notes}</p>
+            <div className="flex items-start gap-2 bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <Info size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-gray-600">{exchange.notes}</p>
             </div>
           )}
 
