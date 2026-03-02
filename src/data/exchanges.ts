@@ -385,6 +385,7 @@ export const exchanges: Exchange[] = [
     established: 2019,
     url: "https://wallet.rakuten.co.jp/",
     domain: "rakuten.co.jp",
+    logoFile: "rakutenwallet.png",
     logoColor: "#BF0000",
     description:
       "楽天グループの暗号資産サービス。楽天銀行からの即時入金や楽天ポイント連携が特徴。シンプルなUIで初心者にも使いやすい。",
@@ -416,6 +417,7 @@ export const exchanges: Exchange[] = [
     established: 2019,
     url: "https://www.s-blox.com/",
     domain: "s-blox.com",
+    logoFile: "sblox.svg",
     logoColor: "#1A1F35",
     description:
       "ソニーグループ傘下の暗号資産サービス。2025年1月に旧「WhaleFin」からリニューアル。ソニー独自ブロックチェーン「Soneium」との連携も展開中。",
@@ -448,6 +450,7 @@ export const exchanges: Exchange[] = [
     established: 2017,
     url: "https://bittrade.co.jp/",
     domain: "bittrade.co.jp",
+    logoFile: "bittrade.png",
     logoColor: "#1B5FAA",
     description:
       "HTX（旧Huobi）グループの日本法人。国内最多水準の取扱銘柄数が強み。取引所・販売所の両方を提供し、多彩なアルトコインが取引可能。",
@@ -501,6 +504,7 @@ export const exchanges: Exchange[] = [
     established: 2022,
     url: "https://mercoin.jp/",
     domain: "mercoin.jp",
+    logoFile: "mercoin_logo.svg",
     logoColor: "#FF0211",
     description:
       "メルカリグループの暗号資産サービス。メルペイ残高での購入や自動積立が可能。BTC・ETH・XRPに特化したシンプル設計で初心者向け。",
@@ -533,6 +537,7 @@ export const exchanges: Exchange[] = [
     established: 2019,
     url: "https://www.bitmax.me/ja",
     domain: "bitmax.me",
+    logoFile: "linebitmax.png",
     logoColor: "#00C300",
     description:
       "LINEヤフーグループの暗号資産サービス。LINEアプリから直接アクセスでき、PayPayマネーでの購入も可能。1円から取引できる手軽さが特徴。",
@@ -574,6 +579,7 @@ export const exchanges: Exchange[] = [
     established: 2016,
     url: "https://www.bitpoint.co.jp/",
     domain: "bitpoint.co.jp",
+    logoFile: "bitpoint.svg",
     logoColor: "#0066CC",
     description:
       "SBIグループ傘下の暗号資産取引所。取引所手数料が完全無料で取引コストを抑えられる。多様なアルトコインに対応し銘柄数も豊富。",
