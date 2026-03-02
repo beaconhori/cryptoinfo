@@ -10,7 +10,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2014,
     url: "https://bitflyer.com/ja-jp/",
-    logoColor: "#1a56db",
+    logoColor: "#1652F0",
     description:
       "国内最大級のビットコイン取引量を誇る老舗取引所。金融庁登録済みで高い信頼性を持つ。Lightning FXなどのデリバティブ取引も可能。",
     tokens: ["BTC", "ETH", "XRP", "LTC", "BCH", "MONA", "LSK", "XEM"],
@@ -36,8 +36,10 @@ export const exchanges: Exchange[] = [
     japaneseSupport: true,
     fsaRegistered: true,
     trustScore: 5,
-    volumeRank: undefined,
     notes: "取引所(BTC/JPY)は国内最高峰の流動性",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "A8.net / ValueCommerce / もしもアフィリエイト 等で案件あり",
   },
   {
     id: "coincheck",
@@ -47,7 +49,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2012,
     url: "https://coincheck.com/ja/",
-    logoColor: "#00b4cc",
+    logoColor: "#00B7A4",
     description:
       "国内最多水準の取扱銘柄数を誇る取引所。NFTマーケットプレイスや積立投資など多彩なサービスを提供。マネックスグループ傘下。",
     tokens: [
@@ -94,6 +96,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 4,
     notes: "取引所手数料は無料だが販売所スプレッドに注意",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "ValueCommerce / A8.net / afb 等で案件あり。成果報酬は口座開設完了",
   },
   {
     id: "gmo-coin",
@@ -103,7 +108,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2016,
     url: "https://coin.z.com/jp/",
-    logoColor: "#0072bc",
+    logoColor: "#009BDE",
     description:
       "GMOインターネットグループ傘下の取引所。業界最安水準の手数料と豊富な取引機能が特徴。取引所での売買手数料がマイナス(リベート)になることも。",
     tokens: [
@@ -145,6 +150,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 5,
     notes: "入出金手数料が完全無料で実質コストが低い",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "GMOアフィリエイト / A8.net で案件あり",
   },
   {
     id: "bitbank",
@@ -154,7 +162,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2014,
     url: "https://bitbank.cc/",
-    logoColor: "#ff6b35",
+    logoColor: "#2B5FEC",
     description:
       "国内でも有数の取引量を誇るプロ向け取引所。チャートや板が充実しており本格的なトレードが可能。",
     tokens: [
@@ -186,6 +194,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 4,
     notes: "取引板が充実しており国内で本格的なトレードに最適",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "A8.net / もしもアフィリエイト 等で案件あり",
   },
   {
     id: "sbi-vc-trade",
@@ -195,7 +206,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2018,
     url: "https://www.sbivc.co.jp/",
-    logoColor: "#e60012",
+    logoColor: "#E4001B",
     description:
       "SBIホールディングス傘下の取引所。高い信頼性と充実したサービスが特徴。SBIグループとの連携が強み。",
     tokens: [
@@ -235,6 +246,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 5,
     notes: "取引手数料・入出金手数料すべて無料",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "A8.net / ValueCommerce 等で案件あり",
   },
   {
     id: "dmm-bitcoin",
@@ -244,7 +258,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2018,
     url: "https://bitcoin.dmm.com/",
-    logoColor: "#ff0033",
+    logoColor: "#FF0033",
     description:
       "DMMグループが運営する取引所。レバレッジ取引に強みを持ち、多数の通貨ペアに対応。カスタマーサポートが充実。",
     tokens: [
@@ -281,6 +295,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 4,
     notes: "販売所形式のみ、レバレッジ取引ペアが豊富",
+    affiliateUrl: "",
+    affiliateType: "asp",
+    affiliateNote: "DMMアフィリエイト / A8.net で案件あり",
   },
   {
     id: "bybit-jp",
@@ -290,7 +307,7 @@ export const exchanges: Exchange[] = [
     country: "日本",
     established: 2024,
     url: "https://www.bybit.com/ja-JP/",
-    logoColor: "#f7a600",
+    logoColor: "#F7A600",
     description:
       "海外大手Bybitの日本法人。金融庁登録を取得し国内サービスを提供。豊富な銘柄と低い手数料が魅力。",
     tokens: [
@@ -327,6 +344,9 @@ export const exchanges: Exchange[] = [
     fsaRegistered: true,
     trustScore: 4,
     notes: "2024年に日本法人設立、国内でも利用可能に",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "Bybit公式の紹介プログラム（手数料の一部がバック）",
   },
 
   // ========== 海外取引所 ==========
@@ -338,7 +358,7 @@ export const exchanges: Exchange[] = [
     country: "ケイマン諸島",
     established: 2017,
     url: "https://www.binance.com/ja",
-    logoColor: "#f0b90b",
+    logoColor: "#F0B90B",
     description:
       "世界最大の取引量を誇る取引所。1,000以上の通貨ペアを取扱い、現物・先物・オプション・NFTなど多様なサービスを提供。日本居住者は利用制限あり。",
     tokens: [
@@ -388,6 +408,9 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     volumeRank: 1,
     notes: "日本居住者はBinance Japanの利用を推奨",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラム: 紹介した相手の手数料の20〜40%がバック。dashboard.binance.com で発行",
   },
   {
     id: "bybit",
@@ -397,7 +420,7 @@ export const exchanges: Exchange[] = [
     country: "UAE",
     established: 2018,
     url: "https://www.bybit.com/",
-    logoColor: "#f7a600",
+    logoColor: "#F7A600",
     description:
       "デリバティブ取引に強みを持つ世界第2位の取引所。コピートレード機能が充実しており初心者にも人気。",
     tokens: [
@@ -446,6 +469,9 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     volumeRank: 2,
     notes: "コピートレードとデモ取引機能が充実",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラム: bybit.com/ja-JP/vip/affiliate で発行",
   },
   {
     id: "okx",
@@ -455,7 +481,7 @@ export const exchanges: Exchange[] = [
     country: "セーシェル",
     established: 2017,
     url: "https://www.okx.com/ja",
-    logoColor: "#000000",
+    logoColor: "#121212",
     description:
       "世界トップクラスの取引所。Web3ウォレット機能や幅広いDeFiサービスへのアクセスが特徴。機関投資家にも人気。",
     tokens: [
@@ -504,6 +530,9 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     volumeRank: 3,
     notes: "Web3ウォレット機能が充実",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラム: okx.com/ja/affiliate で発行",
   },
   {
     id: "kraken",
@@ -513,7 +542,7 @@ export const exchanges: Exchange[] = [
     country: "アメリカ",
     established: 2011,
     url: "https://www.kraken.com/ja-jp",
-    logoColor: "#5741d9",
+    logoColor: "#5741D9",
     description:
       "セキュリティと信頼性で定評のある老舗取引所。機関投資家向けサービスも充実しており、フィアット出入金が豊富。",
     tokens: [
@@ -556,6 +585,9 @@ export const exchanges: Exchange[] = [
     trustScore: 5,
     volumeRank: 10,
     notes: "セキュリティ実績が最も高い取引所の一つ",
+    affiliateUrl: undefined,
+    affiliateType: "none",
+    affiliateNote: "公式アフィリエイトプログラムは現在提供なし",
   },
   {
     id: "bitget",
@@ -565,7 +597,7 @@ export const exchanges: Exchange[] = [
     country: "シンガポール",
     established: 2018,
     url: "https://www.bitget.com/ja",
-    logoColor: "#00c096",
+    logoColor: "#00C096",
     description:
       "コピートレード機能で急成長した取引所。豊富な取引ペアとリーズナブルな手数料が魅力。",
     tokens: [
@@ -610,6 +642,9 @@ export const exchanges: Exchange[] = [
     trustScore: 3,
     volumeRank: 5,
     notes: "コピートレード機能が業界トップレベル",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式アフィリエイトプログラム: bitget.com/ja/affiliate で発行",
   },
   {
     id: "mexc",
@@ -619,7 +654,7 @@ export const exchanges: Exchange[] = [
     country: "セーシェル",
     established: 2018,
     url: "https://www.mexc.com/ja-JP",
-    logoColor: "#2354e6",
+    logoColor: "#1B49E8",
     description:
       "新興アルトコインの上場が早い取引所。現物取引のmaker手数料が0%で非常にコストが低い。",
     tokens: [
@@ -663,6 +698,9 @@ export const exchanges: Exchange[] = [
     trustScore: 3,
     volumeRank: 8,
     notes: "現物スポット手数料0%、新規アルトコインの取扱いが早い",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラム: mexc.com/ja-JP/referral で発行",
   },
   {
     id: "gate-io",
@@ -672,7 +710,7 @@ export const exchanges: Exchange[] = [
     country: "ケイマン諸島",
     established: 2013,
     url: "https://www.gate.io/ja",
-    logoColor: "#e44d26",
+    logoColor: "#E44D26",
     description:
       "1,700以上の銘柄を取扱う取引所。マイナーなアルトコインの取扱いも多く、幅広い投資選択肢を提供。",
     tokens: [
@@ -719,6 +757,9 @@ export const exchanges: Exchange[] = [
     trustScore: 3,
     volumeRank: 7,
     notes: "取扱銘柄数がトップクラス",
+    affiliateUrl: "",
+    affiliateType: "referral",
+    affiliateNote: "公式リファラルプログラム: gate.io/ja/referral で発行",
   },
 ];
 

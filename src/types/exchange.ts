@@ -89,4 +89,10 @@ export interface Exchange {
   volumeRank?: number;
   /** 特記事項 */
   notes?: string;
+  /** アフィリエイト/リファラルリンク (各自で差し替え) */
+  affiliateUrl?: string;
+  /** アフィリエイト種別 */
+  affiliateType?: "asp" | "referral" | "none";
+  /** アフィリエイト登録先メモ */
+  affiliateNote?: string;
 }

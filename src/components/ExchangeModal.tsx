@@ -332,17 +332,68 @@ export default function ExchangeModal({
             </div>
           )}
 
-          {/* 公式サイトへ */}
-          <a
-            href={exchange.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: exchange.logoColor }}
-          >
-            <ExternalLink size={16} />
-            {exchange.name} 公式サイトへ
-          </a>
+          {/* ボタンエリア */}
+          <div className="space-y-2.5">
+            {/* アフィリエイト/リファラルリンク */}
+            {exchange.affiliateType !== "none" && (
+              exchange.affiliateUrl ? (
+                <a
+                  href={exchange.affiliateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: exchange.logoColor }}
+                >
+                  <ExternalLink size={16} />
+                  {exchange.name} で口座開設する
+                  {exchange.affiliateType === "referral" && (
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">
+                      紹介リンク
+                    </span>
+                  )}
+                </a>
+              ) : (
+                <div
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-white/70 cursor-not-allowed"
+                  style={{ backgroundColor: exchange.logoColor + "99" }}
+                  title={exchange.affiliateNote}
+                >
+                  <ExternalLink size={16} />
+                  {exchange.name} で口座開設する
+                  <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">
+                    リンク未設定
+                  </span>
+                </div>
+              )
+            )}
+
+            {/* 公式サイトへ */}
+            <a
+              href={exchange.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl font-medium transition-colors border ${
+                exchange.affiliateType !== "none"
+                  ? "text-gray-600 border-gray-200 hover:bg-gray-50 bg-white text-sm"
+                  : "text-white font-semibold hover:opacity-90"
+              }`}
+              style={
+                exchange.affiliateType === "none"
+                  ? { backgroundColor: exchange.logoColor }
+                  : undefined
+              }
+            >
+              <ExternalLink size={14} />
+              公式サイトを見る
+            </a>
+
+            {/* アフィリエイト情報メモ */}
+            {exchange.affiliateNote && (
+              <p className="text-xs text-gray-400 text-center px-2">
+                💡 {exchange.affiliateNote}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
