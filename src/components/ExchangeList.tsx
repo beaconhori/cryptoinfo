@@ -116,11 +116,6 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
           ex.description.includes(filter.searchText)
       );
     }
-    if (filter.tokens.length > 0) {
-      list = list.filter((ex) =>
-        filter.tokens.every((token) => ex.tokens.includes(token as never))
-      );
-    }
     if (filter.features.length > 0) {
       list = list.filter((ex) =>
         filter.features.every((feature) =>
@@ -149,9 +144,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
     "すべての取引所";
 
   const hasFilters =
-    filter.tokens.length > 0 ||
     filter.features.length > 0 ||
-    filter.fsaOnly ||
     filter.searchText !== "";
 
   const headerTitle =
