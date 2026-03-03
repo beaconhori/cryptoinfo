@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Exchange, Feature } from "@/types/exchange";
+import { Exchange, Feature, TravelRuleSolution } from "@/types/exchange";
+
+const TR_BADGE: Record<TravelRuleSolution, { label: string; color: string; bg: string }> = {
+  "TRUST":       { label: "TRUST",       color: "#1D4ED8", bg: "#DBEAFE" },
+  "Sygna":       { label: "Sygna",       color: "#4338CA", bg: "#E0E7FF" },
+  "Sygna+TRUST": { label: "Sygna+TRUST", color: "#7C3AED", bg: "#EDE9FE" },
+  "独自対応":    { label: "独自対応",     color: "#0F766E", bg: "#CCFBF1" },
+  "不明":        { label: "不明",         color: "#6B7280", bg: "#F3F4F6" },
+  "N/A":         { label: "N/A",          color: "#9CA3AF", bg: "#F9FAFB" },
+};
 import { FEATURE_LABELS } from "@/data/exchanges";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 import { calcTotalScore, calcYearsScore, calcYears } from "@/lib/scoreUtils";
@@ -317,6 +326,49 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
                     </div>
                     <p className="text-[10px] text-gray-400 mt-0.5">{exchange.established}年設立。最長はBitstamp（2011年・15年）= 5.0点</p>
                   </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* トラベルルール */}
+          {exchange.travelRule && (() => {
+            const tr = TR_BADGE[exchange.travelRule.solution];
+            return (
+              <div className="rounded-2xl border border-gray-200 overflow-hidden">
+                <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                  <Fa icon="route" size={13} className="text-gray-500" />
+                  <h4 className="font-semibold text-gray-800 text-sm">トラベルルール対応</h4>
+                  <span
+                    className="ml-auto text-xs font-bold px-2.5 py-0.5 rounded-full"
+                    style={{ backgroundColor: tr.bg, color: tr.color }}
+                  >
+                    {tr.label}
+                  </span>
+                </div>
+                <div className="p-4 bg-white space-y-3">
+                  <p className="text-xs text-gray-500 leading-relaxed border-l-2 border-gray-200 pl-3">
+                    FATFが定める国際ルール。暗号資産を取引所間で送金する際、送受信者の情報を通知する義務です。
+                    採用ソリューション（TRUST / Sygna）が異なる取引所間では直接送金ができない場合があります。
+                  </p>
+                  {exchange.travelRule.note && (
+                    <div className="flex items-start gap-2 bg-gray-50 rounded-xl p-3 border border-gray-100">
+                      <Fa icon="circle-info" size={13} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-xs text-gray-600">{exchange.travelRule.note}</p>
+                    </div>
+                  )}
+                  {exchange.travelRule.solution !== "N/A" && exchange.travelRule.solution !== "不明" && (
+                    <div className="grid grid-cols-2 gap-2 text-xs text-gray-500">
+                      <div className="bg-blue-50 rounded-lg p-2 text-center">
+                        <p className="font-semibold text-blue-700 text-[11px] mb-0.5">TRUSTと直接送受信</p>
+                        <p>{["TRUST","Sygna+TRUST"].includes(exchange.travelRule.solution) ? "✓ 可能" : "✗ 要中継"}</p>
+                      </div>
+                      <div className="bg-indigo-50 rounded-lg p-2 text-center">
+                        <p className="font-semibold text-indigo-700 text-[11px] mb-0.5">Sygnaと直接送受信</p>
+                        <p>{["Sygna","Sygna+TRUST"].includes(exchange.travelRule.solution) ? "✓ 可能" : "✗ 要中継"}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             );

@@ -1,5 +1,11 @@
 import { supabase } from "./supabase";
-import { Exchange, FeeStructure, SpreadRating } from "@/types/exchange";
+import { Exchange, FeeStructure, SpreadRating, TravelRuleSolution } from "@/types/exchange";
+import { exchanges as staticExchanges } from "@/data/exchanges";
+
+/** 静的データからtravelRuleをIDで引く */
+const travelRuleMap = new Map(
+  staticExchanges.map((e) => [e.id, e.travelRule])
+);
 
 /** Supabase の行 (snake_case) → アプリの Exchange 型 (camelCase) へ変換 */
 function rowToExchange(row: Record<string, unknown>): Exchange {
@@ -48,6 +54,12 @@ function rowToExchange(row: Record<string, unknown>): Exchange {
     ...(row.affiliate_type ? { affiliateType: row.affiliate_type as "asp" | "referral" | "none" } : {}),
     ...(row.affiliate_note ? { affiliateNote: row.affiliate_note as string } : {}),
     ...(row.tokens_url ? { tokensUrl: row.tokens_url as string } : {}),
+    // travelRule: DBに列がなければ静的データから補完
+    ...(row.travel_rule_solution
+      ? { travelRule: { solution: row.travel_rule_solution as TravelRuleSolution, note: (row.travel_rule_note as string | undefined) ?? "" } }
+      : travelRuleMap.get(row.id as string)
+      ? { travelRule: travelRuleMap.get(row.id as string) }
+      : {}),
   };
 }
 

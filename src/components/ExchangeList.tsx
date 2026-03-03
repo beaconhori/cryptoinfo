@@ -21,6 +21,15 @@ const defaultFilter: FilterState = {
 };
 
 function sortExchanges(list: Exchange[], key: SortKey): Exchange[] {
+  const travelRuleOrder: Record<string, number> = {
+    "TRUST": 1,
+    "Sygna+TRUST": 2,
+    "Sygna": 3,
+    "独自対応": 4,
+    "不明": 5,
+    "N/A": 6,
+  };
+
   return [...list].sort((a, b) => {
     switch (key) {
       case "name":
@@ -41,6 +50,11 @@ function sortExchanges(list: Exchange[], key: SortKey): Exchange[] {
         return (b.tradingPairs ?? 0) - (a.tradingPairs ?? 0);
       case "established":
         return a.established - b.established;
+      case "travelRule": {
+        const ra = travelRuleOrder[a.travelRule?.solution ?? "不明"] ?? 5;
+        const rb = travelRuleOrder[b.travelRule?.solution ?? "不明"] ?? 5;
+        return ra - rb;
+      }
       default:
         return 0;
     }

@@ -18,7 +18,8 @@ export type SortKey =
   | "takerFee"
   | "makerFee"
   | "tradingPairs"
-  | "established";
+  | "established"
+  | "travelRule";
 
 interface CompactFilterProps {
   filter: FilterState;
@@ -30,6 +31,7 @@ interface CompactFilterProps {
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "trustScore", label: "信頼スコア順" },
+  { key: "travelRule", label: "トラベルルール対応順" },
   { key: "takerFee", label: "Taker手数料（安い順）" },
   { key: "makerFee", label: "Maker手数料（安い順）" },
   { key: "tradingPairs", label: "取引ペア数（多い順）" },

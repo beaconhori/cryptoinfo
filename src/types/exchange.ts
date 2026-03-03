@@ -82,6 +82,15 @@ export type Feature =
 /** スプレッドの広さ評価 */
 export type SpreadRating = "tight" | "moderate" | "wide" | "very_wide";
 
+/** トラベルルール対応ソリューション */
+export type TravelRuleSolution =
+  | "TRUST"        // Coinbase主導・米系
+  | "Sygna"        // CoolBitX主導・台湾系
+  | "Sygna+TRUST"  // 両方対応
+  | "独自対応"      // 独自実装（Notabene等）
+  | "不明"
+  | "N/A";          // DEXなど非対象
+
 export interface FeeStructure {
   /** 取引所形式: maker手数料(%) */
   exchangeMaker?: number;
@@ -144,4 +153,9 @@ export interface Exchange {
   affiliateNote?: string;
   /** 対応トークン一覧ページURL（主に海外取引所向け） */
   tokensUrl?: string;
+  /** トラベルルール対応情報 */
+  travelRule?: {
+    solution: TravelRuleSolution;
+    note?: string;
+  };
 }

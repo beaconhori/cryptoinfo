@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Exchange } from "@/types/exchange";
+import { Exchange, TravelRuleSolution } from "@/types/exchange";
 import Fa from "@/components/Fa";
 import { getSpreadConfig } from "@/lib/spreadUtils";
 import { calcTotalScore } from "@/lib/scoreUtils";
+
+const TR_CONFIG: Record<TravelRuleSolution, { label: string; bg: string; text: string }> = {
+  "TRUST":       { label: "TRUST",     bg: "bg-blue-100",   text: "text-blue-700" },
+  "Sygna":       { label: "Sygna",     bg: "bg-indigo-100", text: "text-indigo-700" },
+  "Sygna+TRUST": { label: "S+T",       bg: "bg-violet-100", text: "text-violet-700" },
+  "独自対応":    { label: "独自",       bg: "bg-teal-100",   text: "text-teal-700" },
+  "不明":        { label: "不明",       bg: "bg-gray-100",   text: "text-gray-500" },
+  "N/A":         { label: "N/A",        bg: "bg-gray-50",    text: "text-gray-400" },
+};
 
 function scoreColor(score: number): string {
   if (score >= 8.5) return "#10B981"; // emerald
@@ -178,12 +187,22 @@ export default function ExchangeCard({
 
         <div className="flex items-center justify-between">
           <span className="text-xs text-gray-400">{exchange.established}年設立</span>
-          <div className="flex items-center gap-1">
-            <span className="text-xs text-gray-400">総合</span>
-            <span className="text-sm font-black" style={{ color: scoreColor(calcTotalScore(exchange)) }}>
-              {calcTotalScore(exchange).toFixed(1)}
-            </span>
-            <span className="text-[10px] text-gray-400">/ 10</span>
+          <div className="flex items-center gap-1.5">
+            {exchange.travelRule && (() => {
+              const tr = TR_CONFIG[exchange.travelRule.solution];
+              return (
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${tr.bg} ${tr.text}`}>
+                  {tr.label}
+                </span>
+              );
+            })()}
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-gray-400">総合</span>
+              <span className="text-sm font-black" style={{ color: scoreColor(calcTotalScore(exchange)) }}>
+                {calcTotalScore(exchange).toFixed(1)}
+              </span>
+              <span className="text-[10px] text-gray-400">/ 10</span>
+            </div>
           </div>
         </div>
       </div>

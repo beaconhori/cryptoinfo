@@ -49,6 +49,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / ValueCommerce / もしもアフィリエイト 等で案件あり",
+    travelRule: { solution: "TRUST",       note: "2023年5月30日対応。国内ではCoincheckとのみ直接送受信可" },
   },
   {
     id: "coincheck",
@@ -97,6 +98,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "ValueCommerce / A8.net / afb 等で案件あり。成果報酬は口座開設完了",
+    travelRule: { solution: "TRUST",       note: "2023年5月31日対応。国内ではbitFlyerとのみ直接送受信可" },
   },
   {
     id: "gmo-coin",
@@ -144,6 +146,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "GMOアフィリエイト / A8.net で案件あり",
+    travelRule: { solution: "Sygna",       note: "2023年5月31日対応。bitFlyer・Coincheckへの直接送金は不可" },
   },
   {
     id: "bitbank",
@@ -183,6 +186,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / もしもアフィリエイト 等で案件あり",
+    travelRule: { solution: "Sygna",       note: "2023年6月9日対応。bitFlyer・Coincheckへの直接送金は不可" },
   },
   {
     id: "sbi-vc-trade",
@@ -231,6 +235,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / ValueCommerce 等で案件あり",
+    travelRule: { solution: "Sygna+TRUST", note: "2024年4月24日よりTRUSTも追加。国内で両ソリューション対応の数少ない取引所" },
   },
   {
     id: "bybit-jp",
@@ -284,6 +289,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "https://partner.bybit.com/b/118679",
     affiliateType: "referral",
     affiliateNote: "紹介リンクから登録で手数料割引特典あり",
+    travelRule: { solution: "不明",        note: "Bybitグローバルはトラベルルール対応済みだが、日本法人の詳細は未公表" },
   },
   {
     id: "rakuten-wallet",
@@ -316,6 +322,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "楽天アフィリエイトや各種ASPで案件あり",
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
   },
   {
     id: "sblox",
@@ -349,6 +356,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
   },
   {
     id: "bittrade",
@@ -403,6 +411,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
   },
   {
     id: "mercoin",
@@ -436,6 +445,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
+    travelRule: { solution: "不明",        note: "比較的新しい取引所のため詳細情報未確認" },
   },
   {
     id: "bitpoint",
@@ -490,6 +500,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
+    travelRule: { solution: "Sygna+TRUST", note: "2024年1月18日よりTRUSTも追加。国内ハブとして機能" },
   },
 
   // ========== 海外ブランド日本法人・海外取引所 ==========
@@ -548,6 +559,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: okx.com/ja/affiliate で発行",
     tokensUrl: "https://www.okx.com/ja/markets/prices",
+    travelRule: { solution: "不明",        note: "OKX JapanのJVCEA加盟に基づく対応状況は未確認" },
   },
   {
     id: "bitget",
@@ -610,6 +622,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式アフィリエイトプログラム: bitget.com/ja/affiliate で発行",
     tokensUrl: "https://www.bitget.com/ja/spot",
+    travelRule: { solution: "TRUST",       note: "TRUSTネットワーク正式参加。日本の国内TRUST採用取引所と送受信可" },
   },
   {
     id: "mexc",
@@ -671,6 +684,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "紹介リンクから登録で手数料割引特典あり",
     tokensUrl: "https://www.mexc.com/ja-JP/markets",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "zoomex",
@@ -714,6 +728,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムあり",
     tokensUrl: "https://www.zoomex.com/ja-JP/trade/spot",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "kucoin",
@@ -757,6 +772,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: kucoin.com/ja/ucenter/referral で発行",
     tokensUrl: "https://www.kucoin.com/ja/markets",
+    travelRule: { solution: "独自対応",    note: "2025年2月24日より全入出金に必須。KuCoin独自システムで対応" },
   },
   {
     id: "crypto-com",
@@ -800,6 +816,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: crypto.com/ja/referral で発行",
     tokensUrl: "https://crypto.com/ja/exchange/markets",
+    travelRule: { solution: "独自対応",    note: "複数国の規制当局に登録済み。Notabeneなど独自システムで対応" },
   },
   {
     id: "bingx",
@@ -843,6 +860,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "",
     tokensUrl: "https://bingx.com/ja-jp/spot/",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "phemex",
@@ -886,6 +904,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラム: phemex.com/ja/user-center/referral で発行",
     tokensUrl: "https://phemex.com/ja/spot-trading",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "pionex",
@@ -925,6 +944,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://www.pionex.com/ja/markets",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "woox",
@@ -964,6 +984,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://www.woox.io/ja-JP/markets",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "hashkey-global",
@@ -1003,6 +1024,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://global.hashkey.com/en-US/markets",
+    travelRule: { solution: "独自対応",    note: "香港SFC（証券先物委員会）規制準拠。アジア最大級の規制対応取引所" },
   },
   {
     id: "bitrue",
@@ -1042,6 +1064,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://www.bitrue.com/ja/trade/",
+    travelRule: { solution: "不明",        note: "公式のトラベルルール対応状況は未公表" },
   },
   {
     id: "bitstamp",
@@ -1078,6 +1101,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://www.bitstamp.net/markets/",
+    travelRule: { solution: "独自対応",    note: "EU・MiCA規制準拠。欧州最古参取引所として厳格なAML/KYC体制" },
   },
   // ========== 海外ブランドの日本法人 ==========
   {
@@ -1138,6 +1162,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "紹介リンクから登録で手数料割引特典あり",
     tokensUrl: "https://www.binance.com/ja-JP/markets/overview",
+    travelRule: { solution: "不明",        note: "Binance Japanの国内向けトラベルルール対応の詳細は未公表" },
   },
 
   // ========== DEX ==========
@@ -1174,6 +1199,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "none",
     affiliateNote: "アフィリエイトプログラムなし",
     tokensUrl: "https://app.uniswap.org/explore/tokens",
+    travelRule: { solution: "N/A",         note: "DEX（分散型）。KYC不要のため規制対象外" },
   },
   {
     id: "dydx",
@@ -1209,6 +1235,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "紹介リンクから登録で特典あり",
     tokensUrl: "https://dydx.exchange/trade/BTC-USD",
+    travelRule: { solution: "N/A",         note: "DEX（分散型）。KYC不要のため規制対象外" },
   },
   {
     id: "gmx",
@@ -1245,6 +1272,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムあり",
     tokensUrl: "https://app.gmx.io/#/trade",
+    travelRule: { solution: "N/A",         note: "DEX（分散型）。KYC不要のため規制対象外" },
   },
   {
     id: "jupiter",
@@ -1279,6 +1307,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "紹介リンクから利用で手数料の一部が還元",
     tokensUrl: "https://jup.ag/tokens",
+    travelRule: { solution: "N/A",         note: "DEX（分散型）。KYC不要のため規制対象外" },
   },
   {
     id: "hyperliquid",
@@ -1314,6 +1343,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式リファラルプログラムで発行可能",
     tokensUrl: "https://app.hyperliquid.xyz/trade",
+    travelRule: { solution: "N/A",         note: "DEX（分散型）。KYC不要のため規制対象外" },
   },
 ];
 
