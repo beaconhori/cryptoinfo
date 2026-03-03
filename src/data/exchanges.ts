@@ -49,7 +49,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / ValueCommerce / もしもアフィリエイト 等で案件あり",
-    travelRule: { solution: "TRUST",       note: "2023年5月30日対応。国内ではCoincheckとのみ直接送受信可" },
+    travelRule: { solution: "TRUST",       note: "2023年5月30日対応。TRUSTネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "coincheck",
@@ -98,7 +98,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "ValueCommerce / A8.net / afb 等で案件あり。成果報酬は口座開設完了",
-    travelRule: { solution: "TRUST",       note: "2023年5月31日対応。国内ではbitFlyerとのみ直接送受信可" },
+    travelRule: { solution: "TRUST",       note: "2023年5月31日対応。TRUSTネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "gmo-coin",
@@ -146,7 +146,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "GMOアフィリエイト / A8.net で案件あり",
-    travelRule: { solution: "Sygna",       note: "2023年5月31日対応。bitFlyer・Coincheckへの直接送金は不可" },
+    travelRule: { solution: "Sygna",       note: "2023年5月31日対応。Sygnaネットワーク参加取引所への送金に対応。詳細は各取引所の公式サイトでご確認ください" },
   },
   {
     id: "bitbank",
@@ -186,7 +186,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / もしもアフィリエイト 等で案件あり",
-    travelRule: { solution: "Sygna",       note: "2023年6月9日対応。bitFlyer・Coincheckへの直接送金は不可" },
+    travelRule: { solution: "Sygna",       note: "2023年6月9日対応。Sygnaネットワーク参加取引所への送金に対応。詳細は各取引所の公式サイトでご確認ください" },
   },
   {
     id: "sbi-vc-trade",
@@ -235,7 +235,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "A8.net / ValueCommerce 等で案件あり",
-    travelRule: { solution: "Sygna+TRUST", note: "2024年4月24日よりTRUSTも追加。国内で両ソリューション対応の数少ない取引所" },
+    travelRule: { solution: "Sygna+TRUST", note: "2024年4月24日よりTRUSTも追加。両ソリューションに対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "bybit-jp",
@@ -322,7 +322,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "楽天アフィリエイトや各種ASPで案件あり",
-    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "sblox",
@@ -356,7 +356,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
-    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "bittrade",
@@ -411,7 +411,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
-    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク内の取引所と送受信可" },
+    travelRule: { solution: "Sygna",       note: "JVCEA加盟。Sygnaネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "mercoin",
@@ -500,7 +500,7 @@ export const exchanges: Exchange[] = [
     affiliateUrl: "",
     affiliateType: "asp",
     affiliateNote: "各種ASPで案件あり",
-    travelRule: { solution: "Sygna+TRUST", note: "2024年1月18日よりTRUSTも追加。国内ハブとして機能" },
+    travelRule: { solution: "Sygna+TRUST", note: "2024年1月18日よりTRUSTも追加。両ソリューションに対応。詳細は公式サイトでご確認ください" },
   },
 
   // ========== 海外ブランド日本法人・海外取引所 ==========
@@ -622,7 +622,7 @@ export const exchanges: Exchange[] = [
     affiliateType: "referral",
     affiliateNote: "公式アフィリエイトプログラム: bitget.com/ja/affiliate で発行",
     tokensUrl: "https://www.bitget.com/ja/spot",
-    travelRule: { solution: "TRUST",       note: "TRUSTネットワーク正式参加。日本の国内TRUST採用取引所と送受信可" },
+    travelRule: { solution: "TRUST",       note: "TRUSTネットワーク参加取引所への送金に対応。詳細は公式サイトでご確認ください" },
   },
   {
     id: "mexc",

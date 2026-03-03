@@ -53,7 +53,7 @@ function CardBanner({ exchange }: { exchange: Exchange }) {
           src={src}
           alt={`${exchange.name} logo`}
           onError={handleError}
-          className="relative z-10 h-12 w-auto max-w-[150px] object-contain drop-shadow-sm"
+          className="relative z-10 max-h-16 w-auto max-w-[200px] object-contain drop-shadow-sm"
         />
       ) : (
         <div

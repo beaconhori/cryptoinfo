@@ -199,7 +199,7 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
         {/* 白座布団ロゴ */}
         <div className="bg-white rounded-xl p-2 flex items-center justify-center flex-shrink-0">
           {!fallback && src ? (
-            <img src={src} alt={exchange.name} onError={handleError} className="h-10 w-auto max-w-[110px] object-contain" />
+            <img src={src} alt={exchange.name} onError={handleError} className="h-10 w-auto max-w-[140px] object-contain" />
           ) : (
             <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: exchange.logoColor }}>
               {exchange.name.charAt(0)}
@@ -349,24 +349,12 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
                 <div className="p-4 bg-white space-y-3">
                   <p className="text-xs text-gray-500 leading-relaxed border-l-2 border-gray-200 pl-3">
                     FATFが定める国際ルール。暗号資産を取引所間で送金する際、送受信者の情報を通知する義務です。
-                    採用ソリューション（TRUST / Sygna）が異なる取引所間では直接送金ができない場合があります。
+                    対応する取引所の詳細は各取引所の公式サイトでご確認ください。
                   </p>
                   {exchange.travelRule.note && (
                     <div className="flex items-start gap-2 bg-gray-50 rounded-xl p-3 border border-gray-100">
                       <Fa icon="circle-info" size={13} className="text-gray-400 mt-0.5 flex-shrink-0" />
                       <p className="text-xs text-gray-600">{exchange.travelRule.note}</p>
-                    </div>
-                  )}
-                  {exchange.travelRule.solution !== "N/A" && exchange.travelRule.solution !== "不明" && (
-                    <div className="grid grid-cols-2 gap-2 text-xs text-gray-500">
-                      <div className="bg-blue-50 rounded-lg p-2 text-center">
-                        <p className="font-semibold text-blue-700 text-[11px] mb-0.5">TRUSTと直接送受信</p>
-                        <p>{["TRUST","Sygna+TRUST"].includes(exchange.travelRule.solution) ? "✓ 可能" : "✗ 要中継"}</p>
-                      </div>
-                      <div className="bg-indigo-50 rounded-lg p-2 text-center">
-                        <p className="font-semibold text-indigo-700 text-[11px] mb-0.5">Sygnaと直接送受信</p>
-                        <p>{["Sygna","Sygna+TRUST"].includes(exchange.travelRule.solution) ? "✓ 可能" : "✗ 要中継"}</p>
-                      </div>
                     </div>
                   )}
                 </div>
