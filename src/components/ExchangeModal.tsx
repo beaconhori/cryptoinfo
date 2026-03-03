@@ -41,7 +41,7 @@ function ExchangeTradingSection({ exchange }: { exchange: Exchange }) {
     <div className="rounded-2xl border border-gray-200 overflow-hidden">
       {/* ヘッダー */}
       <div className="px-4 py-3 flex items-center gap-2 border-b border-gray-100">
-        <Fa icon="book-open" size={13} className="text-gray-500" />
+        <Fa icon="chart-candlestick" variant="light" size={13} className="text-gray-500" />
         <h4 className="font-semibold text-gray-800 text-sm">取引所（板取引）</h4>
         <span className="text-xs text-gray-400 ml-auto">Order Book</span>
       </div>
@@ -205,7 +205,7 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
             </span>
             {hasExchange && (
               <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
-                <Fa icon="book-open" size={10} /> 取引所
+                <Fa icon="chart-candlestick" variant="light" size={10} /> 取引所
               </span>
             )}
             {hasDealer && (

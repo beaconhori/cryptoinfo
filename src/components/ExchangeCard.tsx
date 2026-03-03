@@ -133,7 +133,7 @@ export default function ExchangeCard({
                 {hasExchange ? (
                   <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white">
                     <div className="flex items-center gap-1.5">
-                      <Fa icon="book-open" size={10} className="text-gray-400 flex-shrink-0" />
+                      <Fa icon="chart-candlestick" variant="light" size={10} className="text-gray-400 flex-shrink-0" />
                       <span className="text-[10px] font-bold text-gray-600">取引所</span>
                     </div>
                     <span className="flex items-center gap-2 text-xs">
@@ -151,7 +151,7 @@ export default function ExchangeCard({
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white">
-                    <Fa icon="book-open" size={10} className="text-gray-300 flex-shrink-0" />
+                    <Fa icon="chart-candlestick" variant="light" size={10} className="text-gray-300 flex-shrink-0" />
                     <span className="text-[10px] font-bold text-gray-300">取引所なし</span>
                   </div>
                 )}

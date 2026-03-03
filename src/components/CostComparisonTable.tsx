@@ -89,7 +89,7 @@ export default function CostComparisonTable({
   const dealerMax = Math.max(...dealerValidCosts);
 
   const tabConfig = {
-    exchange: { label: "取引所", icon: <Fa icon="book-open" size={13} />, count: exchangeList.length, color: "emerald" },
+    exchange: { label: "取引所", icon: <Fa icon="chart-candlestick" variant="light" size={13} />, count: exchangeList.length, color: "emerald" },
     dealer: { label: "販売所", icon: <Fa icon="store" size={13} />, count: dealerList.length, color: "amber" },
     dex: { label: "DEX（オンチェーン）", icon: <Fa icon="bolt" size={13} />, count: dexList.length, color: "teal" },
   } as const;

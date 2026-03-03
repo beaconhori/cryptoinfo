@@ -180,7 +180,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                   activeSection === "exchanges" ? "bg-blue-50 text-blue-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                 }`}
               >
-                <Fa icon="chart-line" size={13} className="flex-shrink-0" />
+                <Fa icon="chart-candlestick" variant="light" size={13} className="flex-shrink-0" />
                 <span className="text-xs font-semibold">取引所を探す</span>
                 <Fa icon="chevron-right" size={11} className={`ml-auto transition-transform ${activeSection === "exchanges" ? "rotate-90" : ""}`} />
               </button>
