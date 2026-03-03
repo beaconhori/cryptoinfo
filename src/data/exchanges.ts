@@ -1098,7 +1098,7 @@ export const exchanges: Exchange[] = [
     established: 2021,
     url: "https://www.orangex.com/ja-jp/",
     domain: "orangex.com",
-    logoFile: "orangex.png",
+    logoFile: "orangex.svg",
     logoColor: "#FF6B00",
     description:
       "2021年設立の新興取引所。チェコにてVASPライセンス取得済み、米FinCEN登録のMSBも保有。完全日本語対応・24時間日本語サポート。コピートレード機能が充実し、Bybit乗り換え先として日本で急速に注目を集めている。",
@@ -1137,7 +1137,7 @@ export const exchanges: Exchange[] = [
     established: 2011,
     url: "https://www.btcc.com/ja-JP/",
     domain: "btcc.com",
-    logoFile: "btcc.svg",
+    logoFile: "btcc.png",
     logoColor: "#E8B20A",
     description:
       "2011年設立、世界で最も歴史ある仮想通貨取引所のひとつ。設立以来14年間セキュリティ事故ゼロを誇る。米FinCEN・カナダFINTRAC・欧州（リトアニア）の3か国でライセンス取得済み。ゼロカット制度で追証なし。",
@@ -1176,7 +1176,7 @@ export const exchanges: Exchange[] = [
     established: 2018,
     url: "https://whitebit.com/",
     domain: "whitebit.com",
-    logoFile: "whitebit.svg",
+    logoFile: "whitebit.png",
     logoColor: "#C9AA4C",
     description:
       "2018年設立、欧州最大級の取引所（トラフィック基準）。ユーザー数3,500万人超。リトアニアFCISほかEU10か国以上でVASP認可取得。CER.liveセキュリティ評価で業界トップ5。レンディング年率18%超のプランを提供。",
