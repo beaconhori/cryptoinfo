@@ -5,6 +5,7 @@
 interface FaProps {
   icon: string;
   variant?: "solid" | "regular" | "light" | "thin" | "brands";
+  sharp?: boolean;
   size?: number;
   className?: string;
   style?: React.CSSProperties;
@@ -12,13 +13,15 @@ interface FaProps {
 
 import React from "react";
 
-export default function Fa({ icon, variant = "solid", size, className = "", style }: FaProps) {
-  const prefix =
+export default function Fa({ icon, variant = "solid", sharp = false, size, className = "", style }: FaProps) {
+  const variantClass =
     variant === "brands" ? "fa-brands" :
     variant === "regular" ? "fa-regular" :
     variant === "light" ? "fa-light" :
     variant === "thin" ? "fa-thin" :
     "fa-solid";
+
+  const prefix = sharp ? `fa-sharp ${variantClass}` : variantClass;
 
   const inlineStyle: React.CSSProperties = {
     ...(size ? { fontSize: size } : {}),

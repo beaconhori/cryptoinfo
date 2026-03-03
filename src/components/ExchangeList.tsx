@@ -65,7 +65,7 @@ function SectionHeader({ label, count, icon, color }: SectionHeaderProps) {
 
 const REGION_ICONS = {
   all: null,
-  domestic: <Fa icon="flag" size={12} />,
+  domestic: <Fa icon="circle-dot" variant="regular" sharp size={12} />,
   overseas: <Fa icon="globe" size={12} />,
   dex: <Fa icon="bolt" size={12} />,
 } as const;
@@ -192,7 +192,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       exchangeTab === "list" ? "bg-blue-500 text-white shadow-sm" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                   >
-                    <Fa icon="grid-2" size={11} className="flex-shrink-0" />
+                    <Fa icon="buildings" variant="regular" size={11} className="flex-shrink-0" />
                     <span className="text-xs font-medium">取引所一覧</span>
                   </button>
                   <button
@@ -201,7 +201,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                       exchangeTab === "compare" ? "bg-blue-500 text-white shadow-sm" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                   >
-                    <Fa icon="table" size={11} className="flex-shrink-0" />
+                    <Fa icon="circle-yen" variant="light" size={11} className="flex-shrink-0" />
                     <span className="text-xs font-medium">取引コスト比較</span>
                   </button>
                 </div>
@@ -324,7 +324,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
                     <>
                       {showDomestic && domesticList.length > 0 && (
                         <section>
-                          <SectionHeader label="国内取引所" count={domesticList.length} icon={<Fa icon="flag" size={15} />} color="#F43F5E" />
+                          <SectionHeader label="国内取引所" count={domesticList.length} icon={<Fa icon="circle-dot" variant="regular" sharp size={15} />} color="#F43F5E" />
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                             {domesticList.map((ex) => (
                               <ExchangeCard key={ex.id} exchange={ex} onClick={() => handleSelect(ex)} highlightTokens={filter.tokens} />
@@ -389,7 +389,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             activeSection === "exchanges" && exchangeTab === "list" ? "text-blue-600" : "text-gray-400"
           }`}
         >
-          <Fa icon="grid-2" size={20} />
+          <Fa icon="buildings" variant="regular" size={20} />
           <span className="text-[10px] font-medium">取引所一覧</span>
         </button>
         <button
@@ -398,7 +398,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
             activeSection === "exchanges" && exchangeTab === "compare" ? "text-blue-600" : "text-gray-400"
           }`}
         >
-          <Fa icon="table" size={20} />
+          <Fa icon="circle-yen" variant="light" size={20} />
           <span className="text-[10px] font-medium">コスト比較</span>
         </button>
         <button

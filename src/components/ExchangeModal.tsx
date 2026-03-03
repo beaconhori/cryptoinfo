@@ -201,7 +201,7 @@ function ModalLogoHeader({ exchange, onClose }: { exchange: Exchange; onClose: (
           <h2 className="text-xl font-bold text-gray-900">{exchange.name}</h2>
           <div className="flex items-center gap-2 mt-1 flex-wrap">
             <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600">
-              {exchange.region === "domestic" ? <><Fa icon="flag" size={10} />国内</> : exchange.region === "dex" ? <><Fa icon="bolt" size={10} />DEX</> : <><Fa icon="globe" size={10} />海外</>}
+              {exchange.region === "domestic" ? <><Fa icon="circle-dot" variant="regular" sharp size={10} />国内</> : exchange.region === "dex" ? <><Fa icon="bolt" size={10} />DEX</> : <><Fa icon="globe" size={10} />海外</>}
             </span>
             {hasExchange && (
               <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-white/70 text-gray-600 flex items-center gap-1">
