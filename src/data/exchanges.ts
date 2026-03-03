@@ -839,9 +839,9 @@ export const exchanges: Exchange[] = [
     volumeRank: 13,
     notes:
       "2024年9月にハッキング被害（約65億円相当）が発生。補償対応済みで運営継続中。コピートレード機能は業界トップクラス。",
-    affiliateUrl: "",
+    affiliateUrl: "https://bingxdao.com/invite/MWZMBT/",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラム: bingx.com/ja-jp/invite で発行",
+    affiliateNote: "",
     tokensUrl: "https://bingx.com/ja-jp/spot/",
   },
   {
