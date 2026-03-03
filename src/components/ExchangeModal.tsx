@@ -441,9 +441,8 @@ export default function ExchangeModal({ exchange, onClose }: ExchangeModalProps)
               <Fa icon="arrow-up-right-from-square" size={15} />
               公式サイトを見る
             </a>
-            {exchange.affiliateNote && (
-              <p className="text-xs text-gray-400 text-center px-2">💡 {exchange.affiliateNote}</p>
-            )}
+
+
           </div>
         </div>
       </div>
