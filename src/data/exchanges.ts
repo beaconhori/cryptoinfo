@@ -1200,9 +1200,9 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     notes:
       "Hacken.ioによるセキュリティ監査済み、CER.liveランキングトップ5。2024年に不正資金1億5,000万ドル超を阻止。WBTトークン保有者は手数料割引・出金無料などの特典あり。金融庁警告なし（2025年時点）。",
-    affiliateUrl: "",
+    affiliateUrl: "https://whitebit.com/referral/17705f2c-af98-405b-9a07-3d8570ed97ab",
     affiliateType: "referral",
-    affiliateNote: "公式リファラルプログラムで発行可能",
+    affiliateNote: "紹介リンクから登録でボーナスあり",
     tokensUrl: "https://whitebit.com/trade/",
     travelRule: { solution: "独自対応", note: "2025年5月よりMiCA（EU暗号資産規制）準拠のTravel Rule本格実装。EU10か国以上のVASP認可保有" },
   },
