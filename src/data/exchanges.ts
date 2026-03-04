@@ -618,7 +618,7 @@ export const exchanges: Exchange[] = [
     trustScore: 4,
     volumeRank: 6,
     notes: "重大なセキュリティ事故なし。コピートレード機能が業界トップレベル。",
-    affiliateUrl: "",
+    affiliateUrl: "https://partner.bitget.com/bg/PQH6T8",
     affiliateType: "referral",
     affiliateNote: "公式アフィリエイトプログラム: bitget.com/ja/affiliate で発行",
     tokensUrl: "https://www.bitget.com/ja/spot",
