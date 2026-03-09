@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Wallet, WalletType, SecurityLevel } from "@/types/wallet";
 import Fa from "@/components/Fa";
+import { calcWalletScore, walletScoreColor } from "@/lib/walletUtils";
 
 const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; bg: string; text: string }> = {
   software:          { label: "デスクトップ",     icon: "desktop",        bg: "bg-blue-100",   text: "text-blue-700" },
@@ -14,8 +15,8 @@ const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; bg: string;
 
 const SECURITY_CONFIG: Record<SecurityLevel, { label: string; color: string }> = {
   high:   { label: "セキュリティ 高", color: "#10B981" },
-  medium: { label: "セキュリティ 中", color: "#F59E0B" },
-  low:    { label: "セキュリティ 低", color: "#EF4444" },
+  medium: { label: "セキュリティ 中", color: "#3B82F6" },
+  low:    { label: "セキュリティ 低", color: "#F59E0B" },
 };
 
 const CHAIN_LABELS: Record<string, string> = {
@@ -49,9 +50,8 @@ const FEATURE_LABELS: Record<string, { label: string; icon: string }> = {
 
 function scoreColor(score: number): string {
   if (score >= 8.5) return "#10B981";
-  if (score >= 7.0) return "#3B82F6";
-  if (score >= 5.5) return "#F59E0B";
-  return "#EF4444";
+  if (score >= 6.5) return "#3B82F6";
+  return "#F59E0B";
 }
 
 interface WalletCardProps {
@@ -158,8 +158,8 @@ export default function WalletCard({ wallet, onClick }: WalletCardProps) {
           </span>
           <div className="flex items-center gap-1">
             <span className="text-xs text-gray-400">スコア</span>
-            <span className="text-sm font-black" style={{ color: scoreColor(wallet.trustScore) }}>
-              {wallet.trustScore.toFixed(1)}
+            <span className="text-sm font-black" style={{ color: walletScoreColor(wallet.securityLevel) }}>
+              {calcWalletScore(wallet.securityLevel).toFixed(1)}
             </span>
             <span className="text-[10px] text-gray-400">/ 10</span>
           </div>

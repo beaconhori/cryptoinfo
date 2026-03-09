@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Wallet, WalletType, SecurityLevel, WalletChain, WalletFeature } from "@/types/wallet";
 import Fa from "@/components/Fa";
+import { calcWalletScore, walletScoreColor } from "@/lib/walletUtils";
 
 const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; color: string; bg: string }> = {
   software:          { label: "デスクトップ",     icon: "desktop",             color: "#3B82F6", bg: "#DBEAFE" },
@@ -14,8 +15,8 @@ const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; color: stri
 
 const SECURITY_CONFIG: Record<SecurityLevel, { label: string; color: string; bg: string; desc: string }> = {
   high:   { label: "高",   color: "#059669", bg: "#D1FAE5", desc: "非常に安全な設計。自己管理型で高いセキュリティを誇ります。" },
-  medium: { label: "中",   color: "#D97706", bg: "#FEF3C7", desc: "一般的なセキュリティレベル。適切に管理すれば十分安全です。" },
-  low:    { label: "低",   color: "#DC2626", bg: "#FEE2E2", desc: "利便性優先の設計。大きな資産の管理には注意が必要です。" },
+  medium: { label: "中",   color: "#3B82F6", bg: "#DBEAFE", desc: "一般的なセキュリティレベル。適切に管理すれば十分安全です。" },
+  low:    { label: "低",   color: "#D97706", bg: "#FEF3C7", desc: "利便性優先の設計。大きな資産の管理には注意が必要です。" },
 };
 
 const CHAIN_LABELS: Record<WalletChain, string> = {
@@ -52,12 +53,6 @@ const FEATURE_CONFIG: Partial<Record<WalletFeature, { label: string; icon: strin
   debit_card:       { label: "暗号資産デビットカード", icon: "credit-card",         desc: "暗号資産を使って実店舗・オンラインで決済可能なカード" },
 };
 
-function scoreColor(score: number): string {
-  if (score >= 8.5) return "#10B981";
-  if (score >= 7.0) return "#3B82F6";
-  if (score >= 5.5) return "#F59E0B";
-  return "#EF4444";
-}
 
 interface WalletModalProps {
   wallet: Wallet;
@@ -139,8 +134,8 @@ function ModalLogoHeader({ wallet, onClose }: { wallet: Wallet; onClose: () => v
 /* ===== メインモーダル ===== */
 export default function WalletModal({ wallet, onClose }: WalletModalProps) {
   const secConfig = SECURITY_CONFIG[wallet.securityLevel];
-  const score = wallet.trustScore;
-  const scoreCol = scoreColor(score);
+  const score = calcWalletScore(wallet.securityLevel);
+  const scoreCol = walletScoreColor(wallet.securityLevel);
 
   return (
     <div
@@ -197,12 +192,13 @@ export default function WalletModal({ wallet, onClose }: WalletModalProps) {
             </div>
           </div>
 
-          {/* 信頼スコア */}
+          {/* セキュリティスコア */}
           <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-1.5">
                 <Fa icon="shield-check" size={14} className="text-yellow-500" />
-                <span className="text-sm font-bold text-gray-700">信頼スコア</span>
+                <span className="text-sm font-bold text-gray-700">セキュリティスコア</span>
+                <span className="text-xs text-gray-400 font-normal">（セキュリティ = スコア）</span>
               </div>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl font-black" style={{ color: scoreCol }}>{score.toFixed(1)}</span>
