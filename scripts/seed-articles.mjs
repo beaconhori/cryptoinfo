@@ -110,7 +110,7 @@ const articles = [
   {
     id: "wallet-guide-001",
     slug: "what-is-crypto-wallet",
-    title: "暗号資産ウォレットとは？初心者向け選び方ガイド【2025年版】",
+    title: "暗号資産ウォレットとは？初心者向け選び方ガイド【2026年版】",
     description:
       "ウォレットの仕組みから種類（ホット・コールド）、シードフレーズの管理方法、初心者におすすめのMetaMask・Phantom・Rabbyまで、わかりやすく解説します。",
     category: "wallet",
