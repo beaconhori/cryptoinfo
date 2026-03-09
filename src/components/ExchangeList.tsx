@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
+import Link from "next/link";
 import { Exchange } from "@/types/exchange";
 import { Wallet } from "@/types/wallet";
 import ExchangeCard from "@/components/ExchangeCard";
@@ -234,6 +235,14 @@ export default function ExchangeList({ initialExchanges, initialWallets }: Excha
               <Fa icon="wallet" size={13} className="flex-shrink-0" />
               <span className="text-xs font-semibold">ウォレットを探す</span>
             </button>
+            {/* 記事・ガイド */}
+            <Link
+              href="/blog"
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-all text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            >
+              <Fa icon="book-open" size={13} className="flex-shrink-0" />
+              <span className="text-xs font-semibold">記事・ガイド</span>
+            </Link>
           </nav>
 
           <div className="px-4 pt-4 border-t border-gray-100">
@@ -419,6 +428,13 @@ export default function ExchangeList({ initialExchanges, initialWallets }: Excha
           <Fa icon="wallet" size={20} />
           <span className="text-[10px] font-medium">ウォレット</span>
         </button>
+        <Link
+          href="/blog"
+          className="flex-1 flex flex-col items-center justify-center py-2.5 gap-1 transition-colors text-gray-400 hover:text-green-600"
+        >
+          <Fa icon="book-open" size={20} />
+          <span className="text-[10px] font-medium">記事</span>
+        </Link>
       </nav>
 
       {selectedExchange && (
