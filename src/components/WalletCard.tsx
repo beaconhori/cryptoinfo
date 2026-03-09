@@ -5,10 +5,11 @@ import { Wallet, WalletType, SecurityLevel } from "@/types/wallet";
 import Fa from "@/components/Fa";
 
 const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; bg: string; text: string }> = {
-  software:          { label: "デスクトップ", icon: "desktop",     bg: "bg-blue-100",   text: "text-blue-700" },
-  hardware:          { label: "ハードウェア", icon: "microchip",   bg: "bg-amber-100",  text: "text-amber-700" },
-  browser_extension: { label: "ブラウザ拡張", icon: "browser",     bg: "bg-purple-100", text: "text-purple-700" },
-  mobile:            { label: "モバイル",     icon: "mobile",      bg: "bg-green-100",  text: "text-green-700" },
+  software:          { label: "デスクトップ",     icon: "desktop",        bg: "bg-blue-100",   text: "text-blue-700" },
+  hardware:          { label: "ハードウェア",     icon: "microchip",      bg: "bg-amber-100",  text: "text-amber-700" },
+  browser_extension: { label: "ブラウザ拡張",     icon: "browser",        bg: "bg-purple-100", text: "text-purple-700" },
+  mobile:            { label: "モバイル",         icon: "mobile",         bg: "bg-green-100",  text: "text-green-700" },
+  smart_account:     { label: "スマートウォレット", icon: "wand-magic-sparkles", bg: "bg-rose-100",   text: "text-rose-700" },
 };
 
 const SECURITY_CONFIG: Record<SecurityLevel, { label: string; color: string }> = {
@@ -39,6 +40,11 @@ const FEATURE_LABELS: Record<string, { label: string; icon: string }> = {
   wc2:              { label: "WC2",        icon: "link" },
   passkey:          { label: "Passkey",    icon: "fingerprint" },
   multi_account:    { label: "マルチ",     icon: "layer-group" },
+  gas_abstraction:  { label: "ガスレス",   icon: "gas-pump" },
+  cross_chain:      { label: "クロスチェーン", icon: "shuffle" },
+  multisig:         { label: "マルチシグ", icon: "key" },
+  erc4337:          { label: "ERC-4337",  icon: "wand-magic-sparkles" },
+  debit_card:       { label: "デビットカード", icon: "credit-card" },
 };
 
 function scoreColor(score: number): string {

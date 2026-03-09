@@ -1,4 +1,4 @@
-export type WalletType = "software" | "hardware" | "browser_extension" | "mobile";
+export type WalletType = "software" | "hardware" | "browser_extension" | "mobile" | "smart_account";
 
 export type WalletChain =
   | "EVM"    // Ethereum互換チェーン全般
@@ -25,7 +25,12 @@ export type WalletFeature =
   | "wc2"             // WalletConnect v2
   | "passkey"         // パスキー/生体認証
   | "social_recovery" // ソーシャルリカバリー
-  | "watch_only";     // ウォッチオンリー対応
+  | "watch_only"      // ウォッチオンリー対応
+  | "gas_abstraction" // ガス代抽象化（代替トークンでガス支払い・無料化）
+  | "cross_chain"     // クロスチェーン操作（ブリッジ不要）
+  | "multisig"        // マルチシグ対応
+  | "erc4337"         // ERC-4337スマートアカウント対応
+  | "debit_card";     // 暗号資産デビットカード
 
 export type SecurityLevel = "high" | "medium" | "low";
 

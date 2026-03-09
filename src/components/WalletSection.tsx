@@ -7,11 +7,12 @@ import WalletModal from "@/components/WalletModal";
 import Fa from "@/components/Fa";
 
 const TYPE_TABS: { value: WalletType | "all"; label: string; icon: string }[] = [
-  { value: "all",               label: "すべて",     icon: "grid-2" },
-  { value: "browser_extension", label: "ブラウザ拡張", icon: "browser" },
-  { value: "mobile",            label: "モバイル",   icon: "mobile" },
-  { value: "software",          label: "デスクトップ", icon: "desktop" },
-  { value: "hardware",          label: "ハードウェア", icon: "microchip" },
+  { value: "all",               label: "すべて",         icon: "grid-2" },
+  { value: "smart_account",     label: "スマート",        icon: "wand-magic-sparkles" },
+  { value: "browser_extension", label: "ブラウザ拡張",    icon: "browser" },
+  { value: "mobile",            label: "モバイル",        icon: "mobile" },
+  { value: "software",          label: "デスクトップ",    icon: "desktop" },
+  { value: "hardware",          label: "ハードウェア",    icon: "microchip" },
 ];
 
 interface WalletSectionProps {

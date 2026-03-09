@@ -5,10 +5,11 @@ import { Wallet, WalletType, SecurityLevel, WalletChain, WalletFeature } from "@
 import Fa from "@/components/Fa";
 
 const TYPE_CONFIG: Record<WalletType, { label: string; icon: string; color: string; bg: string }> = {
-  software:          { label: "デスクトップ", icon: "desktop",   color: "#3B82F6", bg: "#DBEAFE" },
-  hardware:          { label: "ハードウェア", icon: "microchip", color: "#D97706", bg: "#FEF3C7" },
-  browser_extension: { label: "ブラウザ拡張", icon: "browser",   color: "#7C3AED", bg: "#EDE9FE" },
-  mobile:            { label: "モバイル",     icon: "mobile",    color: "#059669", bg: "#D1FAE5" },
+  software:          { label: "デスクトップ",     icon: "desktop",             color: "#3B82F6", bg: "#DBEAFE" },
+  hardware:          { label: "ハードウェア",     icon: "microchip",           color: "#D97706", bg: "#FEF3C7" },
+  browser_extension: { label: "ブラウザ拡張",     icon: "browser",             color: "#7C3AED", bg: "#EDE9FE" },
+  mobile:            { label: "モバイル",         icon: "mobile",              color: "#059669", bg: "#D1FAE5" },
+  smart_account:     { label: "スマートウォレット", icon: "wand-magic-sparkles", color: "#E11D48", bg: "#FFE4E6" },
 };
 
 const SECURITY_CONFIG: Record<SecurityLevel, { label: string; color: string; bg: string; desc: string }> = {
@@ -29,21 +30,26 @@ const CHAIN_LABELS: Record<WalletChain, string> = {
 };
 
 const FEATURE_CONFIG: Partial<Record<WalletFeature, { label: string; icon: string; desc: string }>> = {
-  dex_swap:         { label: "DEXスワップ",        icon: "arrows-rotate", desc: "分散型取引所でのトークンスワップに対応" },
-  nft:              { label: "NFT管理",             icon: "image",         desc: "NFTの表示・送受信・管理が可能" },
-  staking:          { label: "ステーキング",         icon: "coins",         desc: "トークンのステーキングに対応" },
-  hardware_connect: { label: "ハードウェア連携",      icon: "microchip",     desc: "ハードウェアウォレットと接続可能" },
-  ledger_support:   { label: "Ledger対応",          icon: "microchip",     desc: "Ledgerハードウェアウォレットと連携可能" },
-  trezor_support:   { label: "Trezor対応",          icon: "microchip",     desc: "Trezorハードウェアウォレットと連携可能" },
-  multi_account:    { label: "マルチアカウント",      icon: "layer-group",   desc: "複数のウォレットアドレスを管理可能" },
-  browser_ext:      { label: "ブラウザ拡張",         icon: "browser",       desc: "ブラウザ拡張機能として使用可能" },
-  mobile_app:       { label: "モバイルアプリ",       icon: "mobile",        desc: "iOS / Androidアプリを提供" },
-  web_app:          { label: "Webアプリ",           icon: "globe",         desc: "ブラウザから直接アクセス可能" },
-  open_source:      { label: "オープンソース",        icon: "code",          desc: "ソースコードが公開されており透明性が高い" },
-  wc2:              { label: "WalletConnect v2",   icon: "link",          desc: "WalletConnect v2に対応。DAppsと接続可能" },
-  passkey:          { label: "パスキー / 生体認証",  icon: "fingerprint",   desc: "生体認証やパスキーでのログインに対応" },
-  social_recovery:  { label: "ソーシャルリカバリー",  icon: "people-group",  desc: "信頼できる人を介したウォレット復元が可能" },
-  watch_only:       { label: "ウォッチオンリー",      icon: "eye",           desc: "秘密鍵不要でアドレスの残高・取引を監視可能" },
+  dex_swap:         { label: "DEXスワップ",        icon: "arrows-rotate",       desc: "分散型取引所でのトークンスワップに対応" },
+  nft:              { label: "NFT管理",             icon: "image",               desc: "NFTの表示・送受信・管理が可能" },
+  staking:          { label: "ステーキング",         icon: "coins",               desc: "トークンのステーキングに対応" },
+  hardware_connect: { label: "ハードウェア連携",      icon: "microchip",           desc: "ハードウェアウォレットと接続可能" },
+  ledger_support:   { label: "Ledger対応",          icon: "microchip",           desc: "Ledgerハードウェアウォレットと連携可能" },
+  trezor_support:   { label: "Trezor対応",          icon: "microchip",           desc: "Trezorハードウェアウォレットと連携可能" },
+  multi_account:    { label: "マルチアカウント",      icon: "layer-group",         desc: "複数のウォレットアドレスを管理可能" },
+  browser_ext:      { label: "ブラウザ拡張",         icon: "browser",             desc: "ブラウザ拡張機能として使用可能" },
+  mobile_app:       { label: "モバイルアプリ",       icon: "mobile",              desc: "iOS / Androidアプリを提供" },
+  web_app:          { label: "Webアプリ",           icon: "globe",               desc: "ブラウザから直接アクセス可能" },
+  open_source:      { label: "オープンソース",        icon: "code",                desc: "ソースコードが公開されており透明性が高い" },
+  wc2:              { label: "WalletConnect v2",   icon: "link",                desc: "WalletConnect v2に対応。DAppsと接続可能" },
+  passkey:          { label: "パスキー / 生体認証",  icon: "fingerprint",         desc: "生体認証やパスキーでのログインに対応" },
+  social_recovery:  { label: "ソーシャルリカバリー",  icon: "people-group",        desc: "信頼できる人を介したウォレット復元が可能" },
+  watch_only:       { label: "ウォッチオンリー",      icon: "eye",                 desc: "秘密鍵不要でアドレスの残高・取引を監視可能" },
+  gas_abstraction:  { label: "ガス代抽象化",         icon: "gas-pump",            desc: "ETH以外のトークンでガス代を支払い、またはガス代を無料化" },
+  cross_chain:      { label: "クロスチェーン操作",    icon: "shuffle",             desc: "ブリッジ不要でチェーン間を自動的にまたいで操作可能" },
+  multisig:         { label: "マルチシグ",           icon: "key",                 desc: "複数の署名が揃って初めて取引が承認される高セキュリティ方式" },
+  erc4337:          { label: "ERC-4337",            icon: "wand-magic-sparkles", desc: "Ethereumのスマートアカウント標準規格に対応" },
+  debit_card:       { label: "暗号資産デビットカード", icon: "credit-card",         desc: "暗号資産を使って実店舗・オンラインで決済可能なカード" },
 };
 
 function scoreColor(score: number): string {
