@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const revalidate = 60;
 
@@ -110,8 +111,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
             prose-blockquote:border-blue-300 prose-blockquote:bg-blue-50 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
             prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded prose-code:text-sm prose-code:text-gray-800 prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-gray-900 prose-pre:rounded-xl">
-            <ReactMarkdown>{article.body}</ReactMarkdown>
+            prose-pre:bg-gray-900 prose-pre:rounded-xl
+            prose-table:text-sm prose-table:w-full
+            prose-th:bg-gray-50 prose-th:font-semibold prose-th:text-gray-700 prose-th:px-3 prose-th:py-2
+            prose-td:px-3 prose-td:py-2 prose-td:text-gray-600
+            prose-thead:border-b prose-thead:border-gray-200">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
           </div>
         </article>
 
