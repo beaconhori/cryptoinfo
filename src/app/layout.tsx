@@ -40,6 +40,8 @@ export const metadata: Metadata = {
   },
 };
 
+const GA_MEASUREMENT_ID = "G-LBCYC8G7DY";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -59,6 +61,18 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         {children}
       </body>
     </html>

@@ -2,10 +2,12 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import { Exchange } from "@/types/exchange";
+import { Wallet } from "@/types/wallet";
 import ExchangeCard from "@/components/ExchangeCard";
 import ExchangeModal from "@/components/ExchangeModal";
 import CostComparisonTable from "@/components/CostComparisonTable";
 import CompactFilter, { FilterState, SortKey } from "@/components/CompactFilter";
+import WalletSection from "@/components/WalletSection";
 import Fa from "@/components/Fa";
 import { calcTotalScore } from "@/lib/scoreUtils";
 
@@ -93,9 +95,10 @@ const REGION_OPTIONS = [
 
 interface ExchangeListProps {
   initialExchanges: Exchange[];
+  initialWallets: Wallet[];
 }
 
-export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
+export default function ExchangeList({ initialExchanges, initialWallets }: ExchangeListProps) {
   const [filter, setFilter] = useState<FilterState>(defaultFilter);
   const [sortKey, setSortKey] = useState<SortKey>("trustScore");
   const [selectedExchange, setSelectedExchange] = useState<Exchange | null>(null);
@@ -376,15 +379,7 @@ export default function ExchangeList({ initialExchanges }: ExchangeListProps) {
 
             {/* ウォレットセクション */}
             {activeSection === "wallets" && (
-              <div className="flex flex-col items-center justify-center py-24 text-gray-400">
-                <div className="w-20 h-20 rounded-2xl bg-purple-50 flex items-center justify-center mb-5">
-                  <Fa icon="wallet" size={32} className="text-purple-300" />
-                </div>
-                <p className="font-bold text-gray-600 text-lg mb-2">ウォレットガイド</p>
-                <p className="text-sm text-gray-400 mb-1">ハードウェア・ソフトウェア・ブラウザ拡張など</p>
-                <p className="text-sm text-gray-400">各種ウォレットの比較・解説ページを準備中です。</p>
-                <span className="mt-5 px-4 py-1.5 bg-purple-100 text-purple-600 text-xs font-semibold rounded-full">Coming Soon</span>
-              </div>
+              <WalletSection wallets={initialWallets} />
             )}
 
             <footer className="text-center py-4 text-xs text-gray-400 space-y-1">
