@@ -9,38 +9,38 @@ INSERT INTO wallets (id, name, name_en, type, description, url, domain, logo_col
   'MetaMask',
   'MetaMask',
   'browser_extension',
-  '世界最大のEVMウォレット。Ethereum・EVM互換チェーンに対応し、DeFiやNFTの操作が可能。ブラウザ拡張とモバイルアプリを提供。',
+  'Web3のデファクトスタンダード。EVM互換チェーン全般とSolanaに対応し、DeFiやNFTとの互換性が最も広い。ブラウザ拡張・モバイルアプリともに提供。CertiK Skynet: AA (89.77)。',
   'https://metamask.io',
   'metamask.io',
   '#E8831D',
-  ARRAY['EVM'],
-  ARRAY['dex_swap','nft','multi_account','browser_ext','mobile_app','ledger_support','trezor_support','wc2','open_source'],
+  ARRAY['EVM','SOL'],
+  ARRAY['dex_swap','nft','staking','multi_account','browser_ext','mobile_app','ledger_support','trezor_support','wc2','open_source'],
   'medium',
   9,
   2016,
   false,
   true,
   NULL,
-  'ConsenSysが開発。2500万人以上のユーザーが利用。'
+  'ConsenSysが開発。2,500万人以上のユーザーが利用。スワップ手数料0.875%。'
 ),
 (
   'phantom',
   'Phantom',
   'Phantom',
   'browser_extension',
-  'Solana対応の主要ウォレット。NFT・DeFi操作に特化しており、EVMチェーンにも対応。シンプルなUIで初心者にも使いやすい。',
+  'Solanaエコシステムのデファクトウォレット。リアルタイムの詐欺検知機能を搭載し、EVMチェーンにも対応。NFT管理・DeFi操作・ステーキングをシームレスに利用できる。',
   'https://phantom.app',
   'phantom.app',
   '#AB9FF2',
-  ARRAY['SOL','EVM'],
-  ARRAY['dex_swap','nft','staking','multi_account','browser_ext','mobile_app','wc2'],
+  ARRAY['SOL','EVM','BTC'],
+  ARRAY['dex_swap','nft','staking','multi_account','browser_ext','mobile_app','ledger_support','wc2'],
   'medium',
-  8,
+  9,
   2021,
   false,
   true,
   NULL,
-  'Solanaエコシステムのデファクトスタンダードウォレット。'
+  'Solanaエコシステムのデファクトスタンダードウォレット。スワップ手数料0.85%。'
 ),
 (
   'rabby',
@@ -87,19 +87,19 @@ INSERT INTO wallets (id, name, name_en, type, description, url, domain, logo_col
   'Trust Wallet',
   'Trust Wallet',
   'mobile',
-  'Binance傘下のマルチチェーンモバイルウォレット。100以上のブロックチェーンに対応し、NFT・DeFi・ステーキングが一元管理できる。',
+  'Binance公式のマルチチェーンモバイルウォレット。100以上のブロックチェーン・数百万種類のトークンに対応。NFT・DeFi・ステーキングが一元管理でき、日本語にも対応。CertiK Skynet: AA (91.74)。',
   'https://trustwallet.com',
   'trustwallet.com',
   '#3375BB',
   ARRAY['EVM','BTC','SOL','COSMOS','NEAR','TRON'],
   ARRAY['dex_swap','nft','staking','multi_account','mobile_app','browser_ext','wc2','open_source'],
   'medium',
-  8,
+  9,
   2017,
   true,
   true,
   NULL,
-  'Binance公式ウォレット。日本語対応。'
+  'Binance公式ウォレット。日本語対応。オープンソース。'
 ),
 (
   'rainbow',
@@ -140,32 +140,93 @@ INSERT INTO wallets (id, name, name_en, type, description, url, domain, logo_col
   'Uniswap公式ウォレット。DEXスワップに最適化。'
 ),
 
+-- ===== ブラウザ拡張（追加） =====
+(
+  'zerion',
+  'Zerion',
+  'Zerion',
+  'browser_extension',
+  'DeFiポートフォリオ管理に特化したEVMウォレット。50以上のチェーンと8,000以上のDeFiプロトコルに対応。LP・ステーキング・履歴を一元管理でき、上級DeFiユーザーに人気。',
+  'https://zerion.io',
+  'zerion.io',
+  '#2962EF',
+  ARRAY['EVM'],
+  ARRAY['dex_swap','nft','staking','multi_account','browser_ext','mobile_app','wc2','watch_only'],
+  'high',
+  9,
+  2019,
+  false,
+  true,
+  NULL,
+  '50以上のEVMチェーン対応。DeFiポジション・PnL管理が強力。'
+),
+(
+  'okx-wallet',
+  'OKX Wallet',
+  'OKX Wallet',
+  'browser_extension',
+  'OKX取引所が提供するWeb3ウォレット。120以上のネットワークと500以上のDEXに対応したアグリゲーターを内蔵。ミームコイン・NFT・DeFiをワンストップで操作できる。',
+  'https://web3.okx.com',
+  'okx.com',
+  '#000000',
+  ARRAY['EVM','BTC','SOL','TRON'],
+  ARRAY['dex_swap','nft','staking','multi_account','browser_ext','mobile_app','wc2','watch_only'],
+  'medium',
+  8,
+  2022,
+  true,
+  true,
+  NULL,
+  '120以上のネットワーク対応。日本語対応あり。OKX取引所との連携が便利。'
+),
+
+-- ===== モバイル（追加） =====
+(
+  'zengo',
+  'ZenGo',
+  'ZenGo',
+  'mobile',
+  'MPC（マルチパーティ計算）技術によりシードフレーズが不要なモバイルウォレット。顔認証・3FAによる高セキュリティ設計で、初心者でも安心して使える。無料版と有料Pro版（$19.99/月）あり。',
+  'https://zengo.com',
+  'zengo.com',
+  '#1A73E8',
+  ARRAY['EVM','BTC','SOL'],
+  ARRAY['dex_swap','nft','staking','mobile_app','wc2','passkey'],
+  'high',
+  8,
+  2018,
+  false,
+  true,
+  'Proプラン $19.99/月（高度なセキュリティ機能）',
+  'シードフレーズ不要のMPC技術採用。初心者からセキュリティ重視ユーザーまで対応。'
+),
+
 -- ===== ソフトウェア（デスクトップ） =====
 (
   'exodus',
   'Exodus',
   'Exodus',
   'software',
-  '美しいUIのマルチチェーンデスクトップ・モバイルウォレット。初心者でも使いやすく、取引所機能とウォレットが一体化。Ledger連携にも対応。',
+  '美しいUIのマルチチェーンデスクトップ・モバイルウォレット。デスクトップ・モバイル・ブラウザ拡張の全プラットフォームに対応。Trezor連携やステーキング機能も充実し、初心者にも上級者にも使いやすい。',
   'https://www.exodus.com',
   'exodus.com',
   '#0B46F9',
   ARRAY['EVM','BTC','SOL','COSMOS'],
-  ARRAY['dex_swap','staking','multi_account','mobile_app','ledger_support'],
+  ARRAY['dex_swap','nft','staking','multi_account','mobile_app','browser_ext','trezor_support'],
   'medium',
-  7,
+  8,
   2015,
   false,
   true,
   NULL,
-  'デスクトップ・モバイル両対応のマルチチェーンウォレット。'
+  'CertiK Skynet: A (84.95)。デスクトップ・モバイル両対応のマルチチェーンウォレット。'
 ),
 (
   'electrum',
   'Electrum',
   'Electrum',
   'software',
-  'Bitcoinに特化した老舗の軽量デスクトップウォレット。ハードウェアウォレットとの連携、マルチシグ対応など上級者向けの機能が充実。',
+  'Bitcoinに特化した老舗の軽量デスクトップウォレット。2011年から開発が続くオープンソースプロジェクト。ハードウェアウォレット連携・マルチシグ・ウォッチオンリーなど上級者向けの機能が充実。',
   'https://electrum.org',
   'electrum.org',
   '#FF6B00',
@@ -177,7 +238,7 @@ INSERT INTO wallets (id, name, name_en, type, description, url, domain, logo_col
   false,
   true,
   NULL,
-  'Bitcoin専用の高機能デスクトップウォレット。'
+  'Bitcoin専用の高機能デスクトップウォレット。マルチシグ対応。'
 )
 
 ON CONFLICT (id) DO UPDATE SET
